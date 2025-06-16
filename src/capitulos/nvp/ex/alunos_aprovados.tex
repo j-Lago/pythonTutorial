@@ -1,0 +1,37 @@
+Crie uma função que receba um dicionário de alunos e suas notas e retorne uma lista contendo apenas os nomes dos alunos
+aprovado (nota mínima 6.0).
+\begin{minted}{custompython}
+def alunos_aprovados(dados):
+    # seu código aqui
+
+alunos = {
+    'Alice': 8.5,
+    'Bruno': 5.2,
+    'Carlos': 9.0,
+    'Maria': 7.1,
+    'Pedro': 5.8
+}
+aprovados = alunos_aprovados(alunos)
+print(f"Aprovados: {aprovados}")
+\end{minted}
+
+Resultado esperado:
+\begin{minted}{text}
+Aprovados: ['Alice', 'Carlos', 'Maria']
+\end{minted}
+
+\subsection*{Desafio:}
+Substitua a linha contendo o \inlcode{print} para uma chamada a uma nova função (a ser desenvolvida por você) que
+recebe a lista de aprovados e não retorna nada, mas que imprima os nomes dos aprovados de forma mais legível, com apenas
+um nome um por linha.
+Resultado esperado:
+\begin{minted}{text}
+Aprovados:
+  Alice
+  Carlos
+  Maria
+\end{minted}
+
+
+
+

@@ -1,0 +1,143 @@
+\chapter{Estruturas de controle de fluxo}\label{iffor}
+
+Até agora, os pequenos trechos de código que escrevemos seguiram uma sequência linear e bem definida, executando
+instruções em uma ordem preestabelecida, onde cada linha era processada incondicionalmente --- como seguir uma receita
+de bolo à risca.
+
+No entanto, essa abordagem não é suficiente para representar comportamentos mais complexos, onde o próprio algoritmo
+precisa tomar decisões com base no estado atual.
+Por exemplo, em determinado ponto da execução, se uma condição específica for verdadeira, o programa pode seguir
+pelo caminho A; caso contrário, deve seguir pelo caminho B.
+Cada um desses caminhos corresponde a blocos de código distintos, que realizam ações diferentes para atingir um
+certo objetivo.
+
+
+Além das decisões condicionais, os programas frequentemente precisam executar uma mesma ação várias vezes, sem que o
+programador precise escrever o mesmo código repetidamente.
+Além de ser impraticável, muitas vezes a lógica desejada exige que a decisão sobre quantas vezes executar uma tarefa
+seja tomada durante a própria execução do programa, baseada no estado atual.
+
+Para isso, utilizamos as estruturas de repetição (ou loops), que permitem a execução contínua de um bloco de código
+enquanto certas condições forem atendidas, ou garantem que um bloco de código seja executado para todos os valores
+de uma lista.
+Dessa forma, o programa pode automatizar tarefas, tornando o código mais eficiente e adaptável.
+
+Em qualquer programa de computador, controlar a ordem de execução das instruções é fundamental para garantir que a
+aplicação possa lidar com diferentes cenários, tomar decisões dinamicamente e repetir ações conforme necessário.
+Esse controle é realizado por meio das estruturas de controle de fluxo, que possibilitam modificar o comportamento
+de um programa, tornando-o mais flexível e inteligente
+
+Como aludido anteriormente, as estruturas de controle de fluxo podem ser classificadas em duas categorias: estruturas
+condicionais e estruturas de repetição.
+Sua implementação pode variar entre diferentes linguagens, e até mesmo dentro
+de uma mesma linguagem, podem existir múltiplas variantes para tornar seu uso mais conveniente em diferentes situações.
+
+Por exemplo, em Python, decisões condicionais podem ser feitas com \inlcode{if-else}, uma abordagem mais direta, ou
+com \inlcode{match-case}, que facilita comparações mais organizadas entre múltiplas possibilidades.
+Da mesma forma, repetições podem ser controladas com \inlcode{while}, quando se depende de uma condição, ou
+com \inlcode{for}, que é ideal para percorrer sequências.
+
+Essa flexibilidade permite que programadores escolham a estrutura mais adequada para cada contexto, tornando o
+código mais simples, expressivo e eficiente.
+
+Nas próximas seções, exploraremos cada categoria detalhadamente, com exemplos para ilustrar seu funcionamento.
+
+
+\section{Estruturas condicionais}\label{if}
+As estruturas condicionais permitem que um programa tome decisões durante sua execução com base em condições
+estabelecidas.
+Em Python, existem diferentes variantes dessa estrutura, tornando-a mais versátil para diversas situações.
+A abordagem mais comum é o uso de \inlcode{if-else}, onde um bloco de código é executado apenas se uma condição for
+verdadeira.
+Para comparações múltiplas podes usar \inlcode{if-elif-else} ou \inlcode{match-case},
+introduzido no Python 3.10, oferece uma alternativa estruturada, útil quando há diversas possibilidades de decisão.
+
+Exemplo do uso de \inlcode{if-else}:
+\begin{minted}{custompython}
+idade = 20
+
+if idade >= 18:
+    print("Você é maior de idade.")  # é executado se idade for maior ou igual a 18
+else:
+    print("Você é menor de idade.")  # é executado se idade menor que 18
+\end{minted}
+
+O comando \inlcode{if} sempre espera uma expressão que resulte em um valor booleano,
+ou seja, \inlcode{True} (verdadeiro) ou \inlcode{False} (falso).
+
+Quando a condição for avaliada como \inlcode{True}, o bloco de código associado ao \inlcode{if} será executado.
+Caso contrário, se houver um \inlcode{else} (que é opcional), seu respectivo bloco será executado.
+
+Cada bloco pode ter um tamanho arbitrário e conter múltiplas instruções, incluindo estruturas \inlcode{if-else}
+aninhadas, permitindo expressar deci~soes mais complexas.
+Assim como nas funções, a delimitação de um bloco \inlcode{if} é feita pela indentação.
+
+No exemplo, dependendo do valor da variável idade a comparação \inlcode{idade >= 18} retorna \inlcode{True} ou
+\inlcode{False}, e baseado nesse valor o \inlcode{if} escolhe qual bloco de código executar, exibindo a mensagem apropriada.
+
+Essas expressões booleanas geralmente envolvem o uso de operadores relacionais
+(\inlcode{==}, \inlcode{!=}, \inlcode{>}, \inlcode{<}, \inlcode{>=}, \inlcode{<=}), que podem ser combinados com
+operadores lógicos (\inlcode{and}, \inlcode{or}, \inlcode{not}) para formar condições lógicas mais complexas.
+Além disso, o operador \inlcode{is} verifica se duas variáveis referenciam o mesmo objeto na memória, diferindo
+do \inlcode{==}, que compara os valores desses objetos.
+O operador \inlcode{in} é útil para verificar se um determinado valor está presente em uma coleção, como uma lista.
+Outra função embutida \inlcode{isinstance(obj, class)} é especialmente útil para verificar o tipo de um objeto
+dentro dessas expressões.
+
+Segue um exemplo de uma função que verifica o cadastro de um usuário para identificar um meio de contato válido.
+A prioridade é o email; caso não esteja disponível, o número de telefone será retornado como alternativa.
+\begin{minted}{custompython}
+def obter_contato(cadastro: dict) -> str:
+    if 'email' in cadastro and cadastro['email'] != '':
+        return cadastro['email']
+    elif 'telefone' in cadastro and cadastro['telefone'] != '':
+        return cadastro['telefone']
+    else:
+        return 'nenhum contato cadastrado'
+
+usuario1 = {'nome': 'Fulano', 'email': 'fulano@ifsc.edu.br', 'telefone': '(48)99999-9999'}
+usuario2 = {'nome': 'Beltrano', 'telefone': '(48)99999-8888'}
+usuario3 = {'nome': 'Sicrano', 'telefone': ''}
+
+print('contato usuario1:', obter_contato(usuario1))
+print('contato usuario2:', obter_contato(usuario2))
+print('contato usuario3:', obter_contato(usuario3))
+\end{minted}
+\begin{minted}{text}
+contato usuario1: fulano@ifsc.edu.br
+contato usuario2: (48)99999-8888
+contato usuario3: nenhum contato cadastrado
+\end{minted}
+
+A seguir temos um exemplo usando \inlcode{match-case} para verificar se um determinado dia da semana é um final de
+semana ou um dia útil:
+\begin{minted}{custompython}
+dia_da_semana = "sábado"
+
+match dia_da_semana.lower():
+    case "sábado" | "domingo":
+        print("É fim de semana! Aproveite para descansar.")
+    case "segunda" | "terça" | "quarta" | "quinta" | "sexta":
+        print("É dia útil. Hora de trabalhar ou estudar!")
+    case _: # executado caso não haja matching
+        print("Dia inválido. Certifique-se de inserir um nome correto.")
+\end{minted}
+
+Esse código verifica o valor da variável \inlcode{dia_da_semana} e determina se o dia pertence ao final de semana ou
+se é um dia útil, comparando-o com as opções especificadas nos diferentes casos (\inlcode{case}) dentro da estrutura
+\inlcode{match-case}\footnote{em Python
+\inlcode{match-case} é uma estrutura mais completa que não realiza apenas comparações de valores, mas sim
+\emph{pattern matching}, que envolve conceitos de desestruturação e correspondência de padrões. Conceitos um pouco mais avançados que ficarão de fora desse tutorial introdutório.}.
+
+
+Cada \inlcode{case} dentro de um \inlcode{match} representa um possível caso de correspondência, permitindo que o
+programa escolha dinamicamente a execução adequada de apenas um deles.
+
+O operador \inlcode{|} possibilita agrupar múltiplos casos numa mesma cláusula, tornando o código mais legível e eficiente.
+
+Além disso, a conversão para minúsculas (\inlcode{lower()}) garante que a entrada do usuário funcione corretamente,
+independentemente de letras maiúsculas ou minúsculas.
+
+
+
+\section{Estruturas de repetição}\label{for}

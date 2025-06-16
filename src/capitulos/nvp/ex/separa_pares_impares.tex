@@ -1,0 +1,21 @@
+Escreva uma função que recebe uma lista de números inteiros de tamanho arbitrário e retorne duas listas, a primeira
+contendo os elementos pares da lista original, e a segunda os ímpares.
+\begin{minted}{custompython}
+def separa_pares_impares(lista):
+    # seu código aqui
+
+numeros = [5, 7, -9, 6, 4, 7, 9, 3, 8, 6]
+
+pares, impares = separa_pares_impares(numeros)
+print(f"pares: {pares}")
+print(f"ímpares: {impares}")
+\end{minted}
+
+Resultado esperado:
+\begin{minted}{text}
+pares: [6, 4, 8, 6]
+ímpares: [5, 7, -9, 7, 9, 3]
+\end{minted}
+
+\subsection*{Desafio:}
+Reescreva a função adicionando anotação de tipos tanto para os parâmetros como para o retorno.

@@ -1,0 +1,19 @@
+\begin{frame}[fragile]{Slide 3}
+
+Exemplo de imagem a partir de arquivo:
+\begin{center}
+    \includegraphics[width=0.3\textwidth, angle=20]{../class/figs/logo_capa}
+\end{center}
+%
+Exemplo de imagem a partir de arquivo com anotação \texttt{tikz}:
+\begin{tikzpicture}
+    \node[anchor=south west] (img) at (0,0) {\includegraphics[width=0.3\textwidth]{../class/figs/logo_capa}};
+    \draw[secondary, thick, line cap=round, <-] (3,1.2) -- (3.5,1.4) node[right, draw=secondary, rounded corners, thin, fill=background!85!secondary] {nota importante!};
+\end{tikzpicture}
+
+
+
+\end{frame}
+
+
+

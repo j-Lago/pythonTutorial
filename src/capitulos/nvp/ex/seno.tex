@@ -1,0 +1,19 @@
+Escreva uma função \inlcode{seno(alpha: float) - float} que receba um ângulo em radianos e retorne seu valor aproximado de seno, utilizando a seguinte série de Taylor:
+\begin{equation}\label{seno}
+\text{sen}(\alpha) = \alpha-\dfrac{\alpha^3}{3!}+\dfrac{\alpha^5}{5!}-\dfrac{\alpha^7}{7!}+\cdots
+\end{equation}
+A expansão deve ser truncada no primeiro termo em que:
+\begin{equation}
+    \left| \dfrac{\alpha^k}{k!} \right| \leq 0.0001
+\end{equation}
+
+A série acima é convergente para ângulos pertencentes ao intervalo [-\pi, +\pi].
+Portanto, antes de calcular a série, caso o ângulo informado esteja fora desse intervalo, ele deve ser mapeado para o
+intervalo de convergência.
+
+
+Além da função de cálculo do seno, implemente um script de teste que compare os valores obtidos com os retornados
+pela função \inlcode{math.sin()} do Python.
+
+
+

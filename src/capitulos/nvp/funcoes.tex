@@ -1,0 +1,283 @@
+\chapter{Expressões e Funções}
+
+Uma expressão é qualquer fragmento de código que, ao ser executado, retorna um valor.
+Ela pode ser composta por valores, variáveis, operadores e chamadas de funções, que são avaliadas para produzir um
+resultado.
+Esse resultado pode ser armazenado em uma variável ou utilizado como entrada para outra expressão ou função.
+
+
+
+Um exemplo comum de expressão são as operações aritméticas:
+\begin{minted}{custompython}
+a = 3
+b = 7
+
+y = a * 5 + b
+\end{minted}
+
+Aqui, as variáveis \inlcode{a} e \inlcode{b} são inicializadas com valores fixos (ou \emph{literals}, como são
+chamados em programação), enquanto \inlcode{y}
+recebe o resultado do processamento da expressão \inlcode{a * 5 + b}, que retorna \inlcode{22}.
+
+Os operadores aritméticos em Python são:
+adição (\inlcode{+}),
+subtração (\inlcode{-}),
+multiplicação (\inlcode{*}),
+divisão (\inlcode{/}),
+divisão inteira (\inlcode{//}),
+resto da divisão (\inlcode{\%}) e
+potenciação (\inlcode{**}).
+
+
+
+
+
+
+
+
+Outro pilar essencial da programação são as funções, que permitem a organização e reutilização de código.
+Elas ajudam a evitar repetições desnecessárias, encapsular blocos lógicos e contribuir para uma estrutura mais
+eficiente e modular.
+
+Uma função é um bloco de código reutilizável, projetado para executar uma ação específica.
+Sua declaração possui três elementos fundamentais:
+\begin{enumerate}
+\item Parâmetros de entrada, que atuam como espaços reservados para valores que serão fornecidos posteriormente
+\item quando a função for chamada.
+\item O corpo da função, onde a lógica é definida e executada.
+\item O valor de retorno, que é o resultado da função após seu processamento.
+\end{enumerate}
+
+Quando chamamos a função, fornecemos argumentos, que são os valores reais atribuídos aos parâmetros de entrada.
+Esses argumentos carregam informações essenciais vindas do contexto externo, ou seja, da parte do programa que chamou
+a função.
+A função, então, processa esses dados e executa a lógica necessária para produzir um resultado.
+
+Outro aspecto crucial das funções é o escopo de suas variáveis locais (internas).
+Variáveis criadas dentro de uma função existem apenas durante sua execução e são automaticamente descartadas ao seu
+término.
+Isso evita interferências indesejadas em outras partes do código e melhora a eficiência do uso de memória.
+
+Para ilustrar esse conceito, podemos criar a função \inlcode{eq\_reduzida\_reta()}, que encapsula o processamento da
+expressão matemática utilizada anteriormente.
+Nesse caso, ela receberá três parâmetros de entrada: \inlcode{a}, \inlcode{b} e \inlcode{x}.
+No corpo da função, a expressão matemática será avaliada para calcular \inlcode{y},
+que será então retornado como resultado.
+
+A chamada a essa função constitui uma expressão, de forma que esse valor de retorno pode ser capturado e armazenado
+em uma variável ou usada como valor para outra expressão, ou ainda como argumento para outra função.
+
+Veja como essa função pode ser definida em Python:
+\begin{minted}{custompython}
+# definição da função
+# não executa nenhum código, apenas define o que será executado quando a função for chamada
+def eq_reduzida_reta(a, x, b):
+    y = a * x + b
+    return y
+
+# chamada da função com diferentes argumentos
+resultado1 = eq_reduzida_reta(3, 5, 7)  # argumentos posicionais 3, 5, 7
+resultado2 = 5 + eq_reduzida_reta(4, 2, 6)  # resultado como entrada para uma expressao
+resultado3 = eq_reduzida_reta(x=-2, b=10, a=2)  # argumentos nomeados
+
+print(f'resultado1: {resultado1}')
+print(f'resultado2: {resultado2}')
+print(f'resultado3: {resultado3}')
+\end{minted}
+\begin{minted}{text}
+resultado1: 22
+resultado2: 19
+resultado3: 6
+\end{minted}
+
+A declaração da função é indicada pela \emph{keyword} \inlcode{def}, seguida do nome da função e pela lista de
+parâmetros de entrada, declarados entre parênteses.
+Após os dois pontos (\inlcode{:}), inicia-se o corpo da função.
+
+
+Diferente de algumas outras linguagens onde a indentação é apenas estética, em Python ela é essencial, pois define
+o bloco de código pertencente à função.
+Isso garante a organização da estrutura e evita ambiguidades na execução.
+
+Por fim, o comando \inlcode{return} especifica o valor que será retornado ao invocador da função.
+Se omitida, a função não retorna um valor explícito, e seu retorno será implicitamente \inlcode{None}.
+
+Uma chamada de função é feita pelo seu nome, seguido por um par de parênteses.
+Dentro dos parênteses, passamos os argumentos, que devem corresponder aos parâmetros definidos pela função.
+
+Em Python, essa correspondência pode ocorrer de duas formas:
+\begin{itemize}
+\item Argumentos posicionais, em que os valores são passados na ordem definida pela função.
+\item Argumentos nomeados, onde especificamos explicitamente qual valor será atribuído a cada parâmetro,
+permitindo uma ordem arbitrária.
+\end{itemize}
+
+Também podemos combinar ambos os tipos de argumentos em uma chamada de função.
+No entanto, os argumentos posicionais devem obrigatoriamente vir primeiro, seguidos pelos nomeados.
+
+Python também permite a definição de parâmetros opcionais, o que proporciona maior flexibilidade na chamada de funções.
+Isso significa que ao invocar uma função, podemos fornecer todos os argumentos necessários, ou omitir aqueles marcados
+como opcionais.
+
+Um parâmetro é considerado opcional quando, na definição da função, atribuímos a ele um valor padrão.
+Esse valor será usado automaticamente caso o chamador da função não forneça um argumento correspondente.
+
+Por exemplo, podemos reescrever a função \inlcode{eq_reduzida_reta()} tornando \inlcode{b} um parâmetro opcional,
+atribuindo a ele um valor padrão de \inlcode{0}.
+O código correspondente seria:
+\begin{minted}{custompython}
+# definição da função com parâmetro opcional
+def eq_reduzida_reta(a, x, b=0):
+    y = a * x + b
+    return y
+
+# chamada da função com diferentes quantidades de argumentos
+resultado1 = eq_reduzida_reta(3, 5, 7)  # arg b = 7 (fornecido explicitamente)
+resultado2 = eq_reduzida_reta(3, 5)     # arg b omitido, valor padrão é usado (b=0)
+
+print(f'resultado1: {resultado1}')
+print(f'resultado2: {resultado2}')
+\end{minted}
+\begin{minted}{text}
+resultado1: 22
+resultado2: 15
+\end{minted}
+
+Esse conceito permite maior flexibilidade na chamada de funções, reduzindo a necessidade de fornecer todos os
+argumentos manualmente quando faz sentido na lógica da função possuir comportamento padrão.
+Se não indicarmos um valor para \inlcode{b}, a função usará automaticamente \inlcode{b=0}.
+Os demais parâmetros (\inlcode{a} e \inlcode{b}) não possuem valor padrão, portanto, são obrigatórios.
+Chamar a função sem fornecê-los resultaria em um erro.
+
+
+Assim como na criação de variáveis, também podemos anotar os tipos dos parâmetros e do valor de retorno de uma função.
+Essas anotações não afetam a execução do programa, pois são ignoradas pelo interpretador durante a execução.
+No entanto, elas podem ser analisadas por um \emph{type checker} da IDE, que alerta sobre possíveis incompatibilidades
+antes da execução do código.
+
+Isso melhora a legibilidade do código e ajuda na detecção de erros potenciais, tornando a programação mais segura e
+organizada, além de documentar as intenções do programador quando escreveu tal função.
+\begin{minted}[escapeinside=??]{custompython}
+# definição da função com parâmetro opcional e anotação te tipos esperados
+def eq_reduzida_reta(a: int, x: int, b: int = 0) -> int:
+    y = a * x + b
+    return y
+
+# chamada da função
+resultado1 = eq_reduzida_reta(3, 5.6?\tikzmark{squiggly2}?, 7)    # 'float' incompatível com declaração
+resultado2 = eq_reduzida_reta(3, 'texto'?\tikzmark{squiggly}?)   # 'str' incompatível com declaração
+resultado3 = eq_reduzida_reta(3, 5, 7)      # ok
+\end{minted}
+\begin{tikzpicture}[remember picture, overlay]
+    \draw[orange, thick, line cap=round, decorate, decoration={snake, amplitude=0.15mm, segment length=1.5mm}]
+        (pic cs:squiggly) ++(-0.01,-0.03) -- ++(-1.0,0.0);
+    \draw[->, thick, line cap=round, orange] (pic cs:squiggly) ++(-0.01,-0.03) -- ++(0.9,0.9) node[right, fill=black!80!orange, inner sep=1pt]
+        {\scriptsize\texttt{'Literal['texto']'~is not assignable to 'int'}};
+    %
+    \draw[orange, thick, line cap=round, decorate, decoration={snake, amplitude=0.15mm, segment length=1.5mm}]
+        (pic cs:squiggly2) ++(-0.01,-0.03) -- ++(-0.4,0.0);
+    \draw[->, thick, line cap=round, orange] (pic cs:squiggly2) ++(-0.01,-0.03) -- ++(0.9,0.9) node[right, fill=black!80!orange, inner sep=1pt]
+        {\scriptsize\texttt{'float'~is not assignable to 'int'}};
+\end{tikzpicture}
+
+Aqui, todos os parâmetros de entrada e o valor de retorno foram definidos com o tipo \inlcode{int}, o que garante que
+apenas números inteiros sejam aceitos.
+Se um valor \inlcode{str} ou \inlcode{float} for passado incorretamente, um \textit{type checker} pode alertar sobre a
+incompatibilidade.
+
+Contudo, para essa função em específico, números fracionários (\inlcode{float}) seriam completamente válidos.
+Para permitir esse tipo de entrada, podemos utilizar anotações de múltiplos tipos com o operador \inlcode{|}, como no
+exemplo abaixo:
+\begin{minted}{custompython}
+# Definição da função com suporte a múltiplos tipo
+def eq_reduzida_reta(a: int | float, x: int | float, b: int | float = 0) -> int | float:
+    y = a * x + b
+    return y
+\end{minted}
+
+Além disso, nada impede que parâmetros e valores de retorno tenham tipos diferentes—tudo depende da lógica que a
+função deve executar.
+A anotação de tipos é opcional, mas é altamente encorajada para manter a clareza do código e detectar possíveis erros
+antes da execução.
+
+Inda sobre funções, os parâmetros de entrada e o valor de retorno são elementos opcionais em uma função e sua presença
+depende da ação que se deseja realizar.
+Algumas funções podem simplesmente executar uma tarefa sem receber valores externos ou sem produzir e retornar um
+resultado.
+
+Um exemplo disso é a função padrão \inlcode{print}, que já utilizamos ao longo deste material sem muitas explicações.
+Essa função recebe um argumento, geralmente uma \inlcode{str} contendo o texto a ser exibido, e imprime essa informação
+no terminal.
+No entanto, ela não retorna um valor\footnote{Tecnicamente, toda função python tem um retorno. Se \inlcode{retorn} não for usado dentro da função então por padrão o interpretador Python retornará \inlcode{None}, que justamente é o objeto que indica a ausência de valor.} para quem a chamou no código.
+
+Internamente ela apenas faz uma chamada para o sistema operacional para imprimir um texto no terminal.
+
+Em Python, funções também podem retornar múltiplos valores simultaneamente, o que torna o código mais flexível e evita
+a necessidade de usar estruturas, listas ou dicionários para armazenar múltiplos resultados.
+
+Essa funcionalidade é especialmente útil quando uma função precisa retornar vários cálculos ou informações
+relacionadas ao mesmo tempo, além de possibilitar o retorno de dados sobre erros encontrados durante sua execução
+
+Isso é possível porque Python permite que uma função retorne uma \inlcode{tupla}, que pode ser desempacotada na chamada
+da função.
+Veja um exemplo:
+\begin{minted}{custompython}
+import math
+
+def bhaskara(a: float, b: float, c: float) -> tuple[float, float]:
+    delta = b**2 - 4*a*c
+    if delta < 0:
+        raise ValueError("A equação não possui raízes reais. O delta é negativo.")
+
+    raiz1 = (-b + math.sqrt(delta)) / (2 * a)
+    raiz2 = (-b - math.sqrt(delta)) / (2 * a)
+    return raiz1, raiz2    # retorna ambas as raízes
+
+r1, r2 = bhaskara(a=0.5, b=14.3, c=45.0)
+print(f'{r1 = }')
+print(f'{r2 = }')
+\end{minted}
+\begin{minted}{text}
+r1 = -3.5999999999999996
+r2 = -25.0
+\end{minted}
+
+Observe que \inlcode{return} retorna uma \inlcode{tuple} contendo dois valores do tipo \inlcode{float}.
+Essa tupla é então desempacotada pelo código que chama a função, e cada valor retornado é atribuído a uma
+variável distinta (\inlcode{r1} e \inlcode{r2}).
+
+O comando \inlcode{import math} é uma declaração ao interpretador para importar o módulo \inlcode{math}, já que
+\inlcode{sqrt} usada para o cálculo da raiz quadrada não é uma função embutida, ou seja, não é uma função disponível
+por padrão, muito embora faça parte da biblioteca padrão do Python e nenhum pacote adicional de terceiros
+necessita ser instalado.
+
+No código acima, a linha \inlcode{import math} é uma declaração ao interpretador para importar o módulo \inlcode{math},
+já que \inlcode{sqrt}, usada para calcular a raiz quadrada, não é uma função embutida (não está disponível por padrão).
+No entanto, ela faz parte da biblioteca padrão do Python, então não é necessário instalar nenhum pacote externo de terceiros.
+
+Ainda nesse exemplo, introduzimos o comando \inlcode{raise}, que lança uma exceção (geralmente associada a um erro)
+caso a função encontre raízes complexas, uma condição para a qual ela não foi projetada para lidar.
+Se essa exceção não for tratada\footnote{O tratamento adequado de exceções em Python é realizado por meio da estrutura \inlcode{try-except}, permitindo capturar
+e gerenciar erros de maneira controlada.
+No entanto, essa abordagem foge ao escopo desse texto introdutório.} pelo código que chama a função, a execução do programa será interrompida.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

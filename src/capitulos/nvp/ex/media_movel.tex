@@ -1,0 +1,58 @@
+\definecolor{c0}{rgb}{0.6,0.6,0.6}
+\definecolor{c1}{rgb}{0.4,0.4,0.9}
+\definecolor{c2}{rgb}{0.3,0.6,0.6}
+\definecolor{c3}{rgb}{0.3,0.6,0.3}
+\definecolor{c4}{rgb}{0.7,0.8,0.0}
+\definecolor{c5}{rgb}{0.8,0.3,0.3}
+\definecolor{civ}{rgb}{1.0,0.4,0.0}
+
+Escreva uma função \inlcode{media_movel(serie: list[float], n: int) -> list[float]} que recebe como argumentos uma
+lista numérica \inlcode{serie} de tamanho arbitrário e um inteiro \inlcode{n}, indicando o
+número de elementos da janela de cálculo da média móvel a ser computada na lista \inlcode{serie}.
+A função deve retornar uma nova série, na forma de uma lista de \inlcode{float} com o  mesmo tamanho de \inlcode{serie},
+contendo os valores calculados da média móvel.
+Ou seja, para elementos cujo índice é maior ou igual a \inlcode{n}:
+\begin{equation}
+    y_{k} =
+        \dfrac{1}{n}\sum_{i=k-n+1}^k x_i \ \ \ \ \ \ , \ \   k \geq n
+\end{equation}
+onde $x$ é a série original de entrada e $y$ a que contem as médias moveis.
+
+Preencha os elementos da serie de retorno cujos índices são menores que \inlcode{n} com \inlcode{float(}\inlstr{nan}\inlcode{)}.
+
+Por exemplo, para a lista \inlcode{[ 1.0, 3.0, 2.0, 4.0, 6.0, 2.0, 1.0 ]} e \inlcode{n=3}:
+    $$
+    x = [~~~ \textcolor{c1}{\underbrace{1~~~~~ 3~~~~~ 2}_{y_3 = \frac{1+3+2}{3}=2}}~~~~~ 4~~~~~ 6~~~~~ 2~~~~~ 1~~~ ]
+    $$
+    \vspace{-3mm}$$
+    x = [~~~ 1~~~~~ \textcolor{c2}{\underbrace{3~~~~~ 2~~~~~ 4}_{y_4 = \frac{3+2+4}{3}=3}}~~~~~ 6~~~~~ 2~~~~~ 1~~~ ]
+    $$
+    \vspace{-3mm}$$
+    x = [~~~ 1~~~~~ 3~~~~~ \textcolor{c3}{\underbrace{ 2~~~~~ 4~~~~~ 6}_{y_5 = \frac{2+4+6}{3}=4}}~~~~~ 2~~~~~ 1~~~ ]
+    $$
+    \vspace{-3mm}$$
+    x = [~~~ 1~~~~~ 3~~~~~ 2~~~~~ \textcolor{c4}{\underbrace{ 4~~~~~ 6~~~~~ 2}_{y_6 = \frac{4+6+2}{3}=4}}~~~~~ 1~~~]
+    $$
+    \vspace{-3mm}$$
+    x = [~~~ 1~~~~~ 3~~~~~ 2~~~~~ 4~~~~~ \textcolor{c5}{\underbrace{ 6~~~~~ 2~~~~~ 1}_{y_7 = \frac{6+2+1}{3}=3}} ~~~]
+    $$
+    \vspace{-3mm}$$
+    y = [~~~ \, \textcolor{c0}{\cdot} \; ~~~~~ \textcolor{c0}{\cdot} ~~~~~ \textcolor{c1}{2}~~~~~ \textcolor{c2}{3}~~~~~ \textcolor{c3}{4}~~~~~ \textcolor{c4}{4}~~~~~ \textcolor{c5}{3}~~~ ]
+    $$
+    \\
+
+\begin{minted}{custompython}
+def media_movel(serie: list[float], n: int) -> list[float]:
+    # seu código aqui
+
+print(media_movel([ 1.0, 3.0, 2.0, 4.0, 6.0, 2.0, 1.0 ], 3))
+\end{minted}
+
+Resultado esperado:
+\begin{minted}{text}
+[nan, nan, 2.0, 3.0, 4.0, 4.0, 3.0]
+\end{minted}
+
+
+
+

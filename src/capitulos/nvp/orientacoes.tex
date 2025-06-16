@@ -1,0 +1,47 @@
+%! Author = j-Lago
+%! Date = 6/28/2024
+
+\unnumberedchapter{Orientações Iniciais e Convenções}
+
+Este tutorial oferece uma introdução concisa ao Python, voltada para os alunos ingressantes no curso de Mestrado
+Profissional em Sistemas de Energia.
+
+Por ter um caráter introdutório, o texto apresenta exemplos e conceitos sem a intenção de esgotar completamente o
+tema ou fornecer soluções otimizadas para problemas específicos.
+
+Os exemplo aqui descritos assumem a utilização de Python 3.10 (ou superior) que deve estar devidamente instalado (\url{https://www.python.org/downloads/}).
+
+Também recomenda-se a utilização de alguma IDE (\emph{Integrated Development Environment}) para facilitar a escrita e manipulação do código.
+As duas mais populares para desenvolvimento em Python são:
+\begin{itemize}
+    \item \texttt{PyCharm}: uma IDE dedicada ao Python, desenvolvida pela JetBrains.
+    Oferece uma configuração padrão robusta e inclui funcionalidades como autocomplete, análise de código, refatoração,
+    debugging, testes integrados e integração com Git.
+    É uma ferramenta profissional ideal para projetos complexos, embora possa ser pesada em máquinas mais simples ou antigas.
+    Disponível em duas versões: Professional (paga) e Community Edition (gratuita).
+    Embora a versão gratuita tenha algumas limitações, ela é mais do que suficiente para este tutorial e até mesmo para projetos pessoais de grande porte.
+    (\url{https://www.jetbrains.com/pycharm/download/})
+    \item \texttt{VS Code}: um editor de código aberto, leve e flexível, não restrito a uma única linguagem.
+    O suporte ao Python é obtido por meio de extensões, que também habilitam ferramentas de análise de código.
+    Seu uso exige uma configuração inicial, incluindo a instalação da extensão Python (Microsoft).
+    Outras extensões relacionadas à produtividade podem ser obtidas pelo marketplace integrado ao VS Code.
+    (\url{https://code.visualstudio.com/download/})
+\end{itemize}
+
+
+No texto, códigos Python serão identificados por uma caixa preta:
+\begin{minted}[escapeinside=??, frame=single, rulecolor=brown]{custompython}
+?\textcolor{brown}{\faIcon{file} exemplo\_codigo\_python.py}?
+\end{minted}
+\vspace{-0.8em}
+%
+\begin{minted}[escapeinside=??]{custompython}
+
+print('Hello, World!')
+\end{minted}
+
+enquanto comandos e mensagens impressas no terminal estarão em uma caixa azul:
+\begin{minted}[escapeinside=??]{text}
+?\textcolor{green!20!brown}{C:\char92curso\_python\char92>}? python exemplo_codigo_python.py
+Hello, World!
+\end{minted}

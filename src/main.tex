@@ -1,0 +1,57 @@
+% usar Tex Live e lualatex
+% usar minted v2.9
+% custom compiler argument: -shell-escape
+
+
+\documentclass{../class/IFSCreport}
+
+\usepackage[pdftex,
+            pdfauthor={Prof. Jackson Lago, Dr.},
+            pdftitle={},
+            pdfkeywords={},
+            pdfcreator={LuaLaTex, Biber},
+            pdfborder={0 0 0}]{hyperref}
+\usepackage{import}
+
+\definecolor{primary}{RGB}{137, 197, 63}
+\definecolor{secondary}{RGB}{234, 32, 38}
+
+\newcommand{\plotscale}{0.51}
+\newcommand{\todo}{To be done!}
+
+
+
+%-----------------------------------------------------------------------------------------------------------------------
+\date{Junho de 2024}
+\author{Jackson Lago, Dr.}
+\email{jackson.lago@ifsc.edu.br}
+\subject{Introdução}
+\title{Python}
+\subtitle{Subtítulo do modelo}
+\cabecalho{\textsc{Introdução ao Python} \\  \vspace{1.5mm}}
+
+\addbibresource{refs.bib}
+
+%-----------------------------------------------------------------------------------------------------------------------
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+%\input{capitulos/cap_01}
+
+\input{capitulos/nvp/orientacoes}
+\input{capitulos/nvp/variaveis}
+\input{capitulos/nvp/funcoes}
+\input{capitulos/nvp/iffor}
+
+\input{capitulos/nvp/ex1}
+
+%\input{capitulos/nvp/class}
+%\input{capitulos/nvp/refs}
+
+
+\printbibliography
+\end{document}

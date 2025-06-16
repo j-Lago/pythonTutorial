@@ -1,0 +1,5 @@
+[pygments.lexers]
+custompython = custompython:CustompythonLexer
+
+[pygments.styles]
+pycharm = pycharm:PycharmStyle

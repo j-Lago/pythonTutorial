@@ -1,0 +1,24 @@
+Escreva uma função  \inlcode{procura(lista, valor)},  que recebe uma lista de números de tamanho arbitrário e um valor
+a ser buscado dentro dessa lista.
+A função deve retornar uma nova lista contendo os índices das ocorrências do valor na lista original.
+
+Se o valor não for encontrado, a função deve retornar uma lista vazia.
+\begin{minted}{custompython}
+def procura(lista, valor):
+    # seu código aqui
+
+ids = procura([2, 4, 8, 3, 0, 3, 5, 7], 3)
+print(ids)
+\end{minted}
+
+Resultado esperado:
+\begin{minted}{text}
+[3, 5]
+\end{minted}
+
+\subsection*{Desafio:}
+Além de criar sua própria lógica para a busca, tente também resolver o problema utilizando o função embutida \inlcode{filter()}.
+Para isso, você precisará aplicar uma função \inlcode{lambda}, que não foi abordada neste tutorial.
+Pesquise sobre essa técnica e descubra como utilizá-la para filtrar os índices corretamente!
+
+

@@ -1,0 +1,570 @@
+\chapter{Variáveis e Tipos}
+
+A computação em seu nível mais básico baseia-se na manipulação de dados armazenados na memória.
+
+As linguagens naturais são ambíguas e, muitas vezes, subjetivas, o que pode gerar interpretações variadas.
+Diferentemente delas, uma linguagem de programação deve ser precisa e determinística, garantindo previsibilidade no
+processamento da informação.
+
+Através dessas linguagens, comunicamos ao hardware como manipular os dados armazenados na memória, transformando-os
+em novos valores.
+Esses valores, por sua vez, são interpretados e associados a algo significativo no mundo real, seja um número, um
+texto ou uma representação visual.
+
+Blocos de dados armazenados na memória que representam coletivamente um conceito comum são chamados objetos.
+Os tipos associados a esses objetos formam uma camada de abstração que define como um conjunto de bits deve ser
+interpretado.
+Essa abstração permite representar diversos conceitos, como números inteiros, valores fracionários, caracteres e outros
+tipos de dados, tornando a manipulação dessas informações mais estruturada e intuitiva.
+
+Diferente de algumas linguagens, em Python não é necessário declarar o tipo da variável explicitamente
+— o interpretador determina automaticamente o tipo com base no valor atribuído.
+
+Python possui diversos tipos primitivos, que representam os dados mais básicos da linguagem.
+Estes podem ser utilizados diretamente para expressar algum conceito real ou combinados para formar tipos compostos
+(ou estruturados), capazes de representar ideias e relações mais complexas.
+
+
+Os principais são:
+
+\begin{itemize}
+    \item \inlcode{int}: utilizado para armazenar números inteiros, como \inlcode{10}, \inlcode{-5}, e \inlcode{0}
+    \item \inlcode{float}: representa valores com casas decimais, como \inlcode{3.14}, \inlcode{-0.5}, \inlcode{1.6e-3}
+    \item \inlcode{complex}: representa números complexos, como \inlcode{3.2 + 4.7j}
+    \item \inlcode{bool}: representa uma grandeza booleana, que pode assumir apenas \inlcode{True} ou \inlcode{False}, essencial para estruturas de decisão
+    \item \inlcode{str}: string utilizado para armazenar textos, como \inlstr{Olá, mundo!}.
+    \item \inlcode{NoneType}: pode assumir apenas o valor \inlcode{None}, e pode ser explicitamente atribuído
+    a uma variável para sinalizar a ausência de um valor.
+
+
+
+\end{itemize}
+
+Em código a criação de variáveis com os tipos acima descritos ficaria:
+\begin{minted}{custompython}
+idade = 25
+peso = 78.6
+impedancia = 5 + 3j
+ativo = True
+nome = 'Fulano de Tal'
+sem_valor = None
+
+print(f"'idade' é uma variável do tipo {type(idade)} e valor: {idade}")
+print(f"'peso' é uma variável do tipo {type(peso)} e valor: {peso}")
+print(f"'impedancia' é uma variável do tipo {type(impedancia)} e valor: {impedancia}")
+print(f"'ativo' é uma variável do tipo {type(ativo)} e valor: {ativo}")
+print(f"'nome' é uma variável do tipo {type(nome)} e valor: {nome}")
+print(f"'sem_valor' é uma variável do tipo {type(sem_valor)} e valor: {sem_valor}")
+\end{minted}
+
+O código acima apenas cria diversas variáveis de diferentes tipos e para cada uma delas imprime o seu tipo e valor no terminal:
+\begin{minted}{text}
+'idade' é uma variável do tipo <class 'int'> e valor: 25
+'peso' é uma variável do tipo <class 'float'> e valor: 78.6
+'impedancia' é uma variável do tipo <class 'complex'> e valor: (5+3j)
+'ativo' é uma variável do tipo <class 'bool'> e valor: True
+'nome' é uma variável do tipo <class 'str'> e valor: Fulano de Tal
+'sem_valor' é uma variável do tipo <class 'NoneType'> e valor: None
+\end{minted}
+
+Antes de prosseguirmos e começarmos a utilizar essas variáveis para realizar tarefas úteis, é importante refletir
+sobre o conceito de tipagem e as diferentes formas como as linguagens de programação a tratam.
+
+Algumas linguagens possuem tipagem dinâmica, onde o tipo das variáveis é determinado durante a execução do programa.
+Outras adotam tipagem estática, exigindo que os tipos sejam declarados antecipadamente e validados durante a compilação
+(quando aplicável).
+Essa diferença impacta diretamente a maneira como escrevemos, mantemos e depuramos código.
+
+Python é uma linguagem interpretada e de tipagem dinâmica, o que significa que seu código não é compilado previamente
+e que o tipo de uma variável é determinado em tempo de execução, sem exigir uma declaração explícita por parte do
+programador.
+Isso não significa que as variáveis não possuam um tipo associado, mas sim que o próprio interpretador do Python
+gerencia automaticamente os tipos conforme necessário.
+
+%Esse comportamento contrasta com linguagens de tipagem estática (como C, C++, Rust, etc.), onde a definição de tipos
+%ocorre durante a compilação, antes do início da execução do programa.
+
+Por exemplo, no seguinte código:
+\begin{minted}{custompython}
+descricao = 'Geladeira frost free 500l'  # tipo: str
+quantidade = 10                          # tipo: int
+peso_unitario = 72.7                     # tipo: float
+\end{minted}
+
+as variáveis \inlcode{descricao}, \inlcode{quantidade} e
+\inlcode{peso\_unitario}\footnote{Em Python, o estilo \texttt{snake\_case} é tradicionalmente usado para nomear variáveis,
+separando palavras com underscores (\texttt{\_}) e usando minúsculas.}
+são automaticamente criadas com os tipos
+\inlcode{str}, \inlcode{int} e \inlcode{float}, respectivamente.
+O interpretador infere esses tipos com base nos valores atribuídos a cada variável
+(o valor à direita de \texttt{=}).
+
+Além disso, uma variável pode ser redefinida posteriormente, até mesmo para um tipo diferente.
+Essa abordagem pode ser vantajosa para tornar o código mais flexível e dinâmico, mas também pode introduzir problemas ao
+mascarar erros difíceis de identificar.
+
+Por exemplo, em
+\begin{minted}{custompython}
+descricao = 'Geladeira frost free 500l'  # tipo: str
+quantidade = 10                          # tipo: int
+peso_unitario = 72.7                     # tipo: float
+
+print(f"pré: 'descricao' é do tipo {type(descricao)} com valor: {descricao}")
+descricao = quantidade   # redefine descricao para int
+print(f"pós: 'descricao' é do tipo {type(descricao)} com valor: {descricao}")
+\end{minted}
+\begin{minted}{text}
+pré: 'descricao' é do tipo <class 'str'> com valor: Geladeira frost free 500l
+pós: 'descricao' é do tipo <class 'int'> com valor: 10
+\end{minted}
+
+a variável \inlcode{descricao} inicialmente criada como \inlcode{str} e valor \inlstr{Geladeira frost free 500l}, é redefinida para
+\inlcode{int}, passando a armazenar o valor \inlcode{10}.
+Esse comportamento exemplifica a tipagem dinâmica do Python, onde uma mesma variável pode assumir diferentes tipos ao
+longo da execução do código.
+
+Em Python, uma variável é apenas um nome que referencia um objeto em memória.
+Quando uma variável é redefinida, ela passa a apontar para outro objeto, que não necessariamente precisa ter o mesmo tipo.
+
+Esse código é válido e não resultará em erros de execução por si só.
+No entanto, pode representar um erro lógico caso essa alteração de tipo não esteja alinhada com a intenção do programador.
+Cabe ao programador garantir a coerência do
+código, tratando \inlcode{descricao} como \inlcode{str} na parte inicial do programa e como
+\inlcode{int} posteriormente, conforme necessário.
+
+Embora essa redefinição com mudança de tipo não configure um erro sintático e possa ser útil em alguns casos, sua
+prática indiscriminada é desencorajada, pois pode dificultar legibilidade e a manutenção do código.
+
+A tipagem dinâmica do Python torna a linguagem mais simples e flexível, facilitando o desenvolvimento, especialmente
+para iniciantes.
+No entanto, essa característica exige atenção, pois erros de tipagem podem surgir em tempo de execução se os tipos
+das variáveis não forem corretamente tratados.
+
+
+Por exemplo, considere o seguinte código:
+\begin{minted}{custompython}
+descricao = 'Geladeira frost free 500l'  # tipo: str
+quantidade = 10                          # tipo: int
+peso_unitario = 72.7                     # tipo: float
+
+peso_total = peso_unitario * quantidade
+print(f'Peso total: {peso_total} kg')
+\end{minted}
+%
+\begin{minted}{text}
+    Peso total: 727.0 kg
+\end{minted}
+
+As variáveis \inlcode{quantidade} (\inlcode{int}) e \inlcode{peso\_unitario} (\inlcode{float}) são multiplicadas, gerando
+um novo valor do tipo \inlcode{float}, que é atribuído a \inlcode{peso\_total}.
+Essa operação é perfeitamente válida, tanto do ponto de vista sintático da linguagem quanto do ponto de vista lógico.
+
+Agora, observe o que aconteceria se o programador, por descuido, digitasse \inlcode{descricao} ao invés
+de \inlcode{peso\_unitario}.
+\begin{minted}{custompython}
+descricao = 'Geladeira frost free 500l'  # tipo: str
+quantidade = 10                          # tipo: int
+peso_unitario = 72.7                     # tipo: float
+
+peso_total = peso_unitario * descricao   # <- erro de digitação
+print(f'Peso total: {peso_total} kg')
+\end{minted}
+%
+\begin{minted}[escapeinside=??]{text}
+Traceback (most recent call last):
+  File ?\textcolor{magenta!80}{\char34c:\char92curso\_python\char92aula1\char92variaveis.py\char34}?, line ?\textcolor{magenta!80}{5}?, in ?\textcolor{magenta!80}{<module>}?
+    peso_total = ?\textcolor{red!70}{peso\_unitario * descricao}?
+                 ?\textcolor{red!70}{\char126\char126\char126\char126\char126\char126\char126\char126\char126\char126\char126\char126\char126\char126\char94\char126\char126\char126\char126\char126\char126\char126\char126\char126\char126}?
+?\textcolor{magenta!80}{TypeError: can't multiply sequence by non-int of type 'float'}?
+\end{minted}
+
+Durante a execução do código, o interpretador encontrou uma operação inválida e gerou um erro de incompatibilidade
+de tipos, pois a multiplicação entre um \inlcode{float} com um \inlcode{str} não está definida.
+
+Perceba que esse erro só ocorre em tempo de execução, no momento em que o interpretador Python tenta realizar a
+multiplicação entre um \inlcode{float} e um \inlcode{str}.
+Trata-se de um erro de lógica, não de sintaxe, pois, sendo Python uma linguagem de tipagem dinâmica,
+\inlcode{peso\_unitario} e \inlcode{descricao} poderiam armazenar qualquer tipo de dado ao longo da execução do código,
+podendo sofrer mudanças não só de valor, mas também de tipo, até atingir a linha onde ocorre a tentativa e
+multiplicação e, consequentemente, o erro.
+
+Esse erro seria facilmente detectado e corrigido no momento da escrita do código ou durante a compilação em
+linguagens de tipagem estática (como C, C++, Java, Rust, etc), impedindo sua ocorrência em tempo de execução.
+Esse exemplo foi incluído apenas para ilustrar também as desvantágens e os possíveis desafios da tipagem dinâmica.
+
+Embora Python não suporte tipagem estática, ele suporta opcionalmente anotação de tipos.
+As anotações de tipos são declarações do programador quanto ao tipo intentado para cada variável
+criada\footnote{Além da anotação de tipo de variáveis, podemos também anotar tipos para parâmetros e retorno de
+funções/métodos}.
+
+Apesar das anotações de tipos não influenciarem a execução do código --- sendo ignoradas pelo interpretador Python
+durante a execução --- elas são extremamente úteis.
+Essas anotações são utilizadas por ferramentas de análise estática integradas à maioria das IDEs modernas para
+identificar possíveis erros de incompatibilidade de tipos no momento da escrita do
+código\footnote{A análise estática de tipos (ou \emph{type checking}) está habilitada por padrão na IDE PyCham.
+Já no VS Code, ela pode habilitada incluindo os campos
+\texttt{'python.analysis.autoImportCompletions': true,} \texttt{'python.analysis.typeCheckingMode': 'standard'} no arquivo de
+configurações \texttt{settings.json}.
+%Outras extensões populares para produtividade como \texttt{Pylint} e \texttt{Flake8} podem ser instaladas pelo VS Code Extensions Marketplace
+}
+além de melhorar a legibilidade e a manutenção, minimizando assim os riscos associados à tipagem dinâmica, mantendo
+todos os seus benefícios.
+
+Reescrevendo o exemplo anterior com anotação de tipos, a IDE agora pode nos alertar sobre um provável erro antes
+mesmo da execução:
+\begin{minted}[escapeinside=??]{custompython}
+descricao: str = 'Geladeira frost free 500l'
+quantidade: int = 10
+peso_unitario: float = 72.7
+
+peso_total = peso_unitario * descricao?\tikzmark{squigglydescricao}?   # <- erro de digitação
+print(f'Peso total: {peso_total} kg')
+\end{minted}
+%
+\begin{tikzpicture}[remember picture, overlay]
+    \draw[orange, thick, line cap=round, decorate, decoration={snake, amplitude=0.15mm, segment length=1.5mm}]
+        (pic cs:squigglydescricao) ++(-0.01,-0.03) -- ++(-3.66,0.0);
+    \draw[->, thick, line cap=round, orange] (pic cs:squigglydescricao) ++(-0.01,-0.03) -- ++(0.6,0.6) node[right, fill=black!80!orange, inner sep=1pt]
+        {\scriptsize\texttt{Operator '*'~not supported for types 'float'~and 'str'}};
+\end{tikzpicture}
+
+Além dos tipo primitivos, Python possui mais duas formas de armazenar informações: através de classes customizadas
+\inlcode{class}, que serão discutidas no capítulo \ref{class} e através de coleções de dados (\inlcode{collections})
+
+
+
+
+\section{Collections}
+
+Em Python, coleções são estruturas que armazenam múltiplos valores em uma única variável.
+As três coleções mais comuns da linguagem são: list, set e dict.
+Cada uma delas possui características específicas que as tornam mais adequadas para diferentes situações.
+
+
+
+
+\subsection{\inlcode{list}}
+As listas (\inlcode{list}) são uma das estruturas mais versáteis do Python, representam sequências de elementos
+ordenados e mutáveis.
+Ous seja, os elementos inseridos nela são mantidos na mesma ordem e podem ser alterados a qualquer momento,
+seja adicionando, removendo modificando ou substituindo itens.
+
+Além disso, possuem tamanho arbitrário, crescendo conforme novos elementos são inseridos.
+
+Uma lista pode ser criada utilizando colchetes \inlcode{[]} e pode armazenar qualquer tipo de dado, inclusive, diferentes tipos para cada elemento.
+Por exemplo:
+\begin{minted}{custompython}
+numeros = [8, 2, 0, -4, 15]
+nomes = ['Alice', 'Bruno', 'Carla']
+misto = [42, 'texto', 3.14, True]  # lista com tipos variados
+\end{minted}
+
+A lista é uma coleção dinâmica, e pode crescer mesmo apos sua criação para acomodar novos elementos:
+\begin{minted}{custompython}
+cores = ['azul', 'amarelo', 'cinza', 'vermelho']
+print(f'pré: A lista 'cores' possui {len(cores)} elementos: {cores}')
+
+cores.append('verde')  # adiciona um novo elemento de valor 'verde' ao final da lista
+print(f'pós: A lista 'cores' possui {len(cores)} elementos: {cores}}')
+\end{minted}
+\begin{minted}{text}
+pré: A lista 'cores' possui 4 elementos: ['azul', 'amarelo', 'cinza', 'vermelho']
+pós: A lista 'cores' possui 5 elementos: ['azul', 'amarelo', 'cinza', 'vermelho', 'verde']
+\end{minted}
+
+Esse código introduz um elemento novo: a chamada cores.append(), onde append() é um método da método da classe list
+Métodos são semelhantes a funções, mas estão associados a um tipo de dado específico (à uma \inlcode{class}) e
+normalmente modificam o próprio objeto ao qual pertencem.
+
+A chamada de um método geralmente impacta diretamente o objeto no qual ele é invocado.
+No caso de append(), um novo elemento é adicionado ao final da lista, alterando sua estrutura inicial.
+
+Esse conceito será revisitado e formalizado com mais detalhes no Capítulo \ref{class}, quando exploraremos a
+construção e uso de classes em Python.
+
+Note que a lista cresce automaticamente para acomodar novos elementos, sem que o programador precise gerenciar ou
+alocar memória adicional manualmente.
+Essa característica torna as listas particularmente flexíveis para armazenar conjuntos dinâmicos de dados.
+
+Além disso, no último exemplo, introduzimos a função \inlcode{len()}, que retorna o número de elementos presentes na coleção.
+Essa é uma função essencial para validar o tamanho de uma lista antes de realizar operações que dependam da quantidade de itens.
+
+Também podemo acessar elementos individuais dessa lista, tanto para leitura como para escrita.
+Essa indexação é realizada com a seguinte sintaxe \inlcode{nome_da_lista[indice]}, veja o código exemplo:
+\begin{minted}{custompython}
+cores = ['azul', 'amarelo', 'cinza', 'vermelho', 'verde']
+
+# a indexação dos elemntos da listas por um inteiro inicia em 0
+selecionada1 = cores[1]  # indice 1 equivale ao 2° elemento
+print(f'selecioanda1 é: {selecionada1}')
+
+# indice negativos podem ser usados para indexar elemntos do final para o início da listas
+selecionada2 = cores[-2]  # -2 indica o penúltimo elemento
+print(f'selecioanda2 é: {selecionada2}')
+
+# é possível a indexação por slice, ou faixa de índices m:n (n é não inclusivo)
+selecionadas = cores[0:3]  # 0:3 corresponde aos indices 0,1,2
+print(f'selecionadas são: {selecionadas}')
+
+# elementos da lista também podem ser individualemente modificados
+cores[2] = 'marrom'  # altera o terceiro elemento de 'cinza' para 'marrom'
+print(f'pós modificação: {cores}')
+
+# podemo excluir elementos, o que desloca dos indices dos elementos a sua direita
+del cores[3]
+print(f'pós excusão por indice: {cores}')
+
+# ou ainda podemo excluir não por indice mas por valor
+cores.remove('azul')
+print(f'pós excusão por valor: {cores}')
+
+# tentar acessar índices que não existe resultará em um erro
+cores[99]
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+selecioanda1 é: amarelo
+selecioanda2 é: vermelho
+selecionadas são: ['azul', 'amarelo', 'cinza']
+pós modificação: ['azul', 'amarelo', 'marrom', 'vermelho', 'verde']
+pós excusão por índice: ['azul', 'amarelo', 'marrom', 'verde']
+pós excusão por valor: ['amarelo', 'marrom', 'verde']
+Traceback (most recent call last):
+  File ?\textcolor{magenta!80}{\char34c:\char92curso\_python\char92aula1\char92variaveis.py\char34}?, line ?\textcolor{magenta!80}{28}?, in ?\textcolor{magenta!80}{<module>}?
+    ?\textcolor{red!70}{cores[99]}?
+    ?\textcolor{red!70}{\char126\char126\char126\char126\char126\char94\char94\char94\char94}?
+?\textcolor{magenta!80}{IndexError: list index out of range}?
+\end{minted}
+
+Vários outros métodos e funções para manipular listas estão disponíveis por padrão. Segue uma breve enumeração dos mais úteis:
+\begin{itemize}
+\item \inlcode{len(lista)} – Retorna o número de elementos na lista.
+\item \inlcode{lista.append(valor)} – Adiciona um novo elemento ao final da lista.
+\item \inlcode{lista.insert(indice, valor)} – Insere um elemento em uma posição específica.
+\item \inlcode{lista.remove(valor)} – Remove a primeira ocorrência do valor especificado.
+\item \inlcode{lista.pop(indice)} – Remove e retorna o elemento na posição indicada (ou o último, se omitido).
+\item \inlcode{lista.index(valor)} – Retorna o índice da primeira ocorrência do valor.
+\item \inlcode{lista.count(valor)} – Retorna o número de vezes que o valor aparece na lista.
+\item \inlcode{lista.sort()} – Ordena a lista em ordem crescente (por padrão).
+\item \inlcode{lista.reverse()} – Inverte a ordem dos elementos da lista.
+\item \inlcode{sorted(lista)} – Retorna uma nova lista ordenada, sem modificar a original.
+\item \inlcode{lista.copy()} – Retorna uma cópia superficial da lista.
+\item \inlcode{lista.clear()} – Remove todos os elementos da lista.
+\end{itemize}
+
+Esses métodos permitem desde operações simples, como acessar elementos, até manipulações mais avançadas,
+como ordenação e remoção de elementos.
+No decorrer desse tutorial, abordaremos mais detalhes sobre a aplicação desses métodos em exemplos práticos.
+
+
+\subsection{\inlcode{tuple}}
+
+Assim como \inlcode{list}, a \inlcode{tuple} (ou tupla) é uma estrutura de dados que permite armazenar uma sequência
+de valores.
+No entanto, enquanto listas são mutáveis (ou seja, seus elementos podem ser alterados, adicionados ou removidos),
+tuplas são imutáveis: uma vez criadas, seus elementos não podem ser modificados.
+
+Essa característica confere à tupla maior segurança e previsibilidade, tornando-a ideal para representar coleções
+fixas de dados que não devem ser alteradas acidentalmente, ou até valores de retorno de uma função.
+
+Tuplas são definidas por uma sequência de valores separados por vírgula (\inlcode{,}), não necessariamente, mas comumente
+inseridos entre parênteses (\inlcode{()}).
+\begin{minted}{custompython}
+coordenada = (46.8, 22.3)
+print(coordenada)
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+(46.8, 22.3)
+\end{minted}
+
+Para definir uma tupla de um único elemento, é obrigatório adicionar uma vírgula,
+caso contrário, o Python interpretará o valor como um tipo isolado:
+\begin{minted}{custompython}
+numero = (5)   # não é tupla, é apenas um int
+tupla = (5,)  # tupla com um único elemento
+print(f'numero é do tipo {type(numero)} e valor: {numero}')
+print(f'tupla é do tipo {type(tupla)} e valor: {tupla}')
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+numero é do tipo <class 'int'> e valor: 5
+tupla é do tipo <class 'tuple'> e valor: (5,)
+\end{minted}
+
+
+A indexação de tuplas segue o mesmo princípio das listas,
+permitindo acessar elementos por índices (\inlcode{0} para o primeiro item, índices negativos para contar do final)
+\begin{minted}{custompython}
+cores = 'azul', 'verde', 'vermelho', 'amarelo', 'roxo'
+print(cores[0])     # azul
+print(cores[-1])    # roxo
+print(cores[1:4])   # ('verde', 'vermelho', 'amarelo')
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+azul
+roxo
+('verde', 'vermelho', 'amarelo')
+\end{minted}
+
+Embora tupla possa pareceu uma versão limitada de lista, elas são estruturas complementares, com propósitos distintos.
+Essas limitações justamente tornam operações com tuplas mais previsíveis, rápidas e seguras.
+
+
+
+
+\subsection{\inlcode{set}}
+Um set é uma coleção semelhante à lista (list), porém não permite valores duplicados e não mantém uma ordem fixa dos
+elementos.
+Isso faz com que seja uma estrutura útil para armazenar itens únicos e realizar operações matemáticas como união,
+interseção e diferença.
+
+Os conjuntos podem ser criados utilizando chaves \inlcode{\{\}} ou a função \inlcode{set()}:
+\begin{minted}{custompython}
+cores = {'azul', 'vermelho', 'verde', 'azul'}
+print(cores)
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+{'azul', 'vermelho', 'verde'}
+\end{minted}
+
+Observe que, mesmo que \inlstr{azul} tenha sido declarado duas vezes, ele aparece apenas uma vez no conjunto.
+
+Outra forma de criar um conjunto é utilizando \inlcode{set()} passando uma \inlcode{list} como argumento:
+\begin{minted}{custompython}
+valores = set([1, 2, 3, 4, 4, 5])
+print(valores)
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+{1, 2, 3, 4, 5}
+\end{minted}
+
+Os conjuntos são ideais quando precisamos garantir que os elementos sejam únicos, eliminando valores repetidos automaticamente.
+
+Por não manter uma ordem fixa dos elementos, set não permite acesso por índice.
+Isso significa que não podemos utilizar a notação \inlcode{set[indice]} para recuperar ou modificar elementos
+específicos, como fazemos com listas.
+Em vez disso, a manipulação de conjuntos é realizada por métodos próprios, como adição, remoção, união, interseção e
+diferença, que operam sobre o conjunto como um todo:
+
+\begin{minted}{custompython}
+a = {1, 2, 3, 4}
+b = {3, 4, 5}
+b.add(6)
+
+print(f'união: {a | b}')
+print(f'interseção: {a & b}')
+print(f'diferença: {a - b}')
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+união: {1, 2, 3, 4, 5, 6}
+interseção: {3, 4}
+diferença: {1, 2}
+\end{minted}
+
+Embora \inlcode{set} não suporte indexação direta, ainda é possível iterar sobre seus elementos utilizando laços
+como \inlcode{for}.
+Dessa forma, podemos percorrer todos os itens do conjunto sem precisar acessar um elemento
+específico por índice.
+A iteração sobre coleções de dados será abordada no capítulo \ref{iffor}.
+
+Aqui está uma lista resumida dos principais métodos e funções para manipulação de sets em Python:
+\begin{itemize}
+\item \inlcode{len(set)} – Retorna o número de elementos no conjunto.
+\item \inlcode{set.add(valor)} – Adiciona um novo elemento ao conjunto.
+\item \inlcode{set.remove(valor)} – Remove um elemento existente (gera erro se o valor não existir).
+\item \inlcode{set.discard(valor)} – Remove um elemento sem gerar erro caso ele não exista.
+\item \inlcode{set.pop()} – Remove e retorna um elemento aleatório do conjunto.
+\item \inlcode{set.clear()} – Remove todos os elementos do conjunto.
+\item \inlcode{set.copy()} – Retorna uma cópia do conjunto.
+\end{itemize}
+
+
+\subsection{\inlcode{dict}}
+
+Em Python, um dicionário (dict) é uma estrutura de dados que implementa um hashmap, permitindo o armazenamento de pares
+\inlcode{key: value} (chave e valor).
+Essa abordagem garante acesso eficiente aos valores a partir de suas chaves, tornando a busca em grandes coleções
+extremamente rápida.
+
+Diferente das listas \inlcode{list} e conjuntos \inlcode{set}, que organizam elementos sequencialmente ou de forma desordenada,
+o dicionário associa cada valor a uma chave única, permitindo acessos diretos sem necessidade de percorrer toda a
+estrutura.
+
+Cada chave (\inlcode{key}) pode ser qualquer tipo de dado que suporte a função \inlcode{hash()}, como números, strings
+ou tuplas imutáveis.
+Já o valor (\inlcode{value}) pode ser qualquer objeto do Python, incluindo listas, outras coleções, classes definidas
+pelo usuário e até mesmo funções.
+
+Podemos criar um dicionário utilizando chaves (\inlcode{\{\}}) e inserindo os pares \inlcode{key: value} dentro delas.
+Por exemplo:
+\begin{minted}{custompython}
+dados = {'nome': 'Fulano', 'idade': 25, 'cidade': 'Florianópolis'}
+print(dados)
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+{'nome': 'Fulano', 'idade': 25, 'cidade': 'Florianópolis'}
+\end{minted}
+
+Para recuperar um valor armazenado em um dicionário, utilizamos sua chave entre colchetes \inlcode{[]}:
+\begin{minted}{custompython}
+dados = {'nome': 'Fulano', 'idade': 25, 'cidade': 'Florianópolis'}
+nome = dados['nome']
+print(f'nome: {nome}')
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+nome: Fulano
+\end{minted}
+
+Tentar acessar uma chave inexistente gera um erro \inlcode{KeyError}:
+\begin{minted}{custompython}
+dados = {'nome': 'Fulano', 'idade': 25, 'cidade': 'Florianópolis'}
+telefone = dados['telefone']
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+Traceback (most recent call last):
+  File ?\textcolor{magenta!80}{\char34c:\char92curso\_python\char92aula1\char92variaveis.py\char34}?, line ?\textcolor{magenta!80}{2}?, in ?\textcolor{magenta!80}{<module>}?
+    ?\textcolor{red!70}{telefone = dados['telefone']}?
+    ?\textcolor{red!70}{           \char126\char126\char126\char126\char126\char94\char94\char94\char94\char94\char94\char94\char94\char94\char94\char94\char94}?
+?\textcolor{magenta!80}{KeyError: 'telefone'}?
+\end{minted}
+
+Já escrever em uma chave previamente inexistes, expande o \inlcode{dict} incluindo esse novo par:
+\begin{minted}{custompython}
+dados = {'nome': 'Fulano', 'idade': 25, 'cidade': 'Florianópolis'}
+
+dados['telefone'] = '(48)99999-9999'
+print(dados)
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+{'nome': 'Fulano', 'idade': 25, 'cidade': 'Florianópolis', 'telefone': '(48)99999-9999'}
+\end{minted}
+
+Dicionários são mutáveis, permitindo que seus elementos sejam alterados, adicionados ou removidos.
+Podemos modificar ou remover um valor acessando sua chave diretamente:
+\begin{minted}{custompython}
+dados = {'nome': 'Fulano', 'idade': 25, 'cidade': 'Florianópolis'}
+
+dados['idade'] = 26   # modifica o valor associado à chave 'idade'
+del dados['cidade']   # remove o valor associado à chave 'cidade'
+print(dados)
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
+{'nome': 'Fulano', 'idade': 26}
+\end{minted}
+
+Métodos úteis para manipulação de dicionários
+
+
+Aqui estão alguns métodos úteis para trabalhar com dicionários:
+\begin{itemize}
+\item \inlcode{len(dicionario)}: Retorna a quantidade de pares chave-valor no dicionário.
+\item \inlcode{dicionario.keys()}: Retorna todas as chaves do dicionário.
+\item \inlcode{dicionario.values()}: Retorna todos os valores do dicionário.
+\item \inlcode{dicionario.items()}: Retorna todos os pares chave-valor como tuplas.
+\item \inlcode{dicionario.pop(chave)}: Remove um item e retorna seu valor.
+\item \inlcode{dicionario.update(outro_dicionario)}: Atualiza o dicionário com novos pares chave-valor.
+\item \inlcode{dicionario.clear()}: Remove todos os elementos do dicionário.
+\end{itemize}
+
+Dicionários são ferramentas poderosas para armazenar e acessar dados de forma eficiente.
+Eles são amplamente utilizados em Python para estruturar informações e otimizar operações de busca.
+
+

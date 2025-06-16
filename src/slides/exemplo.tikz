@@ -1,0 +1,136 @@
+% Definições de estilos e geometria
+\tikzset{
+    core/.style={fill=textcolor!30!background},
+    coreshadow/.style={textcolor!40!background},
+    field/.style={fill=violet!60!textcolor, fill opacity=0.3},
+    fieldbox/.style={violet!40!textcolor, draw opacity=0.4, dashed},
+    fieldshadow/.style={pattern color=violet!40!textcolor, opacity=0.4, pattern={Dots[distance=1mm,radius=0.05mm]}},
+    highlighted/.style={fill=violet!60!textcolor, fill opacity=0.3},
+    dashed_lines/.style={violet!60!textcolor, draw opacity=0.6, dashed},
+    coil/.style={primary},
+    outline/.style={textcolor},
+    %
+    minhafigura/.pic={
+        % Definição de coordenadas
+        \pgfmathsetmacro{\alti}{1.25}
+        \pgfmathsetmacro{\larg}{5}
+        \pgfmathsetmacro{\prof}{1.2}
+        \pgfmathsetmacro{\raio}{0.6}    % espessura do core
+        \pgfmathsetmacro{\esprot}{-20}  % ângulo de rotação da espira
+        \pgfmathsetmacro{\termfactor}{0.85}    % terminação da bobina (fator em relação ao raio)
+        %
+        \pgfmathsetmacro{\espc}{1.5}    % espessura do core
+        \pgfmathsetmacro{\espi}{1.4}    % espessura do imã
+        %
+        \pgfmathsetmacro{\sali}{0.9}
+        %
+        \pgfmathsetmacro{\perspangx}{36}
+        \pgfmathsetmacro{\perspangy}{45}
+        \pgfmathsetmacro{\x}{\prof*sin(\perspangy)}
+        \pgfmathsetmacro{\y}{\prof*sin(\perspangx)}
+        \pgfmathsetmacro{\ex}{\raio*sin(\esprot)}
+        \pgfmathsetmacro{\ey}{\raio*cos(\esprot)}
+        %
+        % espiras
+        \coordinate (persp_x) at (\x, 0.0);
+        \coordinate (persp_y) at (0.0, \y);
+        \coordinate (persp) at ($(persp_x) + (persp_y)$);
+        \coordinate (part) at (\sali, 0);
+        \coordinate (inner_y) at (0, \alti);
+        \coordinate (outer_x) at (\larg, 0);
+        \coordinate (esp_x) at (\espc, 0);
+        \coordinate (esp_y) at (0, \espc);
+        \coordinate (larg_i) at (\espi, 0);
+        % inner
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at ($(A) - (inner_y)$);
+        \coordinate (C) at ($(B) + (outer_x)$);
+        \coordinate (D) at ($(C) + (inner_y)$);
+        \coordinate (E) at ($(D) - (part)$);
+        \coordinate (F) at ($(E) + (esp_y)$);
+        \coordinate (G) at ($(F) + (part) + (esp_x)$);
+        \coordinate (H) at ($(G) - (inner_y) - 2*(esp_y)$);
+        \coordinate (I) at ($(H) - (outer_x) - 2*(esp_x)$);
+        \coordinate (J) at ($(I) + (inner_y) + 2*(esp_y)$);
+        \coordinate (K) at ($(J) + (part) + (esp_x)$);
+        \coordinate (L) at ($(K) - (esp_y)$);
+        % ima
+        \coordinate (R) at ($(B)!0.5!(C)$);
+        \coordinate (Q) at ($(R) + (larg_i)$);
+        \coordinate (M) at ($(R) - (larg_i)$);
+        \coordinate (O) at ($(I)!0.5!(H)$);
+        \coordinate (P) at ($(O) + (larg_i)$);
+        \coordinate (N) at ($(O) - (larg_i)$);
+        % campo
+        \coordinate (S) at ($(L)!0.5!(K)$);
+        \coordinate (T) at ($(E)!0.5!(F)$);
+        \coordinate (U) at ($(S)!0.5!(T)$);
+        \coordinate (U2) at ($(U) + (persp)$);
+        \coordinate (AX) at ($(U) - 1.5*(persp)$);
+        \coordinate (AX2) at ($(U2) + 1.5*(persp)$);
+        \coordinate (eA) at ($(U) + (\ex, \ey)$);
+        \coordinate (eB) at ($(U) - (\ex, \ey)$);
+        \coordinate (eA2) at ($(eA) + (persp)$);
+        \coordinate (eA3) at ($(eA2) - \termfactor*(\ex, \ey)$);
+        \coordinate (eA4) at ($(eA3) + 0.4*(persp)$);
+        \coordinate (eB2) at ($(eB) + (persp)$);
+        \coordinate (eB3) at ($(eB2) + \termfactor*(\ex, \ey)$);
+        \coordinate (eB4) at ($(eB3) + 0.4*(persp)$);
+        % outer
+        \coordinate (A2) at ($(A) + (persp_x)$);
+        \coordinate (B2) at ($(B) + (persp)$);
+        \coordinate (C2) at ($(C) + (persp_y)$);
+        \coordinate (D2) at ($(D) + (persp)$);
+        \coordinate (E2) at ($(E) + (persp_y)$);
+        \coordinate (F2) at ($(F) + (persp)$);
+        \coordinate (G2) at ($(G) + (persp)$);
+        \coordinate (H2) at ($(H) + (persp)$);
+        \coordinate (I2) at ($(I) + (persp)$);
+        \coordinate (J2) at ($(J) + (persp)$);
+        \coordinate (K2) at ($(K) + (persp)$);
+        \coordinate (L2) at ($(L) + (persp)$);
+        \coordinate (M2) at ($(M) + (persp)$);
+        \coordinate (N2) at ($(N) + (persp)$);
+        \coordinate (O2) at ($(O) + (persp)$);
+        \coordinate (P2) at ($(P) + (persp)$);
+        \coordinate (Q2) at ($(Q) + (persp)$);
+        \coordinate (R2) at ($(R) + (persp)$);
+        %
+        % Elementos gráficos
+        \fill[core] (A) -- (B) -- (C) -- (D) -- (E) -- (F) -- (G) -- (H) -- (I) -- (J) -- (K) -- (L) -- cycle;
+        \fill[coreshadow] (F) -- (F2) -- (G2) -- (G);
+        \fill[coreshadow] (G) -- (G2) -- (H2) -- (H);
+        \fill[coreshadow] (K) -- (K2) -- (J2) -- (J);
+        \fill[coreshadow] (L) -- (L2) -- (K2) -- (K);
+        \fill[coreshadow] (B) -- (B2) -- (C2) -- (C);
+        \fill[coreshadow] (A) -- (A2) -- (B2) -- (B);
+        %
+        \fill[field] (L) -- (K) -- (K2) -- (F2) -- (F) -- (E);
+        \fill[fieldshadow] (L) -- (K) -- (K2) -- (L2);
+        \draw[fieldbox] (K2) -- (F2);
+        \draw[fieldbox] (K) -- (F);
+        \draw[fieldbox] (L) -- (E);
+        \draw[fieldbox] (L2) -- (E2);
+        %
+        \draw[outline, line join=round] (A) -- (B) -- (C) -- (D) -- (E) -- (F) -- (G) -- (H) -- (I) -- (J) -- (K) -- (L) -- cycle;
+        \draw[outline, line join=round] (F) -- (F2) -- (G2) -- (G) -- cycle;
+        \draw[outline, line join=round] (G) -- (G2) -- (H2) -- (H) -- cycle;
+        \draw[outline, line join=round] (K) -- (K2) -- (J2) -- (J) -- cycle;
+        \draw[outline, line join=round] (L) -- (L2) -- (K2) -- (K) -- cycle;
+        \draw[outline, line join=round] (B) -- (B2) -- (C2) -- (C) -- cycle;
+        \draw[outline, line join=round] (A) -- (A2) -- (B2) -- (B) -- cycle;
+        %
+        \fill[red, fill opacity=0.5] (M) -- (N) -- (O) -- (R);
+        \fill[red!80!textcolor, fill opacity=0.5] (M) -- (R) -- (R2) -- (M2);
+        \fill[blue, fill opacity=0.5] (O) -- (P) -- (Q) -- (R);
+        \fill[blue!80!textcolor, fill opacity=0.5] (R) -- (Q) -- (Q2) -- (R2);
+        \fill[red, fill opacity=0.05] (R) -- (O) -- (O2) -- (R2);
+        \draw[red, draw opacity=0.15, dashed] (R) -- (O) -- (O2) -- (R2);
+        \fill[blue, fill opacity=0.15] (Q) -- (P) -- (P2) -- (Q2);
+        \draw[blue, draw opacity=0.15, dashed] (Q) -- (P) -- (P2) -- (Q2);
+        %
+        \draw[outline, dashdotted, line cap=round] (AX) -- (AX2);
+        \fill[coil, fill opacity=0.1] (eA2) -- (eA) -- (eB) -- (eB2);
+        \draw[coil, ultra thick, line join=round, line cap=round] (eA4) -- (eA3) -- (eA2) -- (eA) -- (eB) -- (eB2) -- (eB3) -- (eB4);
+    }
+}

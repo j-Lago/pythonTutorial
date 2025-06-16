@@ -1,0 +1,8 @@
+custompython.py
+pycharm.py
+setup.py
+custompython.egg-info/PKG-INFO
+custompython.egg-info/SOURCES.txt
+custompython.egg-info/dependency_links.txt
+custompython.egg-info/entry_points.txt
+custompython.egg-info/top_level.txt

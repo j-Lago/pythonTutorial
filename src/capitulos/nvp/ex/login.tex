@@ -1,0 +1,41 @@
+Escreva uma função para validar usuário e senha.
+Ao ser executado, o programa solicita ao usuário (via terminal) seu login e senha.
+Os valores são então comparados a um cadastro pré-definido (armazenado em um dicionário global).
+A função retorna \inlcode{True} ou \inlcode{False}, além de exibir uma mensagem no terminal informando se o acesso foi concedido ou negado.
+\begin{minted}{custompython}
+def validacao(usuario: str, senha: str) -> bool:
+    global CADASTROS
+    # seu código aqui
+
+
+# logins e senhas previamente cadastrados
+CADASTROS = {
+    'fulano'  : '8g7&4A5',
+    'beltrano': 'Hgr787@',
+    'sicrano' : 'po78BA-'
+    }
+
+# interrompe a execução e solicita usuário e senha
+usuario = input("Digite seu login:")
+senha = input("Digite sua senha:")
+
+# chama a função de validação
+acesso = validacao(usuario, senha)
+\end{minted}
+
+\subsection*{Desafio:}
+Modifique o programa para permitir ao usuário três tentativas de acesso.
+Caso a senha seja digitada incorretamente três vezes consecutivas, essa senha deve ser permanentemente invalidada.
+Crie uma nova mensagem informando essa situação.
+A invalidação da senha de um usuário não deve afetar os demais.
+
+
+\subsection*{Importante:}
+Tenha em mente que este exercício tem como objetivo explorar conceitos introdutórios de comparação e controle de fluxo.
+No entanto, por razões óbvias de segurança, senhas nunca devem ser armazenadas ou comparadas diretamente.
+Em aplicações reais, a validação de credenciais sempre envolve criptografia robusta e bancos de dados especializados,
+projetados para garantir a proteção das informações.
+
+
+
+

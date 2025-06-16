@@ -1,0 +1,20 @@
+Crie um programa que receba um dicionário de produtos vendidos, contendo o nome do produto e a quantidade vendida.
+A função deve calcular e retornar uma tupla com o nome e a quantidade do produto mais vendido.
+\begin{minted}{custompython}
+def produto_mais_vendido(dados: dict) -> tuple[str, int]:
+    # seu código aqui
+
+vendas = {
+    'Notebook': 15,
+    'Smartphone': 32,
+    'Tablet': 12,
+    'Fones de ouvido': 45
+}
+nome, quantidade = produto_mais_vendido(vendas)
+print(f"O produto mais vendido foi '{nome}' com {quantidade} vendas.")
+\end{minted}
+
+Resultado esperado:
+\begin{minted}{text}
+O produto mais vendido foi 'Fones de ouvido' com 45 vendas.
+\end{minted}
