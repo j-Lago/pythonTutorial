@@ -1,0 +1,195 @@
+\newcommand{\2}{{\color{MyDarkGreen}$O$}}
+\newcommand{\1}{{\color{MyBrickRed}\ding{55}}}
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0}
+\definecolor{MyBrickRed}{rgb}{0.8, 0.25, 0.33}
+
+Escreva uma função \inlcode{eval_move(board_state, next_move)} que processe a lógica do jogo tic-tac-toe (jogo da velha)
+e informa o resultado da partida.
+
+   O primeiro argumento recebido pela função (\inlcode{board\_state}) é uma matriz $3\times3$ (implementada na forma de
+\inlcode{list[list[int]]}) que contém o estado atual do tabuleiro.
+Elementos da matriz contendo \inlcode{0} indicam que aquela posição ainda não foi jogada.
+Posições da matriz contendo \inlcode{1} indicam que ela foi tomada pelo jogador \1, enquanto posições
+contendo \inlcode{-1} foram tomadas pelo jogador \2.
+
+Valores diferentes de \inlcode{-1}, \inlcode{0} e \inlcode{1} constituem um estado inválido do tabuleiro.
+Outras formas de estados inválidos também devem ser considerados.
+Por exemplo, muitas posições tomadas por um mesmo jogador ou o jogador \2 com mais posições tomadas que \1 (considerando que \1 sempre inicia jogando).
+Abaixo são apresentados alguns valores de \inlcode{board\_state} e o que cada um deles representa.
+
+\begin{minipage}{0.25\textwidth}
+\begin{minted}{custompython}
+# valid state
+board_state = [
+    [ 1, -1,  0],
+    [ 0,  1,  1],
+    [-1,  0, -1]
+]
+\end{minted}
+\end{minipage}
+%
+\begin{minipage}{0.2\textwidth}
+{\renewcommand{\arraystretch}{1.45}
+\begin{center}
+\begin{tabular}{ c | c | c }
+ \1 & \2 &  \\ \hline
+  & \1 &  \1\\ \hline
+ \2 &  & \2
+\end{tabular}
+\end{center}
+}
+\end{minipage}
+%
+%
+%
+\hspace{0.07\textwidth}
+\begin{minipage}{0.25\textwidth}
+\begin{minted}{custompython}
+# invalid state
+board_state = [
+    [ 1, -1,  0],
+    [ 0, -1,  1],
+    [-1,  0, -1]
+]
+\end{minted}
+\end{minipage}
+%
+\begin{minipage}{0.2\textwidth}
+{\renewcommand{\arraystretch}{1.45}
+\begin{center}
+\begin{tabular}{ c | c | c }
+ \1 & \2 &  \\ \hline
+  & \2 &  \1\\ \hline
+ \2 &  & \2
+\end{tabular}
+\end{center}
+}
+\end{minipage}
+
+
+\begin{minipage}{0.25\textwidth}
+\begin{minted}{custompython}
+# player x wins!
+board_state = [
+    [ 1, -1, -1],
+    [ 0,  1,  1],
+    [-1,  0,  1]
+]
+\end{minted}
+\end{minipage}
+%
+\begin{minipage}{0.2\textwidth}
+{\renewcommand{\arraystretch}{1.45}
+\begin{center}
+\begin{tabular}{ c | c | c }
+ \1 & \2 &  \2\\ \hline
+  & \1 &  \1\\ \hline
+ \2 &  & \1
+\end{tabular}
+\end{center}
+}
+\end{minipage}
+%
+%
+%
+\hspace{0.07\textwidth}
+\begin{minipage}{0.25\textwidth}
+\begin{minted}{custompython}
+# draw!
+board_state = [
+    [ 1, -1,  1],
+    [-1, -1,  1],
+    [ 1,  1, -1]
+]
+\end{minted}
+\end{minipage}
+%
+\begin{minipage}{0.2\textwidth}
+{\renewcommand{\arraystretch}{1.45}
+\begin{center}
+\begin{tabular}{ c | c | c }
+ \1 & \2 & \1 \\ \hline
+  \2& \2 &  \1\\ \hline
+ \1 &  \1 & \2
+\end{tabular}
+\end{center}
+}
+\end{minipage}
+
+
+O segundo argumento recebido (\inlcode{next\_move}) é uma tupla de dois inteiros \inlcode{(l,c)}, indicando
+respectivamente a linha e a coluna jogada pelo próximo jogador.
+Valores de \inlcode{l} e \inlcode{c} diferentes de 0, 1 e 2 constituem uma tentativa de joga inválida.
+Também é uma jogada inválida qualquer posição \inlcode{(l,c)} previamente ocupada.
+
+A função deve inferir qual dos jogadores (\1~ou~\2) está realizando a jogada \inlcode{next\_move} a partir do
+estado do tabuleiro (\inlcode{board\_state}), garantindo a alternância entre os jogadores.
+O jogador \1 joga primeiro.
+
+   Uma vez validado o estado atual, o jogador da vez e a posição a ser jogada por este, a função \inlcode{eval\_move}
+deve modificar o estado do tabuleiro executando a jogada solicitada.
+Ela deve ainda avaliar se o jogo acabou ou não, quem ganhou ou se o jogo terminou em empate.
+
+A função retorna duas variáveis, a primeira sendo o novo estado do tabuleiro (\inlcode{board\_state}) incluindo a jogada executada.
+Se a jogada solicitada ou a posição prévia do tabuleiro for inválida, a função retorna o \texttt{board\_state} recebido, sem realizar nenhuma alteração.
+
+Um segundo valor (\inlcode{outcome}) é retornando pela função indicando se a jogada ou posição são inválidas, se houve um vencedor,
+se houve empate ou se o jogo ainda não terminou.
+O retorno \inlcode{outcome} deve ser um inteiro que codifica essas situações da seguinte forma:
+\begin{itemize}
+\item \inlcode{-4} se a posição do tabuleiro passado como argumento for ilegal;
+\item \inlcode{-2} se a próxima jogada for ilegal;
+\item \inlcode{ 0} se a jogada foi executada com sucesso, mas ainda não houve um ganhador;
+\item \inlcode{ 1} se a jogada foi executada com sucesso e o jogador \1 venceu;
+\item \inlcode{ 2} se a jogada foi executada com sucesso e o jogador \2 venceu;
+\item \inlcode{ 3} se a jogada foi executada com sucesso, mas o jogou terminou em empate.
+\end{itemize}
+
+Complete:
+\begin{minted}{custompython}
+BoardSateType = list[list[int]]
+
+def eval_move(board_state: BoardSateType, next_move: tuple[int, int]) -> tuple[BoardSateType, int]:
+    #seu código aqui
+    return board_state, outcome
+
+board_state = [
+    [ 1, -1,  0],
+    [ 0,  0,  1],
+    [-1,  0,  0]
+]
+board_state, outcome = eval_move(board_state, (1, 1))
+print(f"{board_state = }, {outcome = }")
+
+board_state, outcome = eval_move(board_state, (2, 2))
+print(f"{board_state = }, {outcome = }")
+
+board_state, outcome = eval_move(board_state, (0, 1))
+print(f"{board_state = }, {outcome = }")
+
+board_state, outcome = eval_move(board_state, (1, 0))
+print(f"{board_state = }, {outcome = }")
+\end{minted}
+
+Resultado esperado:
+\begin{minted}{text}
+board_state = [[1, -1, 0], [0, 1, 1], [-1, 0, 0]], outcome = 0
+board_state = [[1, -1, 0], [0, 1, 1], [-1, 0, -1]], outcome = 0
+board_state = [[1, -1, 0], [0, 1, 1], [-1, 0, -1]], outcome = -2
+board_state = [[1, -1, 0], [1, 1, 1], [-1, 0, -1]], outcome = 1
+\end{minted}
+
+Note que a função deve realizar várias ações:
+\begin{itemize}
+\item Validação do estado atual do tabuleiro;
+\item Determinação do próximo jogador;
+\item Verificação da próxima jogada;
+\item Aplicação da jogada no tabuleiro;
+\item Avaliação do resultado (vitória, empate ou jogo em andamento).
+\end{itemize}
+
+Convém quebra a implementação da função \inlcode{eval_move} em funções menores, dedicadas a cada uma dessa
+sub-tarefas (nomeie essas funções com nomes significativos).
+
+\subsection*{Desafio:}
+Pesquise sobre \inlcode{Enums} e incorpore-os na representação de \inlcode{outcome} para deixar o código mais legível e organizado.

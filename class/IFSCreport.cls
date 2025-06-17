@@ -36,6 +36,8 @@
 \RequirePackage{biblatex}
 \RequirePackage{booktabs}
 \RequirePackage{xcolor}
+\RequirePackage{pifont}
+\RequirePackage{soul}
 %
 \RequirePackage{lipsum}
 %
@@ -214,7 +216,10 @@ arrow/.style={latex-}}
 
 \newcommand{\inlcode}[1]{\texttt{\color{blue!65!green}\lstinline{#1}}}
 \newcommand{\inlstr}[1]{\texttt{\color{blue!40!green}\lstinline{\'#1\'}}}
-\newcommand{\inlkey}[1]{\texttt{\color{blue!40!green}\lstinline{\'#1\'}}}
+\newcommand{\inlstrdouble}[1]{\texttt{\color{blue!40!green}\lstinline{\"#1\"}}}
+\newcommand{\inlkey}[1]{\texttt{\color{blue!40!green}\lstinline{#1}}}
+
+\newcommand{\colorurl}[1]{\textcolor{purple!50!green}{\url{#1}}}
 
 %%
 %seção
