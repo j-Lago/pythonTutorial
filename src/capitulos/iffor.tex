@@ -43,6 +43,7 @@ código mais simples, expressivo e eficiente.
 Nas próximas seções, exploraremos cada categoria detalhadamente, com exemplos para ilustrar seu funcionamento.
 
 
+
 \section{Estruturas condicionais}\label{if}
 As estruturas condicionais permitem que um programa tome decisões durante sua execução com base em condições
 estabelecidas.
@@ -52,6 +53,8 @@ verdadeira.
 Para comparações múltiplas podes usar \inlcode{if-elif-else} ou \inlcode{match-case},
 introduzido no Python 3.10, oferece uma alternativa estruturada, útil quando há diversas possibilidades de decisão.
 
+
+\subsection{\inlcode{if-else}}
 Exemplo do uso de \inlcode{if-else}:
 \begin{minted}{custompython}
 idade = 20
@@ -84,6 +87,7 @@ O operador \inlcode{in} é útil para verificar se um determinado valor está pr
 Outra função embutida \inlcode{isinstance(obj, class)} é especialmente útil para verificar o tipo de um objeto
 dentro dessas expressões.
 
+\subsection{\inlcode{if-elif-else}}
 Segue um exemplo de uma função que verifica o cadastro de um usuário para identificar um meio de contato válido.
 A prioridade é o email; caso não esteja disponível, o número de telefone será retornado como alternativa.
 \begin{minted}{custompython}
@@ -109,6 +113,7 @@ contato usuario2: (48)99999-8888
 contato usuario3: nenhum contato cadastrado
 \end{minted}
 
+\subsection{\inlcode{match-case}}
 A seguir temos um exemplo usando \inlcode{match-case} para verificar se um determinado dia da semana é um final de
 semana ou um dia útil:
 \begin{minted}{custompython}
@@ -140,4 +145,176 @@ independentemente de letras maiúsculas ou minúsculas.
 
 
 
+
+
 \section{Estruturas de repetição}\label{for}
+
+As estruturas de repetição permitem que um programa execute um bloco de código múltiplas vezes de forma
+controlada, eliminando repetições manuais e tornando o código mais legível e organizado.
+Além de aprimorar a clareza, elas aumentam a eficiência e versatilidade do desenvolvimento ao possibilitar
+que o número de execuções seja definido dinamicamente durante a execução,
+adaptando-se às exigências da lógica que está sendo implementada.
+
+Em Python, assim como na maioria das linguagens, há duas principais formas de implementar repetições:
+o comando \inlcode{while}, ideal para execuções dependentes de uma condição dinâmica, e o comando \inlcode{for},
+mais adequado para percorrer elementos de uma sequência de maneira previsível.
+Cada uma dessas estruturas apresenta vantagens específicas e pode ser aplicada conforme a necessidade do programa,
+abrangendo desde a iteração sobre sequências ou coleções de dados até algoritmos que requerem monitoramento
+contínuo e definição dinâmica do critério de parada, como cálculos iterativos em modelos computacionais.
+
+\subsection{\inlcode{while}}
+
+O comando \inlcode{while} permite a repetição de um bloco de código enquanto uma condição for verdadeira,
+sendo especialmente útil em situações onde o número de iterações não pode ser determinado previamente.
+Essa abordagem possibilita a execução de tarefas que dependem de eventos externos,
+verificações contínuas ou condições de parada dinâmicas.
+
+O exemplo a seguir apresenta um programa interativo no qual o usuário deve tentar adivinhar um número secreto (\inlcode{57}).
+Caso acerte, vence o jogo e o programa é encerrado.
+Se errar, poderá continuar tentando até acertar.
+\begin{minted}{custompython}
+numero_secreto = 57
+print("Tente adivinhar o número entre 0 e 99.")
+palpite = int(input("Digite seu palpite: "))
+
+while palpite != numero_secreto:
+    if palpite < numero_secreto:
+        print("O número secreto é maior. Tente novamente!")
+    else:
+        print("O número secreto é menor. Tente novamente!")
+
+    palpite = int(input("Digite seu palpite: "))
+
+print("Parabéns! Você ganhou!")
+\end{minted}
+
+Já no exemplo a seguir, o programa imprime no terminal os números naturais menores que \inlcode{10}.
+(valor definido pelo usuário):
+\begin{minted}{custompython}
+contador = 0
+while contador < 10:
+    print(contador, end=' ')
+    contador += 1
+\end{minted}
+\begin{minted}{text}
+0 1 2 3 4 5 6 7 8 9
+\end{minted}
+
+Nesse contexto, a variável \inlcode{contador} desempenha o papel de variável de controle, sendo responsável
+por acompanhar e atualizar o estado da repetição a cada iteração.
+
+Como o loop \inlcode{while} apenas avalia uma expressão booleana, é necessário que essa variável seja inicializada, monitorada e
+modificada manualmente.
+Sua inicialização fora do laço e seu incremento em \inlcode{1} a cada iteração é essencial para garantir o
+avanço do programa e evitar loops infinitos.
+
+Esse processo de percorrer uma sequência pre-definida (ou até coleção de dados) é tão fundamental em programação
+que a maioria das linguagens, incluindo Python, oferece uma estrutura específica para essa finalidade.
+Com o comando \inlcode{for}, o estado da iteração é gerenciado automaticamente, sem
+necessidade de controle manual pelo programador, tornando o código mais conciso e legível.
+
+\subsection{\inlcode{for}}
+
+O comando \inlcode{for} é utilizado principalmente para percorrer elementos de uma sequência,
+garantindo que cada item seja processado de maneira previsível.
+
+O exemplo anterior pode ser reescrito substituíndo o \inlcode{while} por um \inlcode{for} da seguinte forma:
+\begin{minted}{custompython}
+for i in range(10):
+    print(i, end=' ')
+\end{minted}
+\begin{minted}{text}
+0 1 2 3 4 5 6 7 8 9
+\end{minted}
+
+Aqui, a variável \inlcode{i} não precisa ser declarada ou incrementada manualmente, pois o próprio
+comando \inlcode{for} atribui a ela cada valor dentro da sequência gerada por \inlcode{range(10)}.
+Na primeira iteração, \inlcode{i} recebe o valor \inlcode{0}, na segunda \inlcode{1}, e assim por diante,
+até atingir \inlcode{9}.
+O valor \inlcode{10} é não inclusivo, ou seja, o loop termina antes de alcançá-lo, e já que \inlcode{10} gera uma
+sequência de \inlcode{0} a \inlcode{9}, temos exatamente \inlcode{10} repetições do loop.
+
+A estrutura \inlcode{for} é particularmente útil ao trabalhar com listas, tuplas, dicionários e outras coleções
+de dados, permitindo percorrer diretamente seus elementos sem necessidade de manipular índices manualmente.
+Além disso, o \inlcode{for} em Python é conceitualmente equivalente ao \inlcode{for-each} presente em linguagens
+como Java e C\#, pois permite acessar diretamente cada elemento de um iterável, tornando o processo de iteração
+mais intuitivo.
+
+O exemplo a seguir demostra isso:
+\begin{minted}{custompython}
+nomes = ['Fulano', 'Beltrano', 'Sicrano']
+
+for nome in nomes:
+    print(f"Saudações, {nome}!")
+\end{minted}
+\begin{minted}{text}
+Saudações, Fulano!
+Saudações, Beltrano!
+Saudações, Sicrano!
+\end{minted}
+
+
+
+Aqui, o loop percorre diretamente os elementos da lista \inlcode{nomes}, atribuindo cada valor individualmente
+à variável \inlcode{nome} em cada iteração, sem exigir um índice explícito.
+Dessa forma, o processamento ocorre um a um, garantindo que cada elemento seja tratado separadamente.
+Essa abordagem torna o código mais claro, eliminando a necessidade de manipulação manual de índices e
+facilitando a interação direta com os dados da coleção.
+
+Em situações onde é necessário acessar tanto o índice quanto o valor de cada elemento durante a repetição, o método \inlcode{enumerate()} pode ser utilizado. Ele retorna pares de valores, onde cada elemento da coleção recebe seu respectivo índice de forma automática.
+\begin{minted}{custompython}
+nomes = ['Fulano', 'Beltrano', 'Sicrano']
+
+for indice, nome in enumerate(nomes):
+    print(f"{indice}: Saudações, {nome}!")
+\end{minted}
+\begin{minted}{text}
+0: Saudações, Fulano!
+1: Saudações, Beltrano!
+2: Saudações, Sicrano!
+\end{minted}
+
+Python também oferece diversas funções embutidas para manipular iteradores, como \inlcode{reversed()},
+permitem percorrer uma sequência de trás pra frente:
+\begin{minted}{custompython}
+nomes = ['Fulano', 'Beltrano', 'Sicrano']
+
+for nome in reversed(nomes):
+    print(f"Saudações, {nome}!")
+\end{minted}
+\begin{minted}{text}
+Saudações, Sicrano!
+Saudações, Beltrano!
+Saudações, Fulano!
+\end{minted}
+
+Além disso, \inlcode{zip()} possibilita a iteração simultânea sobre múltiplas coleções, associando pares de valores
+um a um a cada repetição:
+\begin{minted}{custompython}
+nomes = ['Fulano', 'Beltrano', 'Sicrano']
+idades = [22, 35, 65]
+
+for nome, idade in zip(nomes, idades):
+    print(f"{nome} tem {idade} anos.")
+\end{minted}
+\begin{minted}{text}
+Fulano tem 22 anos.
+Beltrano tem 35 anos.
+Sicrano tem 65 anos.
+\end{minted}
+
+
+Tanto o laço \inlcode{while} quanto o \inlcode{for} podem ser interrompidos a qualquer momento com o
+comando \inlcode{break}.
+Esse mecanismo permite finalizar a execução do loop imediatamente, ignorando qualquer
+condição restante e continuando a execução do programa a partir da próxima instrução após o laço.
+
+
+
+
+
+
+
+
+
+
