@@ -25,7 +25,9 @@ Estes podem ser utilizados diretamente para expressar algum conceito real ou com
 (ou estruturados), capazes de representar ideias e relações mais complexas.
 
 
-Os principais são:
+\section{Tipos primitivos}
+
+Os principais tipos primitivos em Python são:
 
 \begin{itemize}
     \item \inlcode{int}: utilizado para armazenar números inteiros, como \inlcode{10}, \inlcode{-5}, e \inlcode{0}
@@ -100,7 +102,7 @@ separando palavras com underscores (\texttt{\_}) e usando minúsculas.}
 são automaticamente criadas com os tipos
 \inlcode{str}, \inlcode{int} e \inlcode{float}, respectivamente.
 O interpretador infere esses tipos com base nos valores atribuídos a cada variável
-(o valor à direita de \texttt{=}).
+(o valor à direita de \inlcode{=}).
 
 Além disso, uma variável pode ser redefinida posteriormente, até mesmo para um tipo diferente.
 Essa abordagem pode ser vantajosa para tornar o código mais flexível e dinâmico, mas também pode introduzir problemas ao
@@ -205,7 +207,7 @@ durante a execução --- elas são extremamente úteis.
 Essas anotações são utilizadas por ferramentas de análise estática integradas à maioria das IDEs modernas para
 identificar possíveis erros de incompatibilidade de tipos no momento da escrita do
 código\footnote{A análise estática de tipos (ou \emph{type checking}) está habilitada por padrão na IDE PyCham.
-Já no VS Code, ela pode habilitada incluindo os campos
+Já no VS Code, ela pode ser habilitada incluindo os campos
 \texttt{'python.analysis.autoImportCompletions': true,} \texttt{'python.analysis.typeCheckingMode': 'standard'} no arquivo de
 configurações \texttt{settings.json}.
 %Outras extensões populares para produtividade como \texttt{Pylint} e \texttt{Flake8} podem ser instaladas pelo VS Code Extensions Marketplace
@@ -240,9 +242,8 @@ Além dos tipo primitivos, Python possui mais duas formas de armazenar informaç
 \section{Collections}
 
 Em Python, coleções são estruturas que armazenam múltiplos valores em uma única variável.
-As três coleções mais comuns da linguagem são: list, set e dict.
+As quatro coleções mais comuns da linguagem são: \inlcode{list}, \inlcode{tuple}, \inlcode{set} e \inlcode{dict}.
 Cada uma delas possui características específicas que as tornam mais adequadas para diferentes situações.
-
 
 
 
@@ -257,9 +258,9 @@ Além disso, possuem tamanho arbitrário, crescendo conforme novos elementos sã
 Uma lista pode ser criada utilizando colchetes \inlcode{[]} e pode armazenar qualquer tipo de dado, inclusive, diferentes tipos para cada elemento.
 Por exemplo:
 \begin{minted}{custompython}
-numeros = [8, 2, 0, -4, 15]
-nomes = ['Alice', 'Bruno', 'Carla']
-misto = [42, 'texto', 3.14, True]  # lista com tipos variados
+numeros = [8, 2, 0, -4, 15]                # lista de inteiros
+nomes = ['Fulano', 'Beltrano', 'Sicrano']  # lista de strings
+misto = [42, 'texto', 3.14, True]          # lista com tipos variados
 \end{minted}
 
 A lista é uma coleção dinâmica, e pode crescer mesmo apos sua criação para acomodar novos elementos:
@@ -275,12 +276,13 @@ pré: A lista 'cores' possui 4 elementos: ['azul', 'amarelo', 'cinza', 'vermelho
 pós: A lista 'cores' possui 5 elementos: ['azul', 'amarelo', 'cinza', 'vermelho', 'verde']
 \end{minted}
 
-Esse código introduz um elemento novo: a chamada cores.append(), onde append() é um método da método da classe list
-Métodos são semelhantes a funções, mas estão associados a um tipo de dado específico (à uma \inlcode{class}) e
+Esse código introduz um elemento novo: a chamada \inlcode{cores.append()}, onde \inlcode{append()} é um método da classe
+\inlcode{list}.
+Métodos são semelhantes a funções, mas estão associados a um tipo de dado específico (a uma \inlcode{class}) e
 normalmente modificam o próprio objeto ao qual pertencem.
 
-A chamada de um método geralmente impacta diretamente o objeto no qual ele é invocado.
-No caso de append(), um novo elemento é adicionado ao final da lista, alterando sua estrutura inicial.
+A chamada de um método geralmente impacta diretamente o objeto a partir do qual ele é invocado.
+No caso de \inlcode{append()}, um novo elemento é adicionado ao final da lista, alterando sua estrutura inicial.
 
 Esse conceito será revisitado e formalizado com mais detalhes no Capítulo \ref{class}, quando exploraremos a
 construção e uso de classes em Python.
@@ -292,7 +294,7 @@ Essa característica torna as listas particularmente flexíveis para armazenar c
 Além disso, no último exemplo, introduzimos a função \inlcode{len()}, que retorna o número de elementos presentes na coleção.
 Essa é uma função essencial para validar o tamanho de uma lista antes de realizar operações que dependam da quantidade de itens.
 
-Também podemo acessar elementos individuais dessa lista, tanto para leitura como para escrita.
+Também podemos acessar elementos individuais dessa lista, tanto para leitura como para escrita.
 Essa indexação é realizada com a seguinte sintaxe \inlcode{nome_da_lista[indice]}, veja o código exemplo:
 \begin{minted}{custompython}
 cores = ['azul', 'amarelo', 'cinza', 'vermelho', 'verde']
@@ -407,16 +409,16 @@ roxo
 ('verde', 'vermelho', 'amarelo')
 \end{minted}
 
-Embora tupla possa pareceu uma versão limitada de lista, elas são estruturas complementares, com propósitos distintos.
+Embora tupla possa parecer uma versão limitada de lista, elas são estruturas complementares, com propósitos distintos.
 Essas limitações justamente tornam operações com tuplas mais previsíveis, rápidas e seguras.
 
 
 
 
 \subsection{\inlcode{set}}
-Um set é uma coleção semelhante à lista (list), porém não permite valores duplicados e não mantém uma ordem fixa dos
+Um \inlcode{set} é uma coleção semelhante à lista (\inlcode{list}), porém não permite valores duplicados e não mantém uma ordem fixa dos
 elementos.
-Isso faz com que seja uma estrutura útil para armazenar itens únicos e realizar operações matemáticas como união,
+Isso faz com que seja uma estrutura útil para armazenar itens únicos e realizar operações como união,
 interseção e diferença.
 
 Os conjuntos podem ser criados utilizando chaves \inlcode{\{\}} ou a função \inlcode{set()}:
@@ -441,7 +443,7 @@ print(valores)
 
 Os conjuntos são ideais quando precisamos garantir que os elementos sejam únicos, eliminando valores repetidos automaticamente.
 
-Por não manter uma ordem fixa dos elementos, set não permite acesso por índice.
+Por não manter uma ordem fixa dos elementos, \inlcode{set} não permite acesso por índice.
 Isso significa que não podemos utilizar a notação \inlcode{set[indice]} para recuperar ou modificar elementos
 específicos, como fazemos com listas.
 Em vez disso, a manipulação de conjuntos é realizada por métodos próprios, como adição, remoção, união, interseção e
@@ -468,7 +470,7 @@ Dessa forma, podemos percorrer todos os itens do conjunto sem precisar acessar u
 específico por índice.
 A iteração sobre coleções de dados será abordada no capítulo \ref{iffor}.
 
-Aqui está uma lista resumida dos principais métodos e funções para manipulação de sets em Python:
+Aqui está uma lista resumida dos principais métodos e funções para manipulação de \inlcode{set} em Python:
 \begin{itemize}
 \item \inlcode{len(set)} – Retorna o número de elementos no conjunto.
 \item \inlcode{set.add(valor)} – Adiciona um novo elemento ao conjunto.
@@ -482,14 +484,14 @@ Aqui está uma lista resumida dos principais métodos e funções para manipula�
 
 \subsection{\inlcode{dict}}
 
-Em Python, um dicionário (dict) é uma estrutura de dados que implementa um hashmap, permitindo o armazenamento de pares
+Em Python, um dicionário (\inlcode{dict}) é uma estrutura de dados que implementa uma \emph{hash table}, permitindo o armazenamento de pares
 \inlcode{key: value} (chave e valor).
 Essa abordagem garante acesso eficiente aos valores a partir de suas chaves, tornando a busca em grandes coleções
 extremamente rápida.
 
-Diferente das listas \inlcode{list} e conjuntos \inlcode{set}, que organizam elementos sequencialmente ou de forma desordenada,
+Diferente das listas (\inlcode{list}) e conjuntos (\inlcode{set}), que organizam elementos sequencialmente ou de forma desordenada,
 o dicionário associa cada valor a uma chave única, permitindo acessos diretos sem necessidade de percorrer toda a
-estrutura.
+estrutura. Ná prática, essas chaves funcionam como os índices em listas.
 
 Cada chave (\inlcode{key}) pode ser qualquer tipo de dado que suporte a função \inlcode{hash()}, como números, strings
 ou tuplas imutáveis.
@@ -553,8 +555,6 @@ print(dados)
 {'nome': 'Fulano', 'idade': 26}
 \end{minted}
 
-Métodos úteis para manipulação de dicionários
-
 
 Aqui estão alguns métodos úteis para trabalhar com dicionários:
 \begin{itemize}
@@ -569,5 +569,153 @@ Aqui estão alguns métodos úteis para trabalhar com dicionários:
 
 Dicionários são ferramentas poderosas para armazenar e acessar dados de forma eficiente.
 Eles são amplamente utilizados em Python para estruturar informações e otimizar operações de busca.
+
+
+
+
+
+\section{Referência e mutabilidade na atribuição de variáveis}
+
+Em Python, as variáveis não armazenam diretamente os valores, mas referências para objetos na memória.
+Dessa forma, o efeito da atribuição (\inlcode{=}) a uma variável depende da mutabilidade do objeto que ela
+referencia, definindo se a variável continuará apontando para o mesmo objeto ou passará a referenciar um novo.
+
+Os objetos em Python são divididos em dois grupos: imutáveis e mutáveis, conforme sua capacidade de sofrer alterações
+após a criação.
+
+Objetos imutáveis, como \inlcode{int}, \inlcode{float}, \inlcode{str}, \inlcode{bool} e \inlcode{tuple}, não podem ser
+modificados após sua criação.
+Qualquer operação que tente alterar uma variável que referencia um imutável resulta na criação de um novo objeto,
+com um novo endereço de memória, e a variável passa a apontar para ele, sem afetar o objeto original.
+
+
+Por outro lado, objetos mutáveis, como \inlcode{list}, \inlcode{dict}, \inlcode{set} e instâncias de classes, permitem
+alterações diretas em seu conteúdo sem a necessidade de criar um novo objeto.
+Assim, modificações feitas em uma referência são refletidas em todas as variáveis que apontam para o mesmo objeto.
+
+Veja um exemplo com variáveis imutáveis, como \inlcode{int}:
+\begin{minted}{custompython}
+x = 10    # x referencia um inteiro imutável
+print(f"{type(x)=}, {id(x)=}, {x}")
+
+y = x    # y agora referencia o mesmo objeto que x
+print(f"{type(y)=}, {id(y)=}, {y}")
+
+y = y + 5    # um novo objeto é criado e y passa a referenciá-lo
+print(f"{type(y)=}, {id(y)=}, {y}")
+
+z = 10    # uma nova variável z referencia o inteiro 10
+print(f"{type(z)=}, {id(z)=}, {z}")
+\end{minted}
+\begin{minted}{text}
+type(x)=<class 'int'>, id(x)=140706534401224, 10
+type(y)=<class 'int'>, id(y)=140706534401224, 10
+type(y)=<class 'int'>, id(y)=140706534401384, 15
+type(z)=<class 'int'>, id(z)=140706534401224, 10
+\end{minted}
+
+A função \inlcode{id(x)}, utilizada em \inlcode{print}, retorna o identificador único do objeto referenciado
+por \inlcode{x}, que equivale ao seu endereço de memória na implementação CPython.
+
+A saída do código mostra que \inlcode{x} e \inlcode{y} inicialmente referenciam o mesmo objeto \inlcode{10},
+compartilhando o mesmo identificador único (\inlcode{id}). No entanto, ao modificar \inlcode{y}, Python cria um novo
+objeto com valor \inlcode{15}, e \inlcode{y} passa a apontar para ele, sem alterar \inlcode{x}.
+
+
+Já \inlcode{z}, criado posteriormente, também referencia o objeto \inlcode{10}.
+Como esse valor é um inteiro imutável, Python pode reutilizar a mesma referência na
+memória\footnote{Essa reutilização de objetos é uma otimização da implementação CPython conhecida como
+\emph{internin}, geramente aplicada para pequenos objetos.}, garantindo que o
+objeto permaneça inalterável.
+Dessa forma, qualquer modificação em \inlcode{x} faz com que ele passe a apontar para outro objeto, sem
+impactar \inlcode{z}.
+
+
+Agora, um exemplo similar com variáveis mutáveis (lista de um elemento inteiro):
+\begin{minted}{custompython}
+x = [10]    # x referencia um lista mutável com apenas um elemento
+print(f"{type(x)=}, {id(x)=}, {x}")
+
+y = x    # y agora referencia o mesmo objeto que x
+print(f"{type(y)=}, {id(y)=}, {y}")
+
+y[0] = y[0] + 5    # nenhum novo objeto é criado, o valor em y[0] é alterado
+print(f"{type(y)=}, {id(y)=}, {y}")
+
+z = [10]    # uma nova variável z, idêntica, mas independente de x
+print(f"{type(z)=}, {id(z)=}, {z}")
+\end{minted}
+\begin{minted}{text}
+type(x)=<class 'list'>, id(x)=1945482649600, [10]
+type(y)=<class 'list'>, id(y)=1945482649600, [10]
+type(y)=<class 'list'>, id(y)=1945482649600, [15]
+type(z)=<class 'list'>, id(z)=1945484459648, [10]
+\end{minted}
+
+Neste caso, \inlcode{x} e \inlcode{y} são referências para a mesma lista, que é mutável.
+Ao modificar \inlcode{y[0]}, o conteúdo da lista é alterado diretamente, sem criar um novo objeto, o que é evidenciado
+pelo fato de que o identificador único (\inlcode{id}) permanece o mesmo.
+
+Já \inlcode{z} contém outra lista \inlcode{[10]}, alocada em um novo espaço de memória, o que explica seu
+identificador diferente.
+
+Caso se deseje copiar os valores de uma lista para outra, em vez de apenas referenciar o mesmo objeto,
+é necessário usar \inlcode{copy()} ou \inlcode{deepcopy()}.
+
+A função \inlcode{copy()} cria uma nova lista contendo os mesmos elementos da lista original, mas se algum elemento
+for um objeto mutável, como outra lista ou um dicionário, a cópia conterá apenas referências para esses objetos, e
+modificações nos elementos internos afetarão ambas as listas.
+
+Já \inlcode{deepcopy()} copia recursivamente todos os objetos mutáveis dentro da estrutura, garantindo que cada
+nível da cópia seja independente da original.
+
+Veja o exemplo:
+\begin{minted}{custompython}
+from copy import deepcopy
+
+x = [10]    # lista mutável com apenas um elemento
+print(f"{type(x)=}, {id(x)=}, {x}")
+
+y = x    # y agora referencia o mesmo objeto que x
+print(f"{type(y)=}, {id(y)=}, {y}")
+
+z = deepcopy(x)    # nova lista com copias dos valores de x
+print(f"{type(z)=}, {id(z)=}, {z}")
+\end{minted}
+\begin{minted}{text}
+type(x)=<class 'list'>, id(x)=2511057429440, [10]
+type(y)=<class 'list'>, id(y)=2511057429440, [10]
+type(z)=<class 'list'>, id(z)=2511059612160, [10]
+\end{minted}
+
+A compreensão da mutabilidade será crucial quando analisarmos a passagem de argumentos para funções,
+tema abordado no próximo capítulo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

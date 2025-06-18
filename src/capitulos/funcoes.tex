@@ -246,11 +246,6 @@ Observe que \inlcode{return} retorna uma \inlcode{tuple} contendo dois valores d
 Essa tupla é então desempacotada pelo código que chama a função, e cada valor retornado é atribuído a uma
 variável distinta (\inlcode{r1} e \inlcode{r2}).
 
-O comando \inlcode{import math} é uma declaração ao interpretador para importar o módulo \inlcode{math}, já que
-\inlcode{sqrt} usada para o cálculo da raiz quadrada não é uma função embutida, ou seja, não é uma função disponível
-por padrão, muito embora faça parte da biblioteca padrão do Python e nenhum pacote adicional de terceiros
-necessita ser instalado.
-
 No código acima, a linha \inlcode{import math} é uma declaração ao interpretador para importar o módulo \inlcode{math},
 já que \inlcode{sqrt}, usada para calcular a raiz quadrada, não é uma função embutida (não está disponível por padrão).
 No entanto, ela faz parte da biblioteca padrão do Python, então não é necessário instalar nenhum pacote externo de terceiros.
@@ -262,7 +257,10 @@ e gerenciar erros de maneira controlada.
 No entanto, essa abordagem foge ao escopo desse texto introdutório.} pelo código que chama a função, a execução do programa será interrompida.
 
 
-Outro aspecto importante sobre funções em Python é que os parâmetros são sempre passados por atribuição de referência.
+
+\section{Mutabilidade dos argumentos de funções}
+
+Outro aspecto importante sobre funções em Python é que os argumentos são sempre passados por referência (compartilhamento de objeto).
 Ou seja, os nomes das variáveis dentro da função apontam para os mesmos objetos que foram passados como argumento.
 
 No entanto, há uma diferença de comportamento entre objetos imutáveis
@@ -296,9 +294,6 @@ dentro da função antes da modificação: id(x)=140706763580456, x=5
 dentro da função após a modificação: id(x)=140706763581096, x=25
 fora da função: id(a)=140706763580456, a=5
 \end{minted}
-
-A função \inlcode{id(x)} retorna o identificador único do objeto referenciado por \inlcode{x}, que equivale
-ao seu endereço de memória na implementação CPython.
 
 Fica evidente que a instrução \inlcode{x = x**2} não modifica o objeto originalmente apontado por \inlcode{x}, mas sim
 cria um novo objeto em uma nova posição da memória. A variável \inlcode{x} passa, então, a referenciar esse novo objeto,
@@ -351,38 +346,6 @@ dados originais, mas implica em custos de duplicação do objeto, com maior uso 
 
 Em Python, a cópia de objetos pode ser realizada com as funções \inlcode{copy()} ou \inlcode{deepcopy()} do módulo
 \inlcode{copy}, dependendo da profundidade desejada.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
