@@ -15,19 +15,17 @@ Em vez disso, buscam fortalecer o raciocínio lógico, a capacidade de resolver 
 soluções para o computador.
 Além disso, buscam desenvolver uma maior familiaridade com a linguagem, a IDE e o ecossistema que a envolve.
 
-\newcommand{\questao}[2][]{\addtocounter{section}{1}\section*{Questão \thesection} \input{#1#2}}
+\newcommand{\questao}[2][]{\addtocounter{section}{1}\section*{Questão \thesection: #1} \addcontentsline{toc}{section}{Questão \thesection: #1} \input{#2}}
 
-\newcommand{\expath}{capitulos/ex/}
-
-\questao[\expath]{desvio_padrao}
-\questao[\expath]{login}
-\questao[\expath]{bussola}
-\questao[\expath]{separa_pares_impares}
-\questao[\expath]{seno}
-\questao[\expath]{produto_mais_vendido}
-\questao[\expath]{alunos_aprovados}
-\questao[\expath]{media_movel}
-\questao[\expath]{ordena}
-\questao[\expath]{procura}
-\questao[\expath]{tictactoe}
-\questao[\expath]{tictactoe2}
+\questao[\inlcode{bussola}]                {capitulos/ex/bussola}
+\questao[\inlcode{desvio_padrao}]          {capitulos/ex/desvio_padrao}
+\questao[\inlcode{login}]                  {capitulos/ex/login}
+\questao[\inlcode{separa_pares_impares}]   {capitulos/ex/separa_pares_impares}
+\questao[\inlcode{seno}]                   {capitulos/ex/seno}
+\questao[\inlcode{produto_mais_vendido}]   {capitulos/ex/produto_mais_vendido}
+\questao[\inlcode{alunos_aprovados}]       {capitulos/ex/alunos_aprovados}
+\questao[\inlcode{media_movel}]            {capitulos/ex/media_movel}
+\questao[\inlcode{ordena}]                 {capitulos/ex/ordena}
+\questao[\inlcode{procura}]                {capitulos/ex/procura}
+\questao[\inlcode{tictactoe}]              {capitulos/ex/tictactoe}
+\questao[\inlcode{tictactoe} (continuação)]{capitulos/ex/tictactoe2}
