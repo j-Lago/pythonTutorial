@@ -119,22 +119,19 @@ board_state = [
 
 O segundo argumento recebido (\inlcode{next\_move}) é uma tupla de dois inteiros \inlcode{(l,c)}, indicando
 respectivamente a linha e a coluna jogada pelo próximo jogador.
-Valores de \inlcode{l} e \inlcode{c} diferentes de 0, 1 e 2 constituem uma tentativa de joga inválida.
+Valores de \inlcode{l} e \inlcode{c} diferentes de \inlcode{0}, \inlcode{1} e \inlcode{2} constituem uma tentativa de joga inválida.
 Também é uma jogada inválida qualquer posição \inlcode{(l,c)} previamente ocupada.
 
 A função deve inferir qual dos jogadores (\1~ou~\2) está realizando a jogada \inlcode{next\_move} a partir do
 estado do tabuleiro (\inlcode{board\_state}), garantindo a alternância entre os jogadores.
 O jogador \1 joga primeiro.
 
-   Uma vez validado o estado atual, o jogador da vez e a posição a ser jogada por este, a função \inlcode{eval\_move}
-deve modificar o estado do tabuleiro executando a jogada solicitada.
-Ela deve ainda avaliar se o jogo acabou ou não, quem ganhou ou se o jogo terminou em empate.
+   Uma vez validado o estado atual, o jogador da vez e a posição a ser jogada por este, a função \inlcode{eval\_move()}
+deve modificar o estado do tabuleiro executando a jogada solicitada (\emph{side-effect function}).
+Se a jogada solicitada ou a posição prévia do tabuleiro for inválida, a função mantém o \texttt{board\_state} inalterado.
 
-A função retorna duas variáveis, a primeira sendo o novo estado do tabuleiro (\inlcode{board\_state}) incluindo a jogada executada.
-Se a jogada solicitada ou a posição prévia do tabuleiro for inválida, a função retorna o \texttt{board\_state} recebido, sem realizar nenhuma alteração.
-
-Um segundo valor (\inlcode{outcome}) é retornando pela função indicando se a jogada ou posição são inválidas, se houve um vencedor,
-se houve empate ou se o jogo ainda não terminou.
+Alem de modificar \inlcode{board\_state}, a função também retorna um valor  (\inlcode{outcome}), indicando se a
+jogada ou posição são inválidas, se houve um vencedor, se houve empate ou se o jogo ainda não terminou.
 O retorno \inlcode{outcome} deve ser um inteiro que codifica essas situações da seguinte forma:
 \begin{itemize}
 \item \inlcode{-4} se a posição do tabuleiro passado como argumento for ilegal;
@@ -147,27 +144,24 @@ O retorno \inlcode{outcome} deve ser um inteiro que codifica essas situações d
 
 Complete:
 \begin{minted}{custompython}
-BoardSateType = list[list[int]]
-
-def eval_move(board_state: BoardSateType, next_move: tuple[int, int]) -> tuple[BoardSateType, int]:
+def eval_move(board_state: list[list[int]], next_move: tuple[int, int]) -> int:
     #seu código aqui
-    return board_state, outcome
 
 board_state = [
     [ 1, -1,  0],
     [ 0,  0,  1],
     [-1,  0,  0]
 ]
-board_state, outcome = eval_move(board_state, (1, 1))
+outcome = eval_move(board_state, (1, 1))
 print(f"{board_state = }, {outcome = }")
 
-board_state, outcome = eval_move(board_state, (2, 2))
+outcome = eval_move(board_state, (2, 2))
 print(f"{board_state = }, {outcome = }")
 
-board_state, outcome = eval_move(board_state, (0, 1))
+outcome = eval_move(board_state, (0, 1))
 print(f"{board_state = }, {outcome = }")
 
-board_state, outcome = eval_move(board_state, (1, 0))
+outcome = eval_move(board_state, (1, 0))
 print(f"{board_state = }, {outcome = }")
 \end{minted}
 
@@ -192,4 +186,5 @@ Convém quebra a implementação da função \inlcode{eval_move} em funções me
 sub-tarefas (nomeie essas funções com nomes significativos).
 
 \subsection*{Desafio:}
-Pesquise sobre \inlcode{Enums} e incorpore-os na representação de \inlcode{outcome} para deixar o código mais legível e organizado.
+Pesquise sobre \inlcode{Enums} e incorpore-os na representação de \inlcode{outcome} para deixar o código mais
+legível e organizado.

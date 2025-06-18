@@ -262,6 +262,111 @@ e gerenciar erros de maneira controlada.
 No entanto, essa abordagem foge ao escopo desse texto introdutório.} pelo código que chama a função, a execução do programa será interrompida.
 
 
+Outro aspecto importante sobre funções em Python é que os parâmetros são sempre passados por atribuição de referência.
+Ou seja, os nomes das variáveis dentro da função apontam para os mesmos objetos que foram passados como argumento.
+
+No entanto, há uma diferença de comportamento entre objetos imutáveis
+(como \inlcode{int}, \inlcode{float}, \inlcode{str}, \inlcode{bool} e \inlcode{tuple}) e objetos mutáveis
+(como \inlcode{list}, \inlcode{dict}, \inlcode{set} e classes definidas pelo usuário):
+
+
+\begin{itemize}
+\item Objetos imutáveis não podem ser alterados diretamente.
+Por isso, mesmo que a referência seja compartilhada, qualquer tentativa de modificação resulta na criação de um novo objeto.
+Na prática, eles se comportam como se fossem passados por cópia.
+
+\item Já objetos mutáveis podem ser alterados diretamente.
+Isso significa que modificações feitas dentro da função afetam o objeto original fora dela.
+
+\end{itemize}
+
+Abaixo vemos um exemplo de uma função que recebe uma variável imutável:
+\begin{minted}{custompython}
+def quadrado(x):
+    print(f"dentro da função antes da modificação: {id(x)=}, {x=}")
+    x = x**2
+    print(f"dentro da função após a modificação: {id(x)=}, {x=}")
+
+a = 5
+quadrado(a)
+print(f"fora da função: {id(a)=}, {a=}")
+\end{minted}
+\begin{minted}{text}
+dentro da função antes da modificação: id(x)=140706763580456, x=5
+dentro da função após a modificação: id(x)=140706763581096, x=25
+fora da função: id(a)=140706763580456, a=5
+\end{minted}
+
+A função \inlcode{id(x)} retorna o identificador único do objeto referenciado por \inlcode{x}, que equivale
+ao seu endereço de memória na implementação CPython.
+
+Fica evidente que a instrução \inlcode{x = x**2} não modifica o objeto originalmente apontado por \inlcode{x}, mas sim
+cria um novo objeto em uma nova posição da memória. A variável \inlcode{x} passa, então, a referenciar esse novo objeto,
+ocultando (ou \emph{shadowing}) a referência anterior dentro do escopo da função. A variável \inlcode{a}, fora da função,
+permanece inalterada, continuando a referenciar o objeto original.
+
+Agora, observe o comportamento distinto ao lidarmos com argumentos mutáveis:
+\begin{minted}{custompython}
+def quadrado(x):
+    print(f"dentro da função antes da modificação: {id(x)=}, {x=}")
+    x[0] = x[0]**2
+    x[1] = x[1]**2
+    print(f"dentro da função após a modificação: {id(x)=}, {x=}")
+
+a = [5, 3]
+quadrado(a)
+print(f"fora da função: {id(a)=}), {a=}")
+\end{minted}
+\begin{minted}{text}
+dentro da função antes da modificação: id(x)=2075912921088, x=[5, 3]
+dentro da função após a modificação: id(x)=2075912921088, x=[25, 9]
+fora da função: id(a)=2075912921088), a=[25, 9]
+\end{minted}
+
+Como a lista é um objeto mutável, a função altera diretamente o conteúdo do objeto referenciado,
+mantendo o mesmo \inlcode{id}.
+Isso mostra como mudanças feitas dentro da função refletem fora dela --- o parâmetro ainda aponta para o mesmo objeto,
+agora modificado.
+
+
+Compreender essa distinção é fundamental, pois muitas funções em Python podem não retornar um valor explícito, mas
+ainda assim modificar o estado de objetos mutáveis passados como argumento.
+Esse comportamento pode gerar efeitos colaterais significativos na execução do programa --- especialmente quando
+não é antecipado pelo desenvolvedor.
+
+
+Por outro lado, esse mecanismo também é uma ferramenta poderosa para evitar cópias desnecessárias de objetos grandes,
+permitindo que funções operem diretamente sobre estruturas complexas sem comprometer o desempenho ou o uso de memória.
+
+
+Funções desse tipo --- que alteram diretamente os dados aos quais têm acesso --- são conhecidas como funções com
+efeitos colaterais (\emph{side-effect functions}) e são bastante comuns em operações sobre estruturas de dados,
+como listas, dicionários ou objetos de classes definidas pelo usuário.
+
+O oposto de uma \emph{side-effect function} é uma função pura (\emph{pure function}).
+Funções puras garantem que seus parâmetros de entrada sejam apenas lidos, sem qualquer modificação.
+Isso é possível mesmo quando se trabalha com objetos mutáveis, desde que se evite alterar seu estado.
+Para isso, é comum criar cópias dos objetos antes de aplicar transformações --- o que preserva a integridade dos
+dados originais, mas implica em custos de duplicação do objeto, com maior uso de memória e tempo de processamento.
+
+Em Python, a cópia de objetos pode ser realizada com as funções \inlcode{copy()} ou \inlcode{deepcopy()} do módulo
+\inlcode{copy}, dependendo da profundidade desejada.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
