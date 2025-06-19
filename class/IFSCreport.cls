@@ -218,6 +218,7 @@ arrow/.style={latex-}}
 \newcommand{\inlstr}[1]{\texttt{\color{blue!40!green}\lstinline{\'#1\'}}}
 \newcommand{\inlstrdouble}[1]{\texttt{\color{blue!40!green}\lstinline{\"#1\"}}}
 \newcommand{\inlkey}[1]{\texttt{\color{blue!40!green}\lstinline{#1}}}
+\newcommand{\magic}[1]{\texttt{\color{purple!40!magenta}\lstinline{#1}}}
 
 \newcommand{\colorurl}[1]{\textcolor{purple!50!green}{\url{#1}}}
 

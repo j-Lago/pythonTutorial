@@ -1,1 +1,223 @@
-\chapter{Class}\label{class}
+\chapter{Classes}\label{class}
+
+Além dos tipos primitivos e coleções introduzidos no Capítulo \ref{vars}, podemos ainda criar nossos próprios tipos personalizados.
+
+Uma classe descreve um tipo composto que reúne, em um único objeto, um conjunto coerente de variáveis (atributos) e as
+funções que operam sobre elas (métodos), para a manipulação desses dados.
+
+
+Embora as classes sejam um dos pilares da Programação Orientada a Objetos (OOP), viabilizando conceitos como encapsulamento,
+abstração, herança e polimorfismo, este texto introdutório não se propõe a discutir, muito menos advogar por OOP como
+abordagem universal.
+
+Ainda assim, o uso de classes pode melhorar significativamente a organização do código, mesmo sem aderir estritamente
+aos princípios da OOP.
+
+Além disso, compreender a estrutura básica de classes em Python é essencial, especialmente para entender e utilizar
+pacotes especializados, que serão explorados em capítulos futuros.
+
+Nada melhor do que demonstrar na prática as vantagens do uso de classes.
+
+Para isso, vamos revisitar um dos exemplos apresentados no Capítulo \ref{iffor}, onde criamos uma função para buscar
+o contato de um usuário a partir de seu cadastro.
+
+O código original é replicado abaixo:
+
+\begin{minted}{custompython}
+def obter_contato(cadastro: dict) -> str:
+    if 'email' in cadastro and cadastro['email'] != '':
+        return cadastro['email']
+    elif 'telefone' in cadastro and cadastro['telefone'] != '':
+        return cadastro['telefone']
+    else:
+        return 'nenhum contato cadastrado'
+
+usuario1 = {'nome': 'Fulano', 'email': 'fulano@ifsc.edu.br', 'telefone': '(48)99999-9999'}
+usuario2 = {'nome': 'Beltrano', 'telefone': '(48)99999-8888'}
+usuario3 = {'nome': 'Sicrano', 'telefone': ''}
+
+print('contato usuario1:', obter_contato(usuario1))
+print('contato usuario2:', obter_contato(usuario2))
+print('contato usuario3:', obter_contato(usuario3))
+\end{minted}
+\begin{minted}{text}
+contato usuario1: fulano@ifsc.edu.br
+contato usuario2: (48)99999-8888
+contato usuario3: nenhum contato cadastrado
+\end{minted}
+
+Note que a função \inlcode{obter_contato()} possui um único parâmetro \inlcode{cadastro}, que é um dicionário com
+algumas chaves \inlstr{nome}, \inlstr{telefone} e \inlstr{email}.
+Nesse caso, o uso de um dicionário foi a opção encontrada para agrupar os dados relacionados a um indivíduo,
+fornecendo uma estrutura básica para armazenar essas informações sem que fiquem dispersas em múltiplas variáveis.
+
+Como os valores associados às chaves \inlstr{nome}, \inlstr{telefone} e \inlstr{email} estão logicamente interligados,
+faz sentido agrupá-los.
+No entanto, há limitações nessa abordagem pois a função \inlcode{obter_contato()} só funciona corretamente se o
+dicionário contiver as chaves esperadas.
+O código não protege contra inconsistências ou dados ausentes de forma organizada.
+Fica a cardo chamador da função manter uma organização e consistência na estrutura do dicionário fornecido.
+
+Uma forma mais estruturada de lidar com essas questões é utilizar classes, que encapsulam dados
+(\inlstr{nome}, \inlstr{telefone}, \inlstr{email}) e funcionalidade (\inlcode{obter_contato()}) em um único objeto.
+
+
+Poderíamos refatorar o programa criando um novo tipo personalizado chamado \inlcode{Usuario}:
+\begin{minted}[linenos]{custompython}
+# definição da classe
+class Usuario:
+    # o método __init__ é executado ao criar um novo objeto
+    def __init__(self, nome: str, telefone: str = '', email: str = ''):
+        self.nome = nome
+        self.telefone = telefone
+        self.email = email
+
+    def contato(self) -> str:
+        if self.email:
+            return self.email
+        elif self.telefone:
+            return self.telefone
+        else:
+            return 'nenhum contato cadastrado'
+
+# criando instâncias da classe Usuario
+usuario1 = Usuario(nome='Fulano', email='fulano@ifsc.edu.br', telefone='(48)99999-9999')
+usuario2 = Usuario(nome='Beltrano', telefone='(48)99999-8888')
+usuario3 = Usuario(nome='Sicrano')
+
+# utilizando o método contato() e apresentando os resultados
+print('contato usuario1:', usuario1.contato())
+print('contato usuario2:', usuario2.contato())
+print('contato usuario3:', usuario3.contato())
+\end{minted}
+\begin{minted}{text}
+contato usuario1: fulano@ifsc.edu.br
+contato usuario2: (48)99999-8888
+contato usuario3: nenhum contato cadastrado
+\end{minted}
+
+Vamos explorar as partes fundamentais desse código linha por linha.
+
+Na \textbf{linha 2} temos a declaração que estamos definindo uma nova \inlcode{class}
+chamada \inlcode{Usuario}\footnote{Diferente da convenção utilizada para funções e variáveis, que geralmente seguem o
+estilo \textit{snake\_case} (\inlcode{exemplo_variavel}), nomes de classes costumam ser escritos em \textit{CamelCase} (\inlcode{NomeDaClasse}).}.
+
+Essa definição consiste em dois métodos, ou duas funções associadas à classe: \magic{__init__()} (\textbf{linha 4}) e
+\inlcode{contato()} (\textbf{linha 9}).
+
+O método \magic{__init__()} é o construtor da classe, que é executado automaticamente ao criarmos um novo objeto do
+tipo \inlcode{Usuario} (o que é feito na \textbf{linha 18}).
+Esse processo é conhecido como instanciação da classe, e resulta na criação de um objeto em memória.
+Enquanto a classe é apenas uma definição da estrutura e do comportamento dos objetos (um \emph{blueprint}), a instância
+representa a consolidação de um objeto desse tipo em memória, com valores próprios.
+
+
+Assim como funções, os métodos podem ter parâmetros que podem ser obrigatórios ou opcionais (recebendo
+valores padrão).
+No caso de \magic{__init__()}, os parâmetros são \magic{self}, \inlcode{nome}, \inlcode{email} e \inlcode{telefone}.
+
+A principal diferença desse método quando comparado a uma função padrão, é a presença do parâmetro
+\magic{self}, que é uma referência à própria instância do objeto\footnote{O nome \magic{self} é apenas uma convenção, e sua função de autoreferência à instância do objeto está
+diretamente relacionada à posição do parâmetro, que deve sempre ser o primeiro em qualquer método.
+Independentemente do nome utilizado, esse primeiro parâmetro representa o próprio objeto, permitindo o acesso e a
+manipulação de seus atributos e métodos. Contudo, usar \magic{self} é altamente recomendado, pois é uma prática amplamente
+reconhecida e melhora a legibilidade do código.}.
+Não precisamos fornecer \magic{self} a um método de forma manual, o
+Python faz isso de forma automática e nos fornece \magic{self} justamente para podermos manipular os dados relativos à instância.
+
+Na \textbf{linha 5}, criamos o atributo \magic{self.}\inlcode{nome}, atribuindo a ele o valor do parâmetro \inlcode{nome}.
+
+Um atributo é uma variável interna da instância da classe, responsável por armazenar informações específicas de cada
+objeto criado.
+São esses atributos que compõem o objeto.
+
+Embora o atributo e o parâmetro tenham o mesmo nome (o que é uma prática comum, mas não necessária), eles são variáveis
+distintas.
+O parâmetro \inlcode{nome} é passado ao método \magic{__init__()} no momento da criação de um novo objeto da classe
+\inlcode{Usuario}, e seu valor é armazenado internamente no atributo \magic{self.}\inlcode{nome}, garantindo que essa
+informação fique acessível ao longo da vida útil do objeto.
+
+Além de \inlcode{nome}, são criados mais dois atributos para armazenar \inlcode{email} e \inlcode{telefone}.
+Esses três atributos formam a estrutura de dados armazenados em memória para um objeto da classe \inlcode{Usuario}.
+
+
+Pulando para a \textbf{linha 18}, que na realidade é a primeira a ser executada (já que as anteriores pertencem apenas
+à definição da classe \inlcode{Usuario}), temos a criação da variável \inlcode{usuario1}.
+
+À direita do operador de atribuição (\inlcode{=}) há uma chamada à classe \inlcode{Usuario()}, o que significa que um
+novo objeto do tipo \inlcode{Usuario} está sendo instanciado.
+
+Ao chamar \inlcode{Usuario(nome='Fulano', email=...)}, os argumentos
+fornecidos (\inlcode{nome}, \inlcode{email} e \inlcode{telefone}) são passados para o método \magic{__init__()}, que
+então atribui esses valores aos atributos internos do objeto.
+Isso resulta na criação de uma instância única, armazenada na variável \inlcode{usuario1}, contendo todas as
+informações fornecidas.
+
+Nas \textbf{linhas 19} e \textbf{20}, criamos mais duas instâncias da classe \inlcode{Usuario}, com valores distintos.
+Cada instância da classe representa um objeto único na memoria, contendo suas próprias informações
+de \inlcode{nome}, \inlcode{telefone} e \inlcode{email}, mas possuem a mesma estrutura definida pela classe.
+
+Na \textbf{linha 23}, dentro do comando \inlcode{print()}, temos a chamada  \inlcode{usuario1.contato()}, que executa o
+método \inlcode{contato()} definido na \textbf{linha 9}.
+
+Um detalhe importante é que, na definição de \inlcode{contato(}\magic{self}\inlcode{)}, declaramos um parâmetro
+\magic{self}, mas não o fornecemos explicitamente na chamada do método.
+
+Isso ocorre porque o Python passa \magic{self} automaticamente, garantindo que o método seja chamado sobre a instância correta.
+Ou seja, a chamada \inlcode{usuario1.contato()} equivale internamente a \inlcode{contato(usuario1)}, onde \magic{self} recebe
+\inlcode{usuario1} como argumento.
+
+Note que o encapsulamento dos dados e funcionalidades contribui para a organização e legibilidade do código.
+As instâncias de classes geralmente são objetos mutáveis, como os abordados no Capítulo \ref{vars}.
+Na realidade, em Python, todos os tipos de dados são implementados como classes, até mesmo os tipos primitivos como inteiros.
+
+Diferente de outras linguagens como Java, C++, C\# e Rust, onde existe um sistema explícito de controle de
+acesso (como \inlcode{private}, \inlcode{protected} e \inlcode{public}), em Python todos os membros
+de uma classe são públicos por padrão.
+
+Isso significa que qualquer parte do código que tenha acesso a uma instância da classe pode ler e modificar diretamente
+seus atributos, além de chamar qualquer método definido na classe.
+
+Embora Python não imponha um mecanismo formal de privacidade, existe uma convenção para indicar atributos
+internos\footnote{Convencionou-se utilizar um underscore (\inlcode{_}) antes do nome do atributo para indicar que ele
+não deve ser acessado diretamente (ex: \inlcode{self._informacao_privada}). Apesar de ainda ser possível modificar
+esses atributos externamente, essa prática sinaliza que o atributo é de uso interno, recomendando que sua manipulação
+ocorra apenas dentro da própria classe por seus métodos. IDEs e ferramentas de desenvolvimento costumam alertar sobre
+tentativas de acesso direto a esses atributos, reforçando essa boa prática.}.
+
+
+
+O exemplo a seguir demostra esse acesso a atributos:
+\begin{minted}{custompython}
+class Usuario:
+    def __init__(self, nome: str, telefone: str = '', email: str = ''):
+        self.nome = nome
+        self.telefone = telefone
+        self.email = email
+
+usuario = Usuario(nome='Fulano', email='fulano@ifsc.edu.br', telefone='(48)99999-9999')
+print(f"{usuario.nome}, {usuario.email}, {usuario.telefone}")   # lendo atributos
+
+usuario.email = 'fulano_de_tal@ifsc.edu.br'   # modificando atributo email
+usuario.telefone = '(11)88888-9999'           # modificando atributo telefone
+print(f"{usuario.nome}, {usuario.email}, {usuario.telefone}")    # lendo atributos
+\end{minted}
+\begin{minted}{text}
+Fulano, fulano@ifsc.edu.br, (48)99999-9999
+Fulano, fulano_de_tal@ifsc.edu.br, (11)88888-9999
+\end{minted}
+
+
+As classes em Python oferecem diversas funcionalidades avançadas, como herança, sobrecarga de operadores, métodos
+mágicos, polimorfismo, abstração, propriedades e metaclasses, que ampliam o suporte à programação orientada a objetos.
+
+Embora sejam conceitos importantes, este tutorial introdutório foca nos princípios básicos.
+O aprofundamento nesses temas fica a critério do leitor, que poderá explorá-los de forma gradativa, em um momento
+oportuno, conforme sua necessidade e evolução no aprendizado.
+
+Para praticar os conceitos de classes, refatore o código da questão \inlcode{tictactoe}, transformando o parâmetro
+\inlcode{board_state} em um atributo e a função \inlcode{eval\_move()} método
+da classe \inlcode{TicTacTtoe}.
+
+
+
