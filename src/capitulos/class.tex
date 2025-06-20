@@ -17,7 +17,6 @@ Além disso, compreender a estrutura básica de classes em Python é essencial, 
 pacotes especializados, que serão explorados em capítulos futuros.
 
 Nada melhor do que demonstrar na prática as vantagens do uso de classes.
-
 Para isso, vamos revisitar um dos exemplos apresentados no Capítulo \ref{iffor}, onde criamos uma função para buscar
 o contato de um usuário a partir de seu cadastro.
 
@@ -47,19 +46,21 @@ contato usuario3: nenhum contato cadastrado
 \end{minted}
 
 Note que a função \inlcode{obter_contato()} possui um único parâmetro \inlcode{cadastro}, que é um dicionário com
-algumas chaves \inlstr{nome}, \inlstr{telefone} e \inlstr{email}.
-Nesse caso, o uso de um dicionário foi a opção encontrada para agrupar os dados relacionados a um indivíduo,
-fornecendo uma estrutura básica para armazenar essas informações sem que fiquem dispersas em múltiplas variáveis.
+algumas chaves esperadas: \inlstr{nome}, \inlstr{telefone} e \inlstr{email}.
 
-Como os valores associados às chaves \inlstr{nome}, \inlstr{telefone} e \inlstr{email} estão logicamente interligados,
-faz sentido agrupá-los.
-No entanto, há limitações nessa abordagem pois a função \inlcode{obter_contato()} só funciona corretamente se o
-dicionário contiver as chaves esperadas.
-O código não protege contra inconsistências ou dados ausentes de forma organizada.
-Fica a cardo chamador da função manter uma organização e consistência na estrutura do dicionário fornecido.
+O uso de um dicionário, nesse contexto, foi a forma encontrada para agrupar as informações relacionadas a um mesmo
+indivíduo, evitando que tais dados fiquem soltos, espalhados em variáveis independentes.
+Como os valores associados às chaves \inlstr{nome}, \inlstr{telefone} e \inlstr{email} estão logicamente vinculados,
+faz sentido organizá-los sob uma mesma estrutura.
+
+Essa abordagem apresenta fragilidades e limitações, uma vez que a função \inlcode{obter_contato()}
+depende da existência de chaves específicas no dicionário fornecido para funcionar corretamente.
+O código não prevê mecanismos estruturados para lidar com dados inconsistentes ou ausentes, delegando ao chamador a
+responsabilidade de assegurar a organização e a completude do dicionário fornecido.
+O chamador, de certa forma, precisa conhecer aspectos internos da função.
 
 Uma forma mais estruturada de lidar com essas questões é utilizar classes, que encapsulam dados
-(\inlstr{nome}, \inlstr{telefone}, \inlstr{email}) e funcionalidade (\inlcode{obter_contato()}) em um único objeto.
+(\inlcode{nome}, \inlcode{telefone}, \inlcode{email}) e funcionalidade (\inlcode{obter_contato()}) em um único objeto.
 
 
 Poderíamos refatorar o programa criando um novo tipo personalizado chamado \inlcode{Usuario}:
@@ -122,8 +123,9 @@ diretamente relacionada à posição do parâmetro, que deve sempre ser o primei
 Independentemente do nome utilizado, esse primeiro parâmetro representa o próprio objeto, permitindo o acesso e a
 manipulação de seus atributos e métodos. Contudo, usar \magic{self} é altamente recomendado, pois é uma prática amplamente
 reconhecida e melhora a legibilidade do código.}.
-Não precisamos fornecer \magic{self} a um método de forma manual, o
-Python faz isso de forma automática e nos fornece \magic{self} justamente para podermos manipular os dados relativos à instância.
+Não precisamos (nem devemos) fornecer \magic{self} manualmente a um método, já que o
+Python faz isso de forma automática e disponibiliza a referência \magic{self} aos métodos da classe justamente para
+que estes possam manipular os dados relativos à instância.
 
 Na \textbf{linha 5}, criamos o atributo \magic{self.}\inlcode{nome}, atribuindo a ele o valor do parâmetro \inlcode{nome}.
 
