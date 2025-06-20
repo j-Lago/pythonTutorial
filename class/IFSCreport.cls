@@ -281,7 +281,8 @@ arrow/.style={latex-}}
 
     \large\textbf{\@subject} \\
     \vspace{7mm}
-    \large\textbf{Autor: \@author} \\ \texttt{\@email} \\
+%    \large\textbf{Autor: \@author} \\ \texttt{\@email} \\
+    \large\textbf{\@author} \\ \texttt{\@email} \\
     \vspace{15mm}
     \includegraphics[scale=.4]{../class/figs/logo_ifsc} \\
     \vspace{-5mm}

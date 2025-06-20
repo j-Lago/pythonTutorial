@@ -343,17 +343,18 @@ Traceback (most recent call last):
 Vários outros métodos e funções para manipular listas estão disponíveis por padrão. Segue uma breve enumeração dos mais úteis:
 \begin{itemize}
 \item \inlcode{len(lista)} – Retorna o número de elementos na lista.
-\item \inlcode{lista.append(valor)} – Adiciona um novo elemento ao final da lista.
-\item \inlcode{lista.insert(indice, valor)} – Insere um elemento em uma posição específica.
-\item \inlcode{lista.remove(valor)} – Remove a primeira ocorrência do valor especificado.
-\item \inlcode{lista.pop(indice)} – Remove e retorna o elemento na posição indicada (ou o último, se omitido).
-\item \inlcode{lista.index(valor)} – Retorna o índice da primeira ocorrência do valor.
-\item \inlcode{lista.count(valor)} – Retorna o número de vezes que o valor aparece na lista.
+\item \inlcode{lista.append(valor)} -- Adiciona um novo elemento ao final da lista.
+\item \inlcode{lista.insert(indice, valor)} -- Insere um elemento em uma posição específica.
+\item \inlcode{lista.remove(valor)} -- Remove a primeira ocorrência do valor especificado.
+\item \inlcode{lista.pop(indice)} -- Remove e retorna o elemento na posição indicada (ou o último, se omitido).
+\item \inlcode{lista.index(valor)} -- Retorna o índice da primeira ocorrência do valor.
+\item \inlcode{lista.count(valor)} -- Retorna o número de vezes que o valor aparece na lista.
 \item \inlcode{lista.sort()} – Ordena a lista em ordem crescente (por padrão).
-\item \inlcode{lista.reverse()} – Inverte a ordem dos elementos da lista.
-\item \inlcode{sorted(lista)} – Retorna uma nova lista ordenada, sem modificar a original.
-\item \inlcode{lista.copy()} – Retorna uma cópia superficial da lista.
-\item \inlcode{lista.clear()} – Remove todos os elementos da lista.
+\item \inlcode{lista.reverse()} -- Inverte a ordem dos elementos da lista.
+\item \inlcode{sorted(lista)} -- Retorna uma nova lista ordenada, sem modificar a original.
+\item \inlcode{lista.copy()} -- Retorna uma cópia superficial da lista.
+\item \inlcode{lista.clear()} -- Remove todos os elementos da lista.
+\item \inlcode{lista[i:j:k]} -- fatiamento (\emph{slicing}) de \inlcode{i} até \inlcode{j} com passo \inlcode{k}.
 \end{itemize}
 
 Esses métodos permitem desde operações simples, como acessar elementos, até manipulações mais avançadas,
@@ -472,13 +473,13 @@ A iteração sobre coleções de dados será abordada no capítulo \ref{iffor}.
 
 Aqui está uma lista resumida dos principais métodos e funções para manipulação de \inlcode{set} em Python:
 \begin{itemize}
-\item \inlcode{len(set)} – Retorna o número de elementos no conjunto.
-\item \inlcode{set.add(valor)} – Adiciona um novo elemento ao conjunto.
-\item \inlcode{set.remove(valor)} – Remove um elemento existente (gera erro se o valor não existir).
-\item \inlcode{set.discard(valor)} – Remove um elemento sem gerar erro caso ele não exista.
-\item \inlcode{set.pop()} – Remove e retorna um elemento aleatório do conjunto.
-\item \inlcode{set.clear()} – Remove todos os elementos do conjunto.
-\item \inlcode{set.copy()} – Retorna uma cópia do conjunto.
+\item \inlcode{len(set)} -- Retorna o número de elementos no conjunto.
+\item \inlcode{set.add(valor)} -- Adiciona um novo elemento ao conjunto.
+\item \inlcode{set.remove(valor)} -- Remove um elemento existente (gera erro se o valor não existir).
+\item \inlcode{set.discard(valor)} -- Remove um elemento sem gerar erro caso ele não exista.
+\item \inlcode{set.pop()} -- Remove e retorna um elemento aleatório do conjunto.
+\item \inlcode{set.clear()} -- Remove todos os elementos do conjunto.
+\item \inlcode{set.copy()} -- Retorna uma cópia do conjunto.
 \end{itemize}
 
 
@@ -558,13 +559,13 @@ print(dados)
 
 Aqui estão alguns métodos úteis para trabalhar com dicionários:
 \begin{itemize}
-\item \inlcode{len(dicionario)}: Retorna a quantidade de pares chave-valor no dicionário.
-\item \inlcode{dicionario.keys()}: Retorna todas as chaves do dicionário.
-\item \inlcode{dicionario.values()}: Retorna todos os valores do dicionário.
-\item \inlcode{dicionario.items()}: Retorna todos os pares chave-valor como tuplas.
-\item \inlcode{dicionario.pop(chave)}: Remove um item e retorna seu valor.
-\item \inlcode{dicionario.update(outro_dicionario)}: Atualiza o dicionário com novos pares chave-valor.
-\item \inlcode{dicionario.clear()}: Remove todos os elementos do dicionário.
+\item \inlcode{len(dicionario)} -- Retorna a quantidade de pares chave-valor no dicionário.
+\item \inlcode{dicionario.keys()} -- Retorna todas as chaves do dicionário.
+\item \inlcode{dicionario.values()} -- Retorna todos os valores do dicionário.
+\item \inlcode{dicionario.items()} -- Retorna todos os pares chave-valor como tuplas.
+\item \inlcode{dicionario.pop(chave)} -- Remove um item e retorna seu valor.
+\item \inlcode{dicionario.update(outro_dicionario)} -- Atualiza o dicionário com novos pares chave-valor.
+\item \inlcode{dicionario.clear()} -- Remove todos os elementos do dicionário.
 \end{itemize}
 
 Dicionários são ferramentas poderosas para armazenar e acessar dados de forma eficiente.

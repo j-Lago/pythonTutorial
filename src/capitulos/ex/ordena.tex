@@ -1,16 +1,13 @@
-Escreva uma função  \inlcode{my_sort(values)}, que recebe uma lista de números inteiros de tamanho arbitrário e ordena
+Escreva uma função  \inlcode{ordena(valores)}, que recebe uma lista de números inteiros de tamanho arbitrário e ordena
 seus elementos em ordem crescente.
 A função deve retornar duas listas: a primeira contendo os valores ordenados da lista original; a segunda contendo os
 índices dos elementos da lista original que correspondem à posição dos valores ordenados.
 
-contendo os valores ordenados da lista original e; uma segunda com uma lista contendo os índices dos
-elementos da lista original que correspondem à lista de entrada.
-
 \begin{minted}{custompython}
-def my_sort(values: list[int]) -> tuple[list[int], list[int]]:
+def ordena(valores: list[int]) -> tuple[list[int], list[int]]:
     # seu código aqui
 
-vord, ids = my_sort([1, 4, 3, 5, 8, 2])
+vord, ids = ordena([1, 4, 3, 5, 8, 2])
 print(f"vord: {vord}\n ids: {ids}")
 \end{minted}
 
@@ -22,4 +19,6 @@ vord: [1, 4, 3, 5, 8, 2]
 
 Não utilize a função \inlcode{sort()} ou \inlcode{sorted()} do Python.
 Implemente sua própria lógica de ordenação.
+
+Depois de implementar seu própria algoritmo, utilize as soluções embutidas da linguagem.
 
