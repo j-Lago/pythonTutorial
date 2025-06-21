@@ -49,9 +49,9 @@ O sinal de fase estimado é utilizado nas malhas de controle das correntes e pot
 \begin{equation}\label{eq:2}
     \beta\0 = w\1  \, k_{_1}  \left( \alpha\0 + \alpha\1 \right)  + \beta\1
 \end{equation}
-%\begin{equation}\label{eq:3a}
-%    d{_{_{ n\!}}} =  \alpha\0 \sin(\theta\1) - \beta\0  \cos(\theta\1)
-%\end{equation}
+\begin{equation}\label{eq:3a}
+    d{_{_{ n\!}}} =  \alpha\0 \sin(\theta\1) - \beta\0  \cos(\theta\1)
+\end{equation}
 \begin{equation}\label{eq:3b}
     q{_{_{ n\!}}} =  \alpha\0 \cos(\theta\1) + \beta\0  \sin(\theta\1)
 \end{equation}
@@ -82,9 +82,7 @@ A \figr{fig:plot} mostra um exemplo de como os resultados do script podem ser
 apresentados.
 \begin{figure}[htbp]
     \centering
-    \includegraphics[scale=0.19]{../figs/plot1.pdf}\\
-    \vspace{-16pt}
-    \includegraphics[scale=0.19]{../figs/plot2.pdf}
+    \includegraphics[scale=1.0]{figs/plot_pll}
     \caption{Resultado esperado do script.}
     \label{fig:plot}
 \end{figure}
@@ -115,13 +113,14 @@ Exporte além da tensão, o período correspondente do vetor de tempo e do ângu
                 >{\columncolor{lightgray}}l
                 >{\columncolor{lightgray}}l
                 >{\columncolor{lightgray}}l }
-            time,  & angle,  & voltage              \\
+            time,  & phase,  & voltage              \\
             0.12562,  & 0.001584790,  & 4.3073               \\
             0.12562,  & 0.003702030,  & 14.323               \\
             0.12563,  & 0.005819309,  & -0.32799             \\
             0.12564,  & 0.007936621,  & 14.62                \\
             0.12564,  & 0.010053976,  & 14.767								\\
-            $\ \ \ \ \vdots$     & \ \ \ \ \ \ $\vdots$            & \ \ \  $\vdots$
+            $\ \ \ \ \vdots$     & \ \ \ \ \ \ $\vdots$            & \ \ \  $\vdots$\\
+            0.19879,  & 2.377530852,  & 218.26\\
         \end{tabular}
     }
     \caption{Exemplo da tabela a ser exportada em formato \texttt{.csv}.}
