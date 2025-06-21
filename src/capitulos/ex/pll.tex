@@ -1,27 +1,27 @@
 \newcommand{\0}{_{_{\! n\!}}}
 \newcommand{\1}{_{_{\! n\text{-}\!\>\!1\!}}}
 \newcommand{\2}{_{_{\! n-\!2\!}}}
-Em sistemas de geração fotovoltaicos a energia absorvida pelos arranjos de painéis é convertida em energia elétrica em
-corrente contínua.
-Como na maioria dos sistemas não há nenhuma forma de armazenamento, e como energia se conserva, toda energia absorvida
-pelos módulos deve ser prontamente injetada na rede.
-Para escoar a produção, os inversores de frequência devem não apenas executar a conversão CC--CA, mas fazê--la de forma
+Em sistemas de geração fotovoltaica, a energia solar captada pelos painéis é convertida em energia elétrica em corrente contínua.
+Como a maioria desses sistemas não possui meios de armazenamento, e como energia se conserva, toda a energia gerada
+pelos painéis deve ser imediatamente injetada na rede elétrica.
+
+Para escoar essa produção, os inversores devem não apenas executar a conversão CC--CA, mas fazê--la de forma
 a controlar a injeção de potência na rede, garantindo o equilíbrio energético e consequentemente a estabilidade do
 barramento CC.
 
-Para tal, a tensão imposta pelo inversor deve estar em sincronismos com a da rede.
-De fato, o controle da potência ativa do inversor depende da fase relativa entre a tensão da rede e a tensão imposta
-pelo inversor.
-Ainda, como a rede opera com frequência variável, em torno dos 60~Hz, o inversor precisa a todo instante estimar a fase
-da tensão da rede para executar os ajustes necessários de modo a manter o sincronismo e o ângulo de carga desejado.
+Para isso, a tensão imposta pelo inversor deve estar em sincronismo com a da rede.
+O controle da potência ativa depende diretamente da defasagem entre a tensão da rede e a tensão imposta pelo inversor.
+Além disso, como a rede elétrica opera com frequência variável em torno dos 60 Hz, o inversor deve estimar
+continuamente a fase da tensão da rede a fim de realizar os ajustes necessários para manter o sincronismo e o
+ângulo de carga desejado.
 
 Essa estimação não é trivial já que, além das variações da tensão e frequência em regime permanente, a rede ainda
 apresenta efeitos transitórios impulsivos e oscilatórios, distorções harmônicas, flutuações, ruídos, afundamentos, etc.
 Isso é ainda mais desafiador em sistemas monofásicos, onde amplitude, frequência e fase devem ser obtidas a partir de
-medições de um único sinal sujeito aos fenômenos já citados.
+medições de um único sinal de tensão, sujeito aos fenômenos já citados.
 
 Na prática, existem algumas estratégias para se obter uma estimativa instantânea e precisa da fase da tensão da rede,
-sendo que a maioria delas são baseadas na estrutura SOGI--PLL, cujo diagrama de blocos básico é apresentado na \figr{fig:ex01}.
+sendo que a maioria delas é baseada na estrutura SOGI--PLL, cujo diagrama de blocos básico é apresentado na \figr{fig:ex01}.
 \begin{figure}[htbp]
     \centering
     \includegraphics{figs/pll.eps}
@@ -32,12 +32,14 @@ sendo que a maioria delas são baseadas na estrutura SOGI--PLL, cujo diagrama de
 
 
 O estimador da \figr{fig:ex01} pode ser discretizado e reescrito na forma de equações a diferenças, apresentadas nas equações
-(\ref{eq:0}--\ref{eq:6}), permitindo sua implementação em controladores digitais.
+(\ref{eq:0}--\ref{eq:6}), possibilitando sua implementação em controladores digitais embarcados.
 
-O algoritmo discretizado recebe um sinal amostrado da tensão de entrada (geralmente em algumas poucas dezenas de kHz, dependendo da frequência de
-comutação empregado no inversor).
-A partir dessas amostras, calcula a fase quase instantânea (com atrazo de uma amostra).
-Esse sinal é utilizado nas malhas de controle das correntes e da potência injetadas na rede (não apresentados).
+O algoritmo discretizado recebe um sinal amostrado da tensão de entrada --- tipicamente com frequência de amostragem
+na ordem de algumas dezenas de kHz, dependendo da frequência de comutação utilizada no inversor.
+
+Com base nessas amostras, estima-se a fase da tensão quase instantânea (com atraso de uma amostra).
+O sinal de fase estimado é utilizado nas malhas de controle das correntes e potências ativa e reativa injetadas na rede
+(não abordados nessa questão).
 \begin{equation}\label{eq:0}
         e\0 = k_{_0\!} \left( v\0 - \alpha\1 \right)  - \beta\1
 \end{equation}
@@ -47,12 +49,12 @@ Esse sinal é utilizado nas malhas de controle das correntes e da potência inje
 \begin{equation}\label{eq:2}
     \beta\0 = w\1  \, k_{_1}  \left( \alpha\0 + \alpha\1 \right)  + \beta\1
 \end{equation}
-\begin{equation}\label{eq:3a}
-    d{_{_{ n\!}}} =  \alpha\0 \sin(\theta\1) - \beta\0  \cos(\theta\1)
-\end{equation}
-%\begin{equation}\label{eq:3b}
-%    q{_{_{ n\!}}} =  \alpha\0 \cos(\theta\1) + \beta\0  \sin(\theta\1)
+%\begin{equation}\label{eq:3a}
+%    d{_{_{ n\!}}} =  \alpha\0 \sin(\theta\1) - \beta\0  \cos(\theta\1)
 %\end{equation}
+\begin{equation}\label{eq:3b}
+    q{_{_{ n\!}}} =  \alpha\0 \cos(\theta\1) + \beta\0  \sin(\theta\1)
+\end{equation}
 \begin{equation}\label{eq:4}
     \delta\0 = k_{_2} q{_{_{ n\!}}} + k_{_3} q{_{_{ n\text{-}\!\>\!1\!}}} + \delta\1
 \end{equation}
@@ -66,14 +68,17 @@ Esse sinal é utilizado nas malhas de controle das correntes e da potência inje
 
 Em \texttt{\url{https://github.com/j-Lago/NVP68300}} você encontrará um arquivo \texttt{rede.csv} com a tensão (coluna 2) amostrada de alguns
 ciclos da rede elétrica e um registro temporal (coluna 1) de cada amostra.
-Escreva um script que importe esse sinal para um vetor, e para cada amostra (cada elemento do vetor) execute os cálculos (\ref{eq:0}--\ref{eq:6}).
+Escreva um script que importe esse sinal para um \inlcode{array}, e para cada amostra (cada elemento do \inlcode{array})
+execute os cálculos (\ref{eq:0}--\ref{eq:6}).
 
-Guarde os resultados de cada amostra de $v$ (tensão de entrada), $\alpha$ (tensão filtrada), $d$ (componente de eixo direto da tensão em base
-síncrona), $q$ (componente em quadratura) e $\theta$ (fase estimada pelo PLL).
-Gere e exporte uma figura apresentado a evolução temporal de cada uma desses sinais, bem como alguma indicação do instante que o PLL conseguiu se
-sincronizar (atracar) com a rede elétrica.
-De forma simplificada, assuma que o sincronismo foi obtido no instante do primeiro cruzamento por zero do sinal $\theta$ (saída do PLL) em que
-$\arctan(q/d) < 0.035$~rad ($\approx 2^\circ)$ e $d > 250$~V. A \figr{fig:plot} mostra um exemplo de como os resultados do script podem ser
+Guarde os resultados de cada amostra de $v$ (tensão de entrada), $\alpha$ (tensão filtrada), $d$ (componente de eixo
+direto da tensão em base síncrona), $q$ (componente em quadratura) e $\theta$ (fase estimada pelo PLL).
+Gere e exporte uma figura apresentado a evolução temporal de cada uma desses sinais, bem como alguma indicação do
+instante que o PLL conseguiu se sincronizar (atracar) com a rede elétrica.
+De forma simplificada, assuma que o sincronismo foi obtido no instante do primeiro cruzamento por zero do sinal
+$\theta$ (saída do PLL) em que
+$\arctan(q/d) < 0.035$~rad ($\approx 2^\circ)$ e $d > 250$~V.
+A \figr{fig:plot} mostra um exemplo de como os resultados do script podem ser
 apresentados.
 \begin{figure}[htbp]
     \centering
@@ -95,8 +100,11 @@ Assuma as seguintes constantes para a implementação do controlador e das integ
     \end{aligned}
 \end{equation}
 
-Ainda, exporte para um arquivo \texttt{.csv} a porção do sinal de tensão de entrada compreendida entre a detecção da sincronização até o último
-cruzamento por zero do ângulo $\theta$ (período que compreende todos os ciclos inteiros em que o PLL estava sincronizado).
+
+\section*{Segunda etapa:}
+Exporte para um arquivo \inlcode{.csv} a porção do sinal de tensão de entrada compreendida entre a detecção
+da sincronização até o último cruzamento por zero do ângulo $\theta$ (período que compreende todos os ciclos inteiros
+em que o PLL estava sincronizado).
 Exporte além da tensão, o período correspondente do vetor de tempo e do ângulo de saída do PLL.
 
 \begin{table}[]
@@ -107,14 +115,13 @@ Exporte além da tensão, o período correspondente do vetor de tempo e do ângu
                 >{\columncolor{lightgray}}l
                 >{\columncolor{lightgray}}l
                 >{\columncolor{lightgray}}l }
-            time {[}s{]} &  PLL angle {[}rad{]} &  grid voltage {[}V{]} \\
-            ------------ &  ---------------------- & ------------------------ \\
-            0.12562      &, 0.00158479          &, 4.3073               \\
-            0.12562      &, 0.00370203          &, 14.323               \\
-            0.12563      &, 0.005819309         &, -0.32799             \\
-            0.12564      &, 0.007936621         &, 14.62                \\
-            0.12564      &, 0.010053976         &, 14.767								\\
-            $\ \ \ \ \vdots$     & \ \ \ \ \ \ \ $\vdots$            & \ \ \ \ \ $\vdots$
+            time,  & angle,  & voltage              \\
+            0.12562,  & 0.001584790,  & 4.3073               \\
+            0.12562,  & 0.003702030,  & 14.323               \\
+            0.12563,  & 0.005819309,  & -0.32799             \\
+            0.12564,  & 0.007936621,  & 14.62                \\
+            0.12564,  & 0.010053976,  & 14.767								\\
+            $\ \ \ \ \vdots$     & \ \ \ \ \ \ $\vdots$            & \ \ \  $\vdots$
         \end{tabular}
     }
     \caption{Exemplo da tabela a ser exportada em formato \texttt{.csv}.}
