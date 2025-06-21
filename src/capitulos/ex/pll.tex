@@ -1,6 +1,3 @@
-\newcommand{\0}{_{_{\! n\!}}}
-\newcommand{\1}{_{_{\! n\text{-}\!\>\!1\!}}}
-\newcommand{\2}{_{_{\! n-\!2\!}}}
 Em sistemas de geração fotovoltaica, a energia solar captada pelos painéis é convertida em energia elétrica em corrente contínua.
 Como a maioria desses sistemas não possui meios de armazenamento, e como energia se conserva, toda a energia gerada
 pelos painéis deve ser imediatamente injetada na rede elétrica.
@@ -65,19 +62,36 @@ O sinal de fase estimado é utilizado nas malhas de controle das correntes e pot
     \theta\0 = k_{_1}  \left( \omega\0 + \omega\1 \right)  + \theta\1    \ \ \  (\text{mod}~2\pi)
 \end{equation}
 
+A estimativa de fase da rede ($theta$) obtida ainda deve ser validada.
+O \inlcode{pll} pode demorar alguns ciclos para se sincronizar com a rede (ou atracar).
 
-Em \texttt{\url{https://github.com/j-Lago/NVP68300}} você encontrará um arquivo \texttt{rede.csv} com a tensão (coluna 2) amostrada de alguns
-ciclos da rede elétrica e um registro temporal (coluna 1) de cada amostra.
+
+\section*{Tarefa 1}
+Em \colorurl{https://github.com/j-Lago/NVP68300} você encontrará um arquivo \colorurl{rede.csv} com a
+tensão (\textbf{coluna 2}) amostrada de alguns ciclos da rede elétrica e um registro temporal (\textbf{coluna 1}) de cada amostra.
+
 Escreva um script que importe esse sinal para um \inlcode{array}, e para cada amostra (cada elemento do \inlcode{array})
 execute os cálculos (\ref{eq:0}--\ref{eq:6}).
-
 Guarde os resultados de cada amostra de $v$ (tensão de entrada), $\alpha$ (tensão filtrada), $d$ (componente de eixo
 direto da tensão em base síncrona), $q$ (componente em quadratura) e $\theta$ (fase estimada pelo PLL).
+
+Assuma ainda, de forma simplificada, que o sincronismo foi obtido no instante do primeiro cruzamento por zero do sinal
+$\theta$ (saída do PLL) em que $\arctan(q/d) < 0.02$~rad ($\approx 2^\circ)$ e $d > 250$~V. Identifique esse instante
+bem como os demais cruzamentos por zero subsequentes.
+
+Utilize as seguintes constantes para a implementação do controlador e das integrações:
+\begin{equation}\label{eq:cont}
+    \begin{aligned}
+        k_{_0} &= 0.7 \\
+        k_{_1} &= 2.84\cdot 10^{-6} \\
+        k_{_2} &= 0.385715277950311 \\
+        k_{_3} &= -0.385713293478261 \\
+        \omega_{_0} &= 376.9911184307752
+    \end{aligned}
+\end{equation}
+
 Gere e exporte uma figura apresentado a evolução temporal de cada uma desses sinais, bem como alguma indicação do
 instante que o PLL conseguiu se sincronizar (atracar) com a rede elétrica.
-De forma simplificada, assuma que o sincronismo foi obtido no instante do primeiro cruzamento por zero do sinal
-$\theta$ (saída do PLL) em que
-$\arctan(q/d) < 0.035$~rad ($\approx 2^\circ)$ e $d > 250$~V.
 A \figr{fig:plot} mostra um exemplo de como os resultados do script podem ser
 apresentados.
 \begin{figure}[htbp]
@@ -87,42 +101,80 @@ apresentados.
     \label{fig:plot}
 \end{figure}
 
-Assuma as seguintes constantes para a implementação do controlador e das integrações:
-\begin{equation}\label{eq:cont}
-    \begin{aligned}
-        k_{_0} &= 0.7 \\
-        k_{_1} &= 2.840000000003951\cdot 10^{-6} \\
-        k_{_2} &= 0.385715277950311 \\
-        k_{_3} &= -0.385713293478261 \\
-        \omega_{_0} &= 376.9911184307752
-    \end{aligned}
+
+
+
+\section*{Tarefa 2}
+Exporte para um arquivo \inlcode{.csv} a porção do sinal de tensão de entrada compreendida entre a detecção
+inicial da sincronização até a amostra que antecede o último cruzamento por zero do ângulo $\theta$, ou seja, o período
+que compreende todos os ciclos inteiros em que o PLL estava sincronizado.
+Exporte além da tensão, o período correspondente do vetor de tempo e do ângulo de saída do PLL.
+%\begin{table}[]
+%    \centering
+%    \small
+%    \texttt{
+%        \begin{tabular}{%{lll}
+%                >{\columncolor{lightgray}}l
+%                >{\columncolor{lightgray}}l
+%                >{\columncolor{lightgray}}l }
+%            time,  & phase,  & voltage              \\
+%            0.12562,  & 0.001584790,  & 4.3073               \\
+%            0.12562,  & 0.003702030,  & 14.323               \\
+%            0.12563,  & 0.005819309,  & -0.32799             \\
+%            0.12564,  & 0.007936621,  & 14.62                \\
+%            0.12564,  & 0.010053976,  & 14.767								\\
+%            $\ \ \ \ \vdots$     & \ \ \ \ \ \ $\vdots$            & \ \ \  $\vdots$\\
+%            0.19247,  & 6.280264753,  & 10.071
+%        \end{tabular}
+%    }
+%    \caption{Exemplo da tabela a ser exportada em formato \texttt{.csv}.}
+%    \label{tab:csv}
+%\end{table}
+
+
+\pagebreak
+\definecolor{bgcsv}{rgb}{0.95,0.95,0.85}
+
+\begin{minted}[escapeinside=??, frame=single, rulecolor=brown, bgcolor=bgcsv]{output}
+?\textcolor{brown}{\faIcon{file} amostras\_sincronizadas.csv}?
+\end{minted}
+\vspace{-0.8em}
+\begin{minted}[escapeinside=??, bgcolor=bgcsv]{output}
+time,    phase,       voltage
+0.12562, 0.001584790, 4.3073
+0.12562, 0.003702030, 14.323
+0.12563, 0.005819309, -0.32799
+0.12564, 0.007936621, 14.62
+0.12564, 0.010053976, 14.767
+    :         :          :
+0.19247, 6.280264753, 10.071
+\end{minted}
+
+
+\section*{Tarefa 3}
+Os dados exportados na tarefa anterior consistem num intervalo da tensão da rede com ciclos inteiros.
+Isso nos permite calcular o valor rms da tensão amostrada da rede através de \eqr{eq:rms}:
+\begin{equation}\label{eq:rms}
+V_{\text{rms}} = \sqrt{\dfrac{1}{N} \sum_ {n=0} ^{N-1} v\0 ^2}
 \end{equation}
 
+Escreva uma função  \inlcode{rms(path: str) -> tuple[float, float]} que recebe como argumento um texto indicando o caminho
+do arquivo exportado na questão anterior e que calcule e retorne o valor rms da tensão e sua frequência fundamental média.
+\begin{minted}{custompython}
+def rms(path: str) -> tuple[float, float]:
+    # seu código aqui
 
-\section*{Segunda etapa:}
-Exporte para um arquivo \inlcode{.csv} a porção do sinal de tensão de entrada compreendida entre a detecção
-da sincronização até o último cruzamento por zero do ângulo $\theta$ (período que compreende todos os ciclos inteiros
-em que o PLL estava sincronizado).
-Exporte além da tensão, o período correspondente do vetor de tempo e do ângulo de saída do PLL.
+vrms, f1 = rms('amostras_sincronizadas.csv')
+print(f"A amostra de tensão possui valor rms de {vrms:.2f} V e frequência {f1:.2f} Hz")
+\end{minted}
 
-\begin{table}[]
-    \centering
-    \small
-    \texttt{
-        \begin{tabular}{%{lll}
-                >{\columncolor{lightgray}}l
-                >{\columncolor{lightgray}}l
-                >{\columncolor{lightgray}}l }
-            time,  & phase,  & voltage              \\
-            0.12562,  & 0.001584790,  & 4.3073               \\
-            0.12562,  & 0.003702030,  & 14.323               \\
-            0.12563,  & 0.005819309,  & -0.32799             \\
-            0.12564,  & 0.007936621,  & 14.62                \\
-            0.12564,  & 0.010053976,  & 14.767								\\
-            $\ \ \ \ \vdots$     & \ \ \ \ \ \ $\vdots$            & \ \ \  $\vdots$\\
-            0.19879,  & 2.377530852,  & 218.26\\
-        \end{tabular}
-    }
-    \caption{Exemplo da tabela a ser exportada em formato \texttt{.csv}.}
-    \label{tab:csv}
-\end{table}
+Saída esperada:
+\begin{minted}{text}
+A amostra de tensão possui valor rms de 220.93 V e frequência 59.84 Hz
+\end{minted}
+
+$^\dagger$\emph{Note que \eqr{eq:rms} só é válida para um vetor $\mathbf{x}$ contendo ciclos inteiros da componente fundamental.
+Ainda, para melhorar a precisão do método, recomenda-se realizar o cálculo considerando ao menos dez ciclos completos da fundamental.
+    (o que não é possível nesse exemplo pelo tamanho da amostra inicial)}
+
+
