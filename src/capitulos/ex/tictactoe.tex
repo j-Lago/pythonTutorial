@@ -1,5 +1,5 @@
-\newcommand{\2}{{\color{MyDarkGreen}$O$}}
-\newcommand{\1}{{\color{MyBrickRed}\ding{55}}}
+\newcommand{\po}{{\color{MyDarkGreen}$O$}}
+\newcommand{\px}{{\color{MyBrickRed}\ding{55}}}
 \definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0}
 \definecolor{MyBrickRed}{rgb}{0.8, 0.25, 0.33}
 
@@ -9,12 +9,12 @@ e informa o resultado da partida.
    O primeiro argumento recebido pela função (\inlcode{board\_state}) é uma matriz $3\times3$ (implementada na forma de
 \inlcode{list[list[int]]}) que contém o estado atual do tabuleiro.
 Elementos da matriz contendo \inlcode{0} indicam que aquela posição ainda não foi jogada.
-Posições da matriz contendo \inlcode{1} indicam que ela foi tomada pelo jogador \1, enquanto posições
-contendo \inlcode{-1} foram tomadas pelo jogador \2.
+Posições da matriz contendo \inlcode{1} indicam que ela foi tomada pelo jogador \px, enquanto posições
+contendo \inlcode{-1} foram tomadas pelo jogador \po.
 
 Valores diferentes de \inlcode{-1}, \inlcode{0} e \inlcode{1} constituem um estado inválido do tabuleiro.
 Outras formas de estados inválidos também devem ser considerados.
-Por exemplo, muitas posições tomadas por um mesmo jogador ou o jogador \2 com mais posições tomadas que \1 (considerando que \1 sempre inicia jogando).
+Por exemplo, muitas posições tomadas por um mesmo jogador ou o jogador \po com mais posições tomadas que \px (considerando que \px sempre inicia jogando).
 Abaixo são apresentados alguns valores de \inlcode{board\_state} e o que cada um deles representa.
 
 \begin{minipage}{0.25\textwidth}
@@ -32,9 +32,9 @@ board_state = [
 {\renewcommand{\arraystretch}{1.45}
 \begin{center}
 \begin{tabular}{ c | c | c }
- \1 & \2 &  \\ \hline
-  & \1 &  \1\\ \hline
- \2 &  & \2
+ \px & \po &  \\ \hline
+  & \px &  \px\\ \hline
+ \po &  & \po
 \end{tabular}
 \end{center}
 }
@@ -58,9 +58,9 @@ board_state = [
 {\renewcommand{\arraystretch}{1.45}
 \begin{center}
 \begin{tabular}{ c | c | c }
- \1 & \2 &  \\ \hline
-  & \2 &  \1\\ \hline
- \2 &  & \2
+ \px & \po &  \\ \hline
+  & \po &  \px\\ \hline
+ \po &  & \po
 \end{tabular}
 \end{center}
 }
@@ -82,9 +82,9 @@ board_state = [
 {\renewcommand{\arraystretch}{1.45}
 \begin{center}
 \begin{tabular}{ c | c | c }
- \1 & \2 &  \2\\ \hline
-  & \1 &  \1\\ \hline
- \2 &  & \1
+ \px & \po &  \po\\ \hline
+  & \px &  \px\\ \hline
+ \po &  & \px
 \end{tabular}
 \end{center}
 }
@@ -108,9 +108,9 @@ board_state = [
 {\renewcommand{\arraystretch}{1.45}
 \begin{center}
 \begin{tabular}{ c | c | c }
- \1 & \2 & \1 \\ \hline
-  \2& \2 &  \1\\ \hline
- \1 &  \1 & \2
+ \px & \po & \px \\ \hline
+  \po& \po &  \px\\ \hline
+ \px &  \px & \po
 \end{tabular}
 \end{center}
 }
@@ -122,9 +122,9 @@ respectivamente a linha e a coluna jogada pelo próximo jogador.
 Valores de \inlcode{l} e \inlcode{c} diferentes de \inlcode{0}, \inlcode{1} e \inlcode{2} constituem uma tentativa de joga inválida.
 Também é uma jogada inválida qualquer posição \inlcode{(l,c)} previamente ocupada.
 
-A função deve inferir qual dos jogadores (\1~ou~\2) está realizando a jogada \inlcode{next\_move} a partir do
+A função deve inferir qual dos jogadores (\px~ou~\po) está realizando a jogada \inlcode{next\_move} a partir do
 estado do tabuleiro (\inlcode{board\_state}), garantindo a alternância entre os jogadores.
-O jogador \1 joga primeiro.
+O jogador \px joga primeiro.
 
    Uma vez validado o estado atual, o jogador da vez e a posição a ser jogada por este, a função \inlcode{eval\_move()}
 deve modificar o estado do tabuleiro executando a jogada solicitada (\emph{side-effect function}).
@@ -137,8 +137,8 @@ O retorno \inlcode{outcome} deve ser um inteiro que codifica essas situações d
 \item \inlcode{-4} se a posição do tabuleiro passado como argumento for ilegal;
 \item \inlcode{-2} se a próxima jogada for ilegal;
 \item \inlcode{ 0} se a jogada foi executada com sucesso, mas ainda não houve um ganhador;
-\item \inlcode{ 1} se a jogada foi executada com sucesso e o jogador \1 venceu;
-\item \inlcode{ 2} se a jogada foi executada com sucesso e o jogador \2 venceu;
+\item \inlcode{ 1} se a jogada foi executada com sucesso e o jogador \px venceu;
+\item \inlcode{ 2} se a jogada foi executada com sucesso e o jogador \po venceu;
 \item \inlcode{ 3} se a jogada foi executada com sucesso, mas o jogou terminou em empate.
 \end{itemize}
 

@@ -19,6 +19,11 @@
 \newcommand{\plotscale}{0.51}
 \newcommand{\todo}{To be done!}
 
+\newcommand{\0}{_{_{\! n\!}}}
+\newcommand{\1}{_{_{\! n\text{-}\!\>\!1\!}}}
+\newcommand{\2}{_{_{\! n-\!2\!}}}
+\newcommand{\questao}[2][]{\addtocounter{section}{1}\section*{Questão \thesection: #1} \addcontentsline{toc}{section}{Questão \thesection: #1} \input{#2}}
+
 
 
 %-----------------------------------------------------------------------------------------------------------------------
@@ -38,18 +43,18 @@
 %-----------------------------------------------------------------------------------------------------------------------
 \begin{document}
 
-%\maketitle
-%\tableofcontents
+\maketitle
+\tableofcontents
+%
+\input{capitulos/orientacoes}
+\input{capitulos/variaveis}
+\input{capitulos/funcoes}
+\input{capitulos/iffor}
 
-%\input{capitulos/orientacoes}
-%\input{capitulos/variaveis}
-%\input{capitulos/funcoes}
-%\input{capitulos/iffor}
-%
-%\input{capitulos/ex1}
-%
-%\input{capitulos/class}
-%\input{capitulos/numpy}
+\input{capitulos/ex1}
+
+\input{capitulos/class}
+\input{capitulos/numpy}
 
 \input{capitulos/ex2}
 
