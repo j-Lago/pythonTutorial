@@ -29,14 +29,57 @@ Para realizar a instalação, basta executar o seguinte comando no terminal:
 ?\textcolor{green!20!brown}{C:\char92curso\_python\char92>}? pip install numpy matplotlib
 \end{minted}
 
-Além disso, a biblioteca \inlcode{NumPy} fornece a estrutura de dados \inlcode{ndarray}, que permite representar
+A biblioteca \inlcode{NumPy} fornece a estrutura de dados \inlcode{ndarray}, que permite representar
 \inlcode{arrays} multidimensionais de forma compacta e eficiente.
 Ela também disponibiliza um vasto conjunto de funções vetorizadas otimizadas, capazes de aplicar operações matemáticas
 diretamente sobre todo o \inlcode{array}, dispensando o uso de laços explícitos que podem ser pouco performáticos em Python.
 Essa abordagem vetorizada resulta em cálculos muito mais rápidos, especialmente ao lidar com grandes volumes de dados.
 
+Uma das aplicações fundamentais da \inlcode{NumPy} é na representação e manipulação de matrizes.
+O exemplo a seguir ilustra esse uso:
+\begin{minted}[linenos]{custompython}
+import numpy as np
 
-Veja o exemplo:
+A = np.array([[2, 3],    # define matriz 2 x 2
+              [-4, 1]])
+x = np.array([[3],       # define matrix 2 x 1
+              [1]])
+b = np.array([[-3],      # define matrix 2 x 2
+              [8]])
+
+y = A @ x + b    # operação de multiplicação e soma matricial
+print(y)
+\end{minted}
+\begin{minted}{text}
+[[ 6]
+ [-3]]
+\end{minted}
+
+Na \textbf{linha 1}, declaramos que utilizaremos o pacote \inlcode{numpy}, e o faremos por meio do \emph{alias}
+\inlcode{np}.
+Ou seja, para não repetirmos \inlcode{numpy} diversas vezes ao longo do código, atribuímos a ele o nome
+abreviado \inlcode{np}.
+
+Na \textbf{linha 3}, criamos a matriz $\mathbf{A}$ de dimensão $2 \times 2$ utilizando \inlcode{array}.
+Já nas \textbf{linhas 5} e \textbf{7}, definimos os vetores coluna $\mathbf{x}$ e $\mathbf{b}$,
+ambos com dimensão $2 \times 1$.
+
+
+E na \textbf{linha 10} realizamos a operação matricial $\mathbf{y} = \mathbf{A} \cdot \mathbf{x} + \mathbf{b}$.
+Observe que o operador \inlcode{@} realiza o produto matricial, conforme definido na álgebra linear.
+Já o operador \inlcode{*} também pode ser utilizado com arrays \inlcode{NumPy}, mas nesse caso representa
+a multiplicação elemento a elemento, e não a multiplicação de matrizes.
+
+Por fim, na \textbf{linha 10}, realizamos a operação matricial $\mathbf{y} = \mathbf{A} \cdot \mathbf{x} + \mathbf{b}$.
+Note que o operador \inlcode{@} realiza o produto matricial, conforme definido na álgebra linear.
+Já o operador \inlcode{*} também pode ser usado com \inlcode{arrays} do \inlcode{NumPy},
+mas nesse caso ele representa a multiplicação elemento a elemento, e não o produto de matrizes.
+
+Além das operações matriciais, o \inlcode{NumPy} também se destaca ao lidar com sequências numéricas unidimensionais,
+graças à sua poderosa implementação de vetorização --- que simplifica tanto a escrita do código quanto sua performance.
+
+No exemplo a seguir, usamos um \inlcode{array} para representar uma sequência numérica e, com isso, podemos usar
+vetorização para aplicar uma expressão matemática a cada elemento dessa sequência:
 \begin{minted}[linenos]{custompython}
 import numpy as np
 
@@ -51,23 +94,32 @@ x = array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. ])
 y = array([ 0.  , -0.75, -1.  , -0.75,  0.  ,  1.25,  3.  ])
 \end{minted}
 
-Na \textbf{linha 1}, declaramos que utilizaremos o pacote \inlcode{numpy}, e o faremos por meio do \emph{alias}
-\inlcode{np}.
-Ou seja, para não repetirmos \inlcode{numpy} diversas vezes ao longo do código, atribuímos a ele o nome
-abreviado \inlcode{np}.
-
 Na \textbf{linha 3}, utilizamos o método \inlcode{linspace} da biblioteca \inlcode{numpy} para criar um \inlcode{array}
-contendo \inlcode{7} valores do tipo \inlcode{float}, igualmente espaçados no intervalo fechado de \inlcode{0} a
+unidimensional (um vetor linha) contendo \inlcode{7} valores do tipo \inlcode{float}, igualmente espaçados no intervalo fechado de \inlcode{0} a
 \inlcode{3} --- ou seja, incluindo os dois extremos do intervalo.
 
-
 Na \textbf{linha 4}, exploramos as funcionalidades de vetorização da biblioteca \inlcode{NumPy} para aplicar a
-expressão matemática diretamente a todos os elementos do \inlcode{array x}.
+expressão matemática diretamente a todos os elementos de \inlcode{x}.
 O resultado é um novo \inlcode{array y}, de mesmo tamanho, cujos valores correspondem à aplicação da expressão
 $y_n = x_n^2 - 2x_n$ em cada elemento $x_n$ do \inlcode{array x}, sem a necessidade de laços explícitos.
 
-Com uma pequena modificação no código, também podemos utilizar o pacote \inlcode{matplotlib} para gerar um gráfico que
-representa os vetores \inlcode{x} e \inlcode{y} no plano cartesiano.
+Nos exemplos anteriores, usamos \inlcode{np.array([...])} para criar um \inlcode{array} a partir de uma
+lista e \inlcode{np.linspace()} para gerar valores igualmente espaçados dentro de um intervalo.
+Além dessas abordagens, a biblioteca \inlcode{NumPy} oferece outras funções bastante úteis para a criação de
+\inlcode{arrays}, como:
+\begin{itemize}
+\item [] \inlcode{np.zeros(shape)} -- cria um \inlcode{array} preenchido com zeros.
+\item [] \inlcode{np.ones(shape)} -- cria um \inlcode{array} preenchido com uns.
+\item [] \inlcode{np.full(shape, valor)} -- cria um \inlcode{array} preenchido com um valor específico.
+\item [] \inlcode{np.eye(n)} -- gera a \inlcode{matriz} identidade de ordem \inlcode{n}.
+\item [] \inlcode{np.arange(início, fim, passo)} -- semelhante à função \inlcode{range}, mas para \inlcode{array}.
+\item [] \inlcode{np.random.rand(shape)} -- cria um \inlcode{array} com valores aleatórios no intervalo \inlcode{[0, 1)}.
+\end{itemize}
+
+
+Outra biblioteca particularmente útil em aplicações de computação científica é a \inlcode{Matplotlib}.
+Com uma pequena modificação no exemplo anterior, podemos utilizá-la para gerar um gráfico que representa os
+vetores \inlcode{x} e \inlcode{y} no plano cartesiano.
 \begin{minted}{custompython}
 import numpy as np
 import matplotlib.pyplot as plt
