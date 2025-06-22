@@ -361,7 +361,7 @@ habilitado       True
 Name: 1872, dtype: object
 \end{minted}
 
-Por padrão, métodos como \inlcode{df.set_index()}, assim como a maioria das operações em \inlcode{DataFrame},
+Por padrão, métodos como \inlcode{df.set_index()}, assim como a maioria dos métodos de \inlcode{DataFrame},
 não modificam a instância original (\emph{inplace}), mas retornam uma nova cópia modificada.
 Essa escolha de design do \inlcode{pandas} visa evitar efeitos colaterais indesejados, o que é especialmente valioso
 em análises de dados complexas\footnote{Caso se deseje modificar o objeto diretamente --- o que pode ser vantajoso em
@@ -372,11 +372,78 @@ pela maioria dos métodos da biblioteca.}.
 Um recurso especialmente relevante do \inlcode{pandas} é sua capacidade de importar e exportar dados 
 de forma simples e eficiente.
 
-Em \colorurl{}
+No link \colorurl{https://github.com/j-Lago/pythonTutorial/blob/master/data/back_emf.csv}, encontra-se um
+arquivo no formato \colorurl{.csv} (\emph{Comma-Separated Values}) contendo uma série temporal da força
+contraeletromotriz induzida de um motor síncrono de ímãs permanentes, registrada por meio de um osciloscópio.
+O arquivo possui duas colunas: \inlstr{time} e \inlstr{voltage}, como ilustrado a seguir:
+\begin{minted}[escapeinside=??, frame=single, rulecolor=brown, bgcolor=bgcsv]{output}
+?\textcolor{brown}{\faIcon{file} back\_emf.csv}?
+\end{minted}
+\vspace{-0.8em}
+\begin{minted}[escapeinside=??, bgcolor=bgcsv]{output}
+time,          voltage
+-0.010000046,  205.108
+-0.0099998456, 207.107
+-0.0099996456, 205.908
+      :           :
+0.010000154,   519.367
+\end{minted}
+
+Podemos importar essa tabela para um \inlcode{DataFrame} com:
+\begin{minted}{custompython}
+import pandas as pd
+
+df = df = pd.read_csv('back_emf.csv', index_col='time')
+
+print(df.head())  # imprime as linhas iniciais do dataframe
+\end{minted}
+\begin{minted}{text}
+           voltage
+time
+-0.010000  205.108
+-0.010000  207.107
+-0.010000  205.908
+-0.009999  203.909
+-0.009999  204.308
+\end{minted}
+
+Uma vez importado, os dados podem ser analisados e modificados utilizando todos os recursos oferecidos
+pelo \inlcode{pandas}.
+Essa biblioteca também se integra de forma eficiente com \inlcode{numpy} e \inlcode{matplotlib}, permitindo
+visualizações e operações numéricas avançadas.
+É possível, por exemplo, gerar \inlcode{arrays} a partir dos dados de uma coluna específica do \inlcode{DataFrame}:
+\begin{minted}{custompython}
+voltage = df.to_numpy()
+print(type(voltage))
+print(voltage)
+\end{minted}
+\begin{minted}{text}
+<class 'numpy.ndarray'>
+[[205.108]
+ [207.107]
+ [205.908]
+ ...
+ [521.366]
+ [522.566]
+ [519.367]]
+\end{minted}
+
+Ou gerar um gráfico com os valores:
+\begin{minted}{custompython}
+df['voltage'].plot()
+plt.show()
+\end{minted}
+
+\begin{center}
+    \includegraphics[scale=1.0]{figs/back_emf}
+\end{center}
 
 
+Por fim, o \inlcode{pandas} também permite a exportação de dados por meio de diversos métodos, como
+\inlcode{df.to_csv()}, \inlcode{df.to_excel()} e \inlcode{df.to_json()}, entre outros.
 
 
-
-Mais informações e recursos de \inlcode{pandas} estão disponíveis na documentação oficial:
+Essa seção apenas introduz a biblioteca \inlcode{pandas}, que oferece uma ampla variedade de métodos
+para manipulação e análise de dados tabulares.
+Informações adicionais, bem como tutoriais e referências detalhadas, estão disponíveis na documentação oficial:
 \colorurl{https://pandas.pydata.org/docs/}.
