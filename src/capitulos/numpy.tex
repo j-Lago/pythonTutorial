@@ -361,8 +361,18 @@ habilitado       True
 Name: 1872, dtype: object
 \end{minted}
 
-Outra funcionalidade particularmente importante do \inlcode{pandas} é a importação e exportação de dados.
+Por padrão, métodos como \inlcode{df.set_index()}, assim como a maioria das operações em \inlcode{DataFrame},
+não modificam a instância original (\emph{inplace}), mas retornam uma nova cópia modificada.
+Essa escolha de design do \inlcode{pandas} visa evitar efeitos colaterais indesejados, o que é especialmente valioso
+em análises de dados complexas\footnote{Caso se deseje modificar o objeto diretamente --- o que pode ser vantajoso em
+estruturas volumosas e transformações simples --- é possível utilizar o argumento \inlcode{inplace=True}, suportado
+pela maioria dos métodos da biblioteca.}.
 
+
+Um recurso especialmente relevante do \inlcode{pandas} é sua capacidade de importar e exportar dados 
+de forma simples e eficiente.
+
+Em \colorurl{}
 
 
 
