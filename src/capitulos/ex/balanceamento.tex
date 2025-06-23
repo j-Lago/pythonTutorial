@@ -1,0 +1,75 @@
+Escreva uma função \inlcode{balanceamento(valores: list) -> tuple[list, list]} que receba uma lista numérica de
+tamanho arbitrário, calcule a média de seus valores e, com base nisso, retorne duas novas listas:
+\begin{itemize}
+    \item a primeira contendo os elementos da lista original cujos valores são menores ou iguais à média;
+    \item a segunda contendo os elementos estritamente maiores que a média.
+\end{itemize}
+
+Note que, em casos particulares, uma ou ambas as listas resultantes podem estar vazias.
+
+Implemente
+\begin{minted}{custompython}
+def balanceamento(valores: list) -> tuple[list, list]:
+    # seu código aqui
+
+l, g = balanceamento([2, 4, 8, 3, 0, 3, 5, 7])
+print(f"{l = }")
+print(f"{g = }")
+\end{minted}
+
+Resultado esperado:
+\begin{minted}{text}
+l = [2, 4, 3, 0, 3]
+g = [8, 5, 7]
+\end{minted}
+
+\subsection*{Desafio:}
+Modifique a função para que ela aceite, opcionalmente, um segundo parâmetro com pesos:
+\inlcode{balanceamento(valores: list, pesos: list | None = None) -> tuple[list, list]}
+
+Neste caso, \inlcode{pesos} deve ser uma lista de mesmo tamanho que \inlcode{valores}, representando o peso associado
+a cada elemento.
+
+O objetivo agora é calcular a média ponderada dos valores, considerando os pesos fornecidos, e utilizá-la como
+critério para particionar os elementos em duas listas:
+\begin{itemize}
+    \item a primeira lista deve conter os elementos cujo produto \inlcode{valor * peso} seja menor ou igual à
+    média ponderada;
+    \item a segunda lista deve conter os elementos cujo produto \inlcode{valor * peso} seja estritamente maior que a
+    média ponderada.
+\end{itemize}
+
+Se o parâmetro \inlcode{pesos} não for fornecido (\inlcode{None}), a função deve atribuir peso \inlcode{1} a todos
+os elementos, recuperando o comportamento original com média aritmética simples.
+
+A função deve lançar uma exceção caso \inlcode{valores} e \inlcode{pesos} não tenham o mesmo tamanho ou se algum dos
+argumentos não seja uma lista numérica.
+
+Implemente:
+\begin{minted}{custompython}
+def balanceamento(valores: list, pesos: list | None = None) -> tuple[list, list]:
+    # seu código aqui
+
+valores = [8, 3, 11, 6, 4, 9]
+pesos  =  [1.0, 0.8, 1.2, 0.9, 1.1, 1.0]
+
+l, g = balanceamento(valores, pesos)
+
+print(f"{l = }")
+print(f"{g = }")
+\end{minted}
+
+Resultado esperado:
+\begin{minted}{text}
+l = [3, 6, 4]
+g = [8, 11, 9]
+\end{minted}
+
+
+
+
+
+
+
+
+

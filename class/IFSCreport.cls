@@ -230,17 +230,17 @@ arrow/.style={latex-}}
 
 
 
-%cabeçalho e rodapé
-%\renewcommand{\headrulewidth}{.5pt}
-%\renewcommand{\footrulewidth}{.5pt}
-%\lhead{\includegraphics[scale=0.24]{../class/figs/ifsc}\\ \noindent\rule[2ex]{\linewidth}{.50pt}}
+
+
 \lhead{\includegraphics[scale=0.16]{../class/figs/logo_cabecalho} \noindent\rule[2ex]{\linewidth}{.50pt}}
 \chead{}
 \rhead{
-    \begin{minipage}{0.80\textwidth} \small
-        \begin{flushleft}
+    \begin{minipage}{1.0\textwidth} %\small
+        \begin{flushright}
             \@cabecalho
-        \end{flushleft}
+            \leftmark
+%            \rightmark
+        \end{flushright}
     \end{minipage}\\ \vspace{1.2mm}
 }
 

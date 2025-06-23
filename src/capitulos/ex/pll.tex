@@ -66,7 +66,7 @@ A estimativa de fase da rede ($theta$) obtida ainda deve ser validada.
 O \inlcode{pll} pode demorar alguns ciclos para se sincronizar com a rede (ou atracar).
 
 
-\section*{Tarefa 1}
+\subsection*{Etapa 1}
 Em \colorurl{https://github.com/j-Lago/pythonTutorial/blob/master/data/grid_voltage.csv} você encontrará um
 arquivo \colorurl{grid_voltage.csv} com a
 tensão (\textbf{coluna 2}) amostrada de alguns ciclos da rede elétrica e um registro temporal (\textbf{coluna 1}) de cada amostra.
@@ -105,7 +105,7 @@ apresentados.
 
 
 
-\section*{Tarefa 2}
+\subsection*{Etapa 2}
 Exporte para um arquivo \inlcode{.csv} a porção do sinal de tensão de entrada compreendida entre a detecção
 inicial da sincronização até a amostra que antecede o último cruzamento por zero do ângulo $\theta$, ou seja, o período
 que compreende todos os ciclos inteiros em que o PLL estava sincronizado.
@@ -151,8 +151,8 @@ time,    phase,       voltage
 \end{minted}
 
 
-\section*{Tarefa 3}
-Os dados exportados na tarefa anterior consistem num intervalo da tensão da rede com ciclos inteiros.
+\subsection*{Etapa 3}
+Os dados exportados na etapa anterior consistem num intervalo da tensão da rede com ciclos inteiros.
 Isso nos permite calcular o valor rms da tensão amostrada da rede através de \eqr{eq:rms}:
 \begin{equation}\label{eq:rms}
 V_{\text{rms}} = \sqrt{\dfrac{1}{N} \sum_ {n=0} ^{N-1} v\0 ^2}
@@ -174,7 +174,7 @@ A amostra de tensão possui valor rms de 220.93 V e frequência 59.84 Hz
 \end{minted}
 
 $^\dagger$\emph{Note que \eqr{eq:rms} só é válida para um vetor $\mathbf{x}$ contendo ciclos inteiros da componente fundamental.
-Ainda, para melhorar a precisão do método, recomenda-se realizar o cálculo considerando ao menos dez ciclos completos da fundamental.
-    (o que não é possível nesse exemplo pelo tamanho da amostra inicial)}
+Ainda, para melhorar a precisão do método, recomenda-se realizar o cálculo considerando ao menos dez ciclos completos da fundamental
+    (o que não é possível nesse exemplo pelo tamanho da amostra inicial).}
 
 
