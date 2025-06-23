@@ -234,7 +234,8 @@ print(f'Peso total: {peso_total} kg')
 \end{tikzpicture}
 
 Além dos tipo primitivos, Python possui mais duas formas de armazenar informações: através de classes customizadas
-\inlcode{class}, que serão discutidas no capítulo \ref{class} e através de coleções de dados (\inlcode{collections})
+\inlcode{class}, que serão discutidas no capítulo \ref{class} e através de coleções de
+dados (\inlcode{collections}).
 
 
 
@@ -250,12 +251,12 @@ Cada uma delas possui características específicas que as tornam mais adequadas
 \subsection{\inlcode{list}}
 As listas (\inlcode{list}) são uma das estruturas mais versáteis do Python, representam sequências de elementos
 ordenados e mutáveis.
-Ous seja, os elementos inseridos nela são mantidos na mesma ordem e podem ser alterados a qualquer momento,
+Ou seja, os elementos inseridos nela são mantidos na mesma ordem e podem ser alterados a qualquer momento,
 seja adicionando, removendo modificando ou substituindo itens.
 
 Além disso, possuem tamanho arbitrário, crescendo conforme novos elementos são inseridos.
 
-Uma lista pode ser criada utilizando colchetes \inlcode{[]} e pode armazenar qualquer tipo de dado, inclusive, diferentes tipos para cada elemento.
+Uma lista pode ser criada utilizando colchetes (\inlcode{[]}) e pode armazenar qualquer tipo de dado, inclusive, diferentes tipos para cada elemento.
 Por exemplo:
 \begin{minted}{custompython}
 numeros = [8, 2, 0, -4, 15]                # lista de inteiros
@@ -263,7 +264,7 @@ nomes = ['Fulano', 'Beltrano', 'Sicrano']  # lista de strings
 misto = [42, 'texto', 3.14, True]          # lista com tipos variados
 \end{minted}
 
-A lista é uma coleção dinâmica, e pode crescer mesmo apos sua criação para acomodar novos elementos:
+A lista é uma coleção dinâmica, e pode crescer mesmo após sua criação para acomodar novos elementos:
 \begin{minted}{custompython}
 cores = ['azul', 'amarelo', 'cinza', 'vermelho']
 print(f'pré: A lista 'cores' possui {len(cores)} elementos: {cores}')
@@ -295,44 +296,70 @@ Além disso, no último exemplo, introduzimos a função \inlcode{len()}, que re
 Essa é uma função essencial para validar o tamanho de uma lista antes de realizar operações que dependam da quantidade de itens.
 
 Também podemos acessar elementos individuais dessa lista, tanto para leitura como para escrita.
-Essa indexação é realizada com a seguinte sintaxe \inlcode{nome_da_lista[indice]}, veja o código exemplo:
+Essa indexação é realizada com a seguinte sintaxe \inlcode{nome_da_lista[indice]}.
+Em python a indexação inicia em \inlcode{0}.
+Veja o código exemplo:
 \begin{minted}{custompython}
 cores = ['azul', 'amarelo', 'cinza', 'vermelho', 'verde']
 
-# a indexação dos elemntos da listas por um inteiro inicia em 0
-selecionada1 = cores[1]  # indice 1 equivale ao 2° elemento
+selecionada1 = cores[1]    # indice 1 equivale ao 2° elemento
 print(f'selecioanda1 é: {selecionada1}')
-
-# indice negativos podem ser usados para indexar elemntos do final para o início da listas
-selecionada2 = cores[-2]  # -2 indica o penúltimo elemento
-print(f'selecioanda2 é: {selecionada2}')
-
-# é possível a indexação por slice, ou faixa de índices m:n (n é não inclusivo)
-selecionadas = cores[0:3]  # 0:3 corresponde aos indices 0,1,2
-print(f'selecionadas são: {selecionadas}')
-
-# elementos da lista também podem ser individualemente modificados
-cores[2] = 'marrom'  # altera o terceiro elemento de 'cinza' para 'marrom'
-print(f'pós modificação: {cores}')
-
-# podemo excluir elementos, o que desloca dos indices dos elementos a sua direita
-del cores[3]
-print(f'pós excusão por indice: {cores}')
-
-# ou ainda podemo excluir não por indice mas por valor
-cores.remove('azul')
-print(f'pós excusão por valor: {cores}')
-
-# tentar acessar índices que não existe resultará em um erro
-cores[99]
 \end{minted}
 \begin{minted}[escapeinside=??]{text}
 selecioanda1 é: amarelo
+\end{minted}
+
+Índices negativos podem ser usados para indexar elementos do final para o início da listas:
+\begin{minted}{custompython}
+selecionada2 = cores[-2]    # -2 indica o penúltimo elemento
+print(f'selecioanda2 é: {selecionada2}')
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
 selecioanda2 é: vermelho
+\end{minted}
+
+É possível a indexação por \inlcode{slice}, ou seja, po faixa de índices \inlcode{m:n}
+(\inlcode{n} é não inclusivo):
+\begin{minted}{custompython}
+selecionadas = cores[0:3]    # 0:3 corresponde aos indices 0,1,2
+print(f'selecionadas são: {selecionadas}')
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
 selecionadas são: ['azul', 'amarelo', 'cinza']
+\end{minted}
+
+Elementos da lista também podem ser individualmente modificados:
+\begin{minted}{custompython}
+cores[2] = 'marrom'  # altera o terceiro elemento de 'cinza' para 'marrom'
+print(f'pós modificação: {cores}')
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
 pós modificação: ['azul', 'amarelo', 'marrom', 'vermelho', 'verde']
+\end{minted}
+
+Podemo excluir elementos, o que desloca os índices dos elementos a sua direita:
+\begin{minted}{custompython}
+del cores[3]    # deleta o 4° elemento
+print(f'pós excusão por indice: {cores}')
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
 pós excusão por índice: ['azul', 'amarelo', 'marrom', 'verde']
+\end{minted}
+
+Podemos ainda excluir não por índice, mas por valor:
+\begin{minted}{custompython}
+cores.remove('azul')
+print(f'pós excusão por valor: {cores}')
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
 pós excusão por valor: ['amarelo', 'marrom', 'verde']
+\end{minted}
+
+Tentar acessar índices que não existe resultará em um erro:
+\begin{minted}{custompython}
+cores[99]
+\end{minted}
+\begin{minted}[escapeinside=??]{text}
 Traceback (most recent call last):
   File ?\textcolor{magenta!80}{\char34c:\char92curso\_python\char92aula1\char92variaveis.py\char34}?, line ?\textcolor{magenta!80}{28}?, in ?\textcolor{magenta!80}{<module>}?
     ?\textcolor{red!70}{cores[99]}?
