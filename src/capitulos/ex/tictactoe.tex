@@ -14,7 +14,7 @@ contendo \inlcode{-1} foram tomadas pelo jogador \po.
 
 Valores diferentes de \inlcode{-1}, \inlcode{0} e \inlcode{1} constituem um estado inválido do tabuleiro.
 Outras formas de estados inválidos também devem ser considerados.
-Por exemplo, muitas posições tomadas por um mesmo jogador ou o jogador \po com mais posições tomadas que \px (considerando que \px sempre inicia jogando).
+Por exemplo, muitas posições tomadas por um mesmo jogador ou o jogador \po~com mais posições tomadas que \px~(considerando que \px~sempre inicia jogando).
 Abaixo são apresentados alguns valores de \inlcode{board\_state} e o que cada um deles representa.
 
 \begin{minipage}{0.25\textwidth}
@@ -124,7 +124,7 @@ Também é uma jogada inválida qualquer posição \inlcode{(l,c)} previamente o
 
 A função deve inferir qual dos jogadores (\px~ou~\po) está realizando a jogada \inlcode{next\_move} a partir do
 estado do tabuleiro (\inlcode{board\_state}), garantindo a alternância entre os jogadores.
-O jogador \px joga primeiro.
+O jogador \px~joga primeiro.
 
    Uma vez validado o estado atual, o jogador da vez e a posição a ser jogada por este, a função \inlcode{eval\_move()}
 deve modificar o estado do tabuleiro executando a jogada solicitada (\emph{side-effect function}).
@@ -137,8 +137,8 @@ O retorno \inlcode{outcome} deve ser um inteiro que codifica essas situações d
 \item \inlcode{-4} se a posição do tabuleiro passado como argumento for ilegal;
 \item \inlcode{-2} se a próxima jogada for ilegal;
 \item \inlcode{ 0} se a jogada foi executada com sucesso, mas ainda não houve um ganhador;
-\item \inlcode{ 1} se a jogada foi executada com sucesso e o jogador \px venceu;
-\item \inlcode{ 2} se a jogada foi executada com sucesso e o jogador \po venceu;
+\item \inlcode{ 1} se a jogada foi executada com sucesso e o jogador \px~venceu;
+\item \inlcode{ 2} se a jogada foi executada com sucesso e o jogador \po~venceu;
 \item \inlcode{ 3} se a jogada foi executada com sucesso, mas o jogou terminou em empate.
 \end{itemize}
 
