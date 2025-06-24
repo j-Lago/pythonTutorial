@@ -30,10 +30,7 @@ potenciação (\inlcode{**}).
 
 
 
-
-
-
-
+\section{Funções}
 
 Outro pilar essencial da programação são as funções, que permitem a organização e reutilização de código.
 Elas ajudam a evitar repetições desnecessárias, encapsular blocos lógicos e contribuir para uma estrutura mais
@@ -346,6 +343,83 @@ dados originais, mas implica em custos de duplicação do objeto, com maior uso 
 
 Em Python, a cópia de objetos pode ser realizada com as funções \inlcode{copy()} ou \inlcode{deepcopy()} do módulo
 \inlcode{copy}, dependendo da profundidade desejada.
+
+
+
+\section{Recursão}
+
+Outro aspecto importante das funções é que elas permitem a implementação de algoritmos ou soluções com estrutura
+recursiva --- ou seja, funções que chamam a si mesmas durante a execução.
+
+Essa abordagem pode ser útil quando um problema pode ser naturalmente decomposto em subtarefas menores de mesma
+natureza.
+Entre os exemplos mais comuns estão a exploração de estruturas hierárquicas, geração de combinações, percurso de
+árvores binárias, execução de buscas binárias, dentre outros.
+Diversos algoritmos de cálculo numérico também fazem uso de estratégias recursivas, como o método da bisseção para
+encontrar raízes de funções, algoritmos de ordenação como o merge sort e a transformada rápida de Fourier (FFT).
+
+Um exemplo clássico é a implementação de uma função que calcula o fatorial de um número, já que $n! = n \cdot (n-1)!$:
+\begin{minted}{custompython}
+def fatorial(n):
+    if n == 0 or n == 1:   # condição base (fim da recursão)
+        return 1
+    print(f"{n}! = {n} * {n - 1}!")    # rastreamento da chamada
+    return n * fatorial(n - 1)    # chamada recursiva
+
+print("início da recursão:")
+resultado = fatorial(5)
+print(f"5! = {resultado}")
+\end{minted}
+\begin{minted}{text}
+início da recursão:
+5! = 5 * 4!
+4! = 4 * 3!
+3! = 3 * 2!
+2! = 2 * 1!
+5! = 120
+\end{minted}
+
+Outro exemplo clássico de recursão é a geração dos termos da sequência de Fibonacci, que se inicia com 0 e 1.
+Cada novo termo é calculado como a soma dos dois anteriores, formando uma progressão potencialmente infinita.
+Abaixo, temos uma implementação recursiva que utiliza acumuladores para calcular o enésimo termo da sequência,
+além de exibir o rastreamento das chamadas recursivas:
+\begin{minted}{custompython}
+def fibonacci(n, a=0, b=1):
+    if n == 0:    # caso base (fim da recursão)
+        return a
+
+    print(f"fibonacci(n={n - 1}, a={b}, b={a + b})")   # rastreamento da chamada
+    return fibonacci(n - 1, b, a + b)    # chamada recussiva
+
+print("início da recursão:")
+resultado = fibonacci(5)
+print(f"fibonacci(5) = {resultado}")
+\end{minted}
+\begin{minted}{text}
+início da recursão:
+fibonacci(n=4, a=1, b=1)
+fibonacci(n=3, a=1, b=2)
+fibonacci(n=2, a=2, b=3)
+fibonacci(n=1, a=3, b=5)
+fibonacci(n=0, a=5, b=8)
+fibonacci(5) = 5
+\end{minted}
+
+É importante lembrar que, como funções recursivas chamam a si mesmas, é necessário definir uma condição que
+interrompa o processo recursivo.
+Essa condição é conhecida como caso base.
+
+As chamadas recursivas são empilhadas em memória até atingirem o caso base, e depois são resolvidas de trás pra frente
+(desempilhadas) através dos retornos às funções que as chamaram.
+
+Além disso, é essencial que cada chamada recursiva contribua para a convergência para esse caso base.
+Ou seja, os argumentos devem ser atualizados de forma que o problema se torne progressivamente menor,
+até atingir a condição de parada.
+
+Todo algoritmo recursivo pode ser reescrito de forma iterativa (a ser estudada no próximo capítulo).
+A versão iterativa geralmente é mais eficiente em termos de desempenho e uso de memória, embora, em alguns casos
+particulares, possa resultar em lógicas mais complexas.
+Na prática, ambas as abordagens têm seu espaço e são escolhidas conforme o contexto e a natureza do problema.
 
 
 
