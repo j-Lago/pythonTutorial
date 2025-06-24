@@ -1,13 +1,13 @@
 \chapter{Estruturas de controle de fluxo}\label{iffor}
 
-Até agora, os pequenos trechos de código que escrevemos seguiram uma sequência linear e bem definida, executando
-instruções em uma ordem preestabelecida, onde cada linha era processada incondicionalmente --- como seguir uma receita
-de bolo à risca.
+Até agora, os pequenos trechos de código que escrevemos, majoritariamente, seguiram uma sequência linear e
+bem definida, executando instruções em uma ordem preestabelecida, onde cada linha era processada
+incondicionalmente --- como seguir uma receita de bolo à risca.
 
 No entanto, essa abordagem não é suficiente para representar comportamentos mais complexos, onde o próprio algoritmo
 precisa tomar decisões com base no estado atual.
 Por exemplo, em determinado ponto da execução, se uma condição específica for verdadeira, o programa pode seguir
-pelo caminho A; caso contrário, deve seguir pelo caminho B.
+pelo caminho \inlcode{A}; caso contrário, deve seguir pelo caminho \inlcode{B}.
 Cada um desses caminhos corresponde a blocos de código distintos, que realizam ações diferentes para atingir um
 certo objetivo.
 
@@ -19,13 +19,13 @@ seja tomada durante a própria execução do programa, baseada no estado atual.
 
 Para isso, utilizamos as estruturas de repetição (ou loops), que permitem a execução contínua de um bloco de código
 enquanto certas condições forem atendidas, ou garantem que um bloco de código seja executado para todos os valores
-de uma lista.
+de uma lista, de forma iterativa.
 Dessa forma, o programa pode automatizar tarefas, tornando o código mais eficiente e adaptável.
 
 Em qualquer programa de computador, controlar a ordem de execução das instruções é fundamental para garantir que a
 aplicação possa lidar com diferentes cenários, tomar decisões dinamicamente e repetir ações conforme necessário.
 Esse controle é realizado por meio das estruturas de controle de fluxo, que possibilitam modificar o comportamento
-de um programa, tornando-o mais flexível e inteligente
+de um programa baseado no esta do atual, tornando-o mais flexível e inteligente.
 
 Como aludido anteriormente, as estruturas de controle de fluxo podem ser classificadas em duas categorias: estruturas
 condicionais e estruturas de repetição.
@@ -34,7 +34,7 @@ de uma mesma linguagem, podem existir múltiplas variantes para tornar seu uso m
 
 Por exemplo, em Python, decisões condicionais podem ser feitas com \inlcode{if-else}, uma abordagem mais direta, ou
 com \inlcode{match-case}, que facilita comparações mais organizadas entre múltiplas possibilidades.
-Da mesma forma, repetições podem ser controladas com \inlcode{while}, quando se depende de uma condição, ou
+Da mesma forma, repetições podem ser controladas com \inlcode{while}, quando depende de uma condição, ou
 com \inlcode{for}, que é ideal para percorrer sequências.
 
 Essa flexibilidade permite que programadores escolham a estrutura mais adequada para cada contexto, tornando o
