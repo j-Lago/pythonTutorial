@@ -5,6 +5,7 @@ import math
 import pandas as pd
 from project_paths import *
 
+
 def i_cell(v: float) -> float:
     i = 0.0  # chute inicial
     while True:

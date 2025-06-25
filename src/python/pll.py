@@ -21,8 +21,6 @@ def rms(path: str) -> tuple[float, float]:
             p0 = p
 
         vrms = np.sqrt((v**2/len(v)).sum())
-        print(n)
-
         return vrms, n/period
 
 
