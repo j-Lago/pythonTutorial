@@ -274,8 +274,9 @@ for indice, nome in enumerate(nomes):
 2: Saudações, Sicrano!
 \end{minted}
 
-Python também oferece diversas funções embutidas para manipular iteradores, como \inlcode{reversed()},
-permitem percorrer uma sequência de trás pra frente:
+Python também oferece diversas funções embutidas para manipular iteradores.
+Por exemplo, \inlcode{reversed()},
+modifica o iterado para percorrer uma sequência de trás pra frente:
 \begin{minted}{custompython}
 nomes = ['Fulano', 'Beltrano', 'Sicrano']
 
@@ -303,6 +304,37 @@ Beltrano tem 35 anos.
 Sicrano tem 65 anos.
 \end{minted}
 
+Assim como \inlcode{list}, os \inlcode{dict} também são \inlcode{Iterables}.
+Ou seja, pode sem iterados (percorridos em estruturas de repetição).
+
+Por padrão, um \inlcode{dict} é iterado por suas chaves:
+\begin{minted}{custompython}
+pares = {'Fulano': 22, 'Beltrano': 35, 'Sicrano': 65}
+
+for key in pares:
+    print(f"A chave '{key}' está associada ao valor {pares[key]}.")
+\end{minted}
+\begin{minted}{text}
+A chave 'Fulano' está associada ao valor 22.
+A chave 'Beltrano' está associada ao valor 35.
+A chave 'Sicrano' está associada ao valor 65.
+\end{minted}
+
+Se quisermos iterar sobre pares chave-valor, podemos utilizar o método \inlcode{.items()}, que retorna um iterador
+com tuplas no formato \inlcode{(chave, valor)}:
+\begin{minted}{custompython}
+pares = {'Fulano': 22, 'Beltrano': 35, 'Sicrano': 65}
+
+for key, value in pares.items():
+    print(f"A chave '{key}' está associada ao valor {value}.")
+\end{minted}
+\begin{minted}{text}
+A chave 'Fulano' está associada ao valor 22.
+A chave 'Beltrano' está associada ao valor 35.
+A chave 'Sicrano' está associada ao valor 65.
+\end{minted}
+
+Recursos adicionais relacionados a iteradores em Python podem ser acessados por meio do módulo padrão \inlcode{itertools}.
 
 Tanto o laço \inlcode{while} quanto o \inlcode{for} podem ser interrompidos a qualquer momento com o
 comando \inlcode{break}.
