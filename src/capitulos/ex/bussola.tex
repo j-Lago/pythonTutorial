@@ -16,11 +16,19 @@ Adote a convenção em que \inlcode{0} graus corresponde ao Norte e \inlcode{90}
     %rosa dos ventos
     \foreach \ang in {0, 180, 270} {
         \fill[gray!70]
-            (\ang:3.5cm) -- (\ang+22.5:1.0cm) -- (0,0) -- (\ang-22.5:1.0cm) -- cycle;
+            (\ang:3.5cm) -- (\ang-22.5:1.0cm) -- (0,0) -- cycle;
+        \fill[gray!50]
+            (\ang:3.5cm) -- (\ang+22.5:1.0cm) -- (0,0) -- cycle;
+        \draw[gray!70]
+            (\ang:3.5cm) -- (\ang+22.5:1.0cm) -- (0,0) -- cycle;
     }
     \foreach \ang in {90} {
         \fill[red!50!brown]
-            (\ang:3.5cm) -- (\ang+22.5:1.0cm) -- (0,0) -- (\ang-22.5:1.0cm) -- cycle;
+            (\ang:3.5cm) -- (\ang-22.5:1.0cm) -- (0,0) -- cycle;
+        \fill[red!50!brown!80]
+            (\ang:3.5cm) -- (\ang+22.5:1.0cm) -- (0,0) -- cycle;
+        \draw[red!50!brown]
+            (\ang:3.5cm) -- (\ang+22.5:1.0cm) -- (0,0) -- cycle;
     }
     \foreach \ang in {45, 135, 225, 315} {
         \fill[gray!30]
