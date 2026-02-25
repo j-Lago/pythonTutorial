@@ -1,0 +1,58 @@
+\section*{Q1: \texttt{harmonicas.py}}
+
+Nas análises de qualidade de energia em sistemas elétricos trifásicos, é comum modelar distorções nos sinais de tensão e
+corrente por meio da decomposição harmônica.
+Essa técnica representa sinais periódicos como a soma de componentes senoidais de diferentes frequências, permitindo
+identificar e quantificar distúrbios como a distorção harmônica total e a presença de harmônicas específicas que podem
+afetar o desempenho de equipamentos e a eficiência do sistema
+
+Além disso, as componentes harmônicas ímpares podem ser classificadas em três categorias, com base na sua ordem $h$
+(um número inteiro positivo e ímpar), conforme sua relação com o número de fases do sistema (geralmente três):
+
+
+\begin{itemize}
+\item Sequência zero: quando $h$ é múltiplo de 3, ou seja, $h \mod 3 = 0$.
+\item Sequência positiva: quando $h \mod 3 = 1$.
+\item Sequência negativa: quando $h \mod 3 = 2$.
+\end{itemize}
+
+Implemente uma função que receba uma lista de inteiros positivos representando ordens harmônicas e os
+classifique nas três categorias descritas acima.
+A função deve retornar uma tupla com três listas:
+\begin{itemize}
+\item A primeira contendo os valores de sequência zero;
+\item A segunda contendo os valores de sequência positiva; e
+\item A terceira contendo os valores de sequência negativa.
+\end{itemize}
+
+
+Se não houver valores em alguma categoria, a lista correspondente deve ser vazia.
+
+Se houver valores pares, ignore-os, e não os inclua em nenhuma das três categorias.
+
+Assuma que o argumento é uma lista de inteiros positivos (sem necessitar de uma validação disso interna a sua função).
+
+\begin{minted}{custompython}
+def classifica_harmonicas(hs: list) -> tuple[list, list, list]:
+    # seu código aqui
+
+
+# Exemplo de uso
+ordem_harmonicas = [5, 7, 9, 3, 2, 11, 13, 15, 1]
+
+zero, pos, neg = classifica_harmonicas(ordem_harmonicas)
+print(f"componentes harmônicas de sequência zero: {zero}")
+print(f"componentes harmônicas de sequência positiva: {pos}")
+print(f"componentes harmônicas de sequência negativa: {neg}")
+\end{minted}
+
+Resultado esperado:
+\begin{minted}{text}
+componentes harmônicas de sequência zero: [9, 3, 15]
+componentes harmônicas de sequência positiva: [7, 13, 1]
+componentes harmônicas de sequência negativa: [5, 11]
+\end{minted}
+
+Dica: Em python, a operação matemática $\mod$ pode ser realizada pelo operador \texttt{\%}.
+
+

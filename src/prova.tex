@@ -1,0 +1,84 @@
+% usar Tex Live e lualatex
+% usar minted v2.9
+% custom compiler argument: -shell-escape
+
+
+\documentclass{../class/IFSCprova}
+
+\usepackage[pdftex,
+            pdfauthor={Prof. Jackson Lago, Dr.},
+            pdftitle={Introdução ao Python: notas de aula},
+            pdfkeywords={python},
+            pdfcreator={LuaLaTex, Biber},
+            pdfborder={0 0 0}]{hyperref}
+\usepackage{import}
+
+\definecolor{primary}{RGB}{137, 197, 63}
+\definecolor{secondary}{RGB}{234, 32, 38}
+\definecolor{bgcsv}{rgb}{0.95,0.95,0.85}
+
+\newcommand{\plotscale}{0.51}
+\newcommand{\todo}{To be done!}
+
+\newcommand{\0}{_{_{\! n\!}}}
+\newcommand{\1}{_{_{\! n\text{-}\!\>\!1\!}}}
+\newcommand{\2}{_{_{\! n-\!2\!}}}
+\newcommand{\questao}[2][]{\addtocounter{section}{1}\section*{Questão \thesection: #1} \addcontentsline{toc}{section}{Questão \thesection: #1} \input{#2}}
+
+\newcommand{\myfrac}[3][0pt]{\genfrac{}{}{}{}{\raisebox{#1}{$#2$}}{\raisebox{-#1}{$#3$}}}
+
+\definecolor{civ}{rgb}{1.0,0.4,0.0}
+
+%-----------------------------------------------------------------------------------------------------------------------
+\autor{Jackson Lago, Dr. Eng.}
+\disciplina{NVP68300 -- Programação Aplicada a Sistemas de Energia}
+\curso{Mestrado Profissional em Sistemas de Energia}
+\titulo{Avaliação}
+
+%-----------------------------------------------------------------------------------------------------------------------
+\begin{document}
+
+%
+\maketitle
+
+\vspace{10mm}
+\noindent
+    \textbf{Orientações gerais:}
+\emph{
+    \begin{enumerate}[label=\roman*)]
+        %\item   Confirme o recebimento desse arquivo respondendo o e--mail com o número encontrado no canto
+        %superior direito dessa página;
+        \item   A interpretação das questões faz parte da avaliação;
+        \item   O tempo destinado à resolução das questões também será considerado na avaliação;
+        %\item   Resolva a prova e envie apenas os arquivos {\texttt{.m}}, nomeados como indicado em cada questão, para
+        %        {\texttt{\href{mailto:jackson.lago@ifsc.edu.br}{jackson.lago@ifsc.edu.br}}} impreterivelmente
+        %        até as \textbf{21h}.
+        %        Respostas enviadas depois desse horário não serão consideradas;
+        \item   Resolva a prova nomeando os arquivos \texttt{.py} conforme indicado em cada questão.
+        Após concluir, reúna todos os arquivos \texttt{.py} gerados em uma única pasta, compacte-a e nomeie o arquivo compactado com seu primeiro e último nome (\texttt{fulano\_tal.zip}).
+        Faça o upload dessa pasta compactada na tarefa aberta no SIGAA impreterivelmente até às \textbf{21:30}.
+        O sistema está configurado para não aceitar respostas enviadas após esse horário, o que resultará em nota \textbf{zero} e, consequentemente, na reprovação do candidato;
+        \item   Todos os arquivos \texttt{.py} necessários para a execução dos algoritmos devem ser entregues;
+        \item   Não envie arquivos que não tenham sido criados por você.
+        Arquivos de saída e figuras geradas não devem ser enviados, pois devem ser produzidos automaticamente pelos seus algoritmos;
+        \item   Na primeira linha de cada arquivo \texttt{.py}, inclua um comentário com seu nome completo e a qual questão da avaliação o arquivo está vinculado (Ex: \texttt{\# Fulano de Tal, Q2});
+        \item   Parte ou todas as questões poderão ser corrigidas automaticamente por um algoritmo que verifica se as soluções atendem aos requisitos especificados nos respectivos enunciados.
+        Portanto, atente-se à implementação correta das funções e scripts, bem como à nomenclatura dos arquivos, nomes das funções, variáveis de retorno e argumentos, conforme indicado em cada questão;
+        %\item   Todas as questões têm peso igual;
+        \item   Para aprovação, é necessário atingir nota \textbf{maior ou igual} a 6,0;
+        \item   A prova é individual, sendo permitida apenas a consulta ao documento \texttt{python\_tutorial.pdf} (disponibilizado no SIGAA) e ao seu caderno de anotações pessoal;
+        \item   Cópias, mesmo que parciais, configuram plágio.
+        Em caso de plágio, será atribuída nota \textbf{zero} à avaliação de todos os envolvidos, o que resultará na reprovação do(s) candidato(s) e, consequentemente, no desligamento do programa de mestrado.
+    \end{enumerate}
+}
+
+    \vspace{2mm}
+
+    \newpage
+
+    \input{prova/q1}
+    \input{prova/q2}
+    \input{prova/q3}
+    \input{prova/q4}
+
+\end{document}
