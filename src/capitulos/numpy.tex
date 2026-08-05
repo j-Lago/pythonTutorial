@@ -79,8 +79,7 @@ Note que o operador \inlcode{@} realiza o produto matricial, conforme definido n
 Já o operador \inlcode{*} também pode ser usado com \inlcode{arrays} do \inlcode{numpy},
 mas nesse caso ele representa a multiplicação elemento a elemento, e não o produto de matrizes.
 
-Além das operações matriciais, o \inlcode{numpy} também se destaca ao lidar com sequências numéricas unidimensionais,
-graças à sua poderosa implementação de vetorização --- que simplifica tanto a escrita do código quanto sua performance.
+Além das operações matriciais, o \inlcode{numpy} também se destaca ao lidar com sequências numéricas unidimensionais, graças à sua poderosa implementação de vetorização, que simplifica tanto a escrita do código quanto sua performance.
 
 No exemplo a seguir, usamos um \inlcode{array} para representar uma sequência numérica e, com isso, podemos usar
 vetorização para aplicar uma expressão matemática a cada elemento dessa sequência:
@@ -100,7 +99,7 @@ y = array([ 0.  , -0.75, -1.  , -0.75,  0.  ,  1.25,  3.  ])
 
 Na \textbf{linha 3}, utilizamos o método \inlcode{linspace} da biblioteca \inlcode{numpy} para criar um \inlcode{array}
 unidimensional (um vetor linha) contendo \inlcode{7} valores do tipo \inlcode{float}, igualmente espaçados no intervalo fechado de \inlcode{0} a
-\inlcode{3} --- ou seja, incluindo os dois extremos do intervalo.
+\inlcode{3}, ou seja, incluindo os dois extremos do intervalo.
 
 Na \textbf{linha 4}, exploramos as funcionalidades de vetorização da biblioteca \inlcode{numpy} para aplicar a
 expressão matemática diretamente a todos os elementos de \inlcode{x}.
@@ -361,12 +360,8 @@ habilitado       True
 Name: 1872, dtype: object
 \end{minted}
 
-Por padrão, métodos como \inlcode{df.set_index()}, assim como a maioria dos métodos de \inlcode{DataFrame},
-não modificam a instância original (\emph{inplace}), mas retornam uma nova cópia modificada.
-Essa escolha de design do \inlcode{pandas} visa evitar efeitos colaterais indesejados, o que é especialmente valioso
-em análises de dados complexas\footnote{Caso se deseje modificar o objeto diretamente --- o que pode ser vantajoso em
-estruturas volumosas e transformações simples --- é possível utilizar o argumento \inlcode{inplace=True}, suportado
-pela maioria dos métodos da biblioteca.}.
+Por padrão, métodos como \inlcode{df.set_index()}, assim como a maioria dos métodos de \inlcode{DataFrame}, não modificam a instância original (\emph{inplace}), mas retornam uma nova cópia modificada. Essa escolha de design do \inlcode{pandas} visa evitar efeitos colaterais indesejados, o que é especialmente valioso em análises de dados complexas.\footnote{Caso se deseje modificar o objeto diretamente, o que pode ser vantajoso em estruturas volumosas e transformações simples, é possível utilizar o argumento \inlcode{inplace=True}, suportado pela maioria dos métodos da biblioteca.}
+
 
 
 Um recurso especialmente relevante do \inlcode{pandas} é sua capacidade de importar e exportar dados 

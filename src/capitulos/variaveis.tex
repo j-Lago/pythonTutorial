@@ -17,8 +17,8 @@ interpretado.
 Essa abstração permite representar diversos conceitos, como números inteiros, valores fracionários, caracteres e outros
 tipos de dados, tornando a manipulação dessas informações mais estruturada e intuitiva.
 
-Diferente de algumas linguagens, em Python não é necessário declarar o tipo da variável explicitamente
---- o interpretador determina automaticamente o tipo com base no valor atribuído.
+Diferentemente de algumas linguagens, em Python não é necessário declarar explicitamente o tipo de uma variável, pois o interpretador determina automaticamente esse tipo com base no valor atribuído.
+
 
 Python possui diversos tipos primitivos, que representam os dados mais básicos da linguagem.
 Estes podem ser utilizados diretamente para expressar algum conceito real ou combinados para formar tipos compostos
@@ -202,8 +202,7 @@ As anotações de tipos são declarações do programador quanto ao tipo intenta
 criada\footnote{Além da anotação de tipo de variáveis, podemos também anotar tipos para parâmetros e retorno de
 funções/métodos}.
 
-Apesar das anotações de tipos não influenciarem a execução do código --- sendo ignoradas pelo interpretador Python
-durante a execução --- elas são extremamente úteis.
+Apesar de as anotações de tipos não influenciarem a execução do código, sendo ignoradas pelo interpretador Python durante a execução, elas são extremamente úteis.
 Essas anotações são utilizadas por ferramentas de análise estática integradas à maioria das IDEs modernas para
 identificar possíveis erros de incompatibilidade de tipos no momento da escrita do
 código\footnote{A análise estática de tipos (ou \emph{type checking}) está habilitada por padrão na IDE PyCham.
@@ -394,7 +393,7 @@ No decorrer desse tutorial, abordaremos mais detalhes sobre a aplicação desses
 Assim como \inlcode{list}, a \inlcode{tuple} (ou tupla) é uma estrutura de dados que permite armazenar uma sequência
 de valores.
 No entanto, enquanto listas são mutáveis (ou seja, seus elementos podem ser alterados, adicionados ou removidos),
-tuplas são imutáveis: uma vez criadas, seus elementos não podem ser modificados.
+tuplas são imutáveis: uma vez criada, seus elementos não podem ser modificados.
 
 Essa característica confere à tupla maior segurança e previsibilidade, tornando-a ideal para representar coleções
 fixas de dados que não devem ser alteradas acidentalmente, ou até valores de retorno de uma função.

@@ -317,13 +317,13 @@ fora da função: id(a)=2075912921088), a=[25, 9]
 
 Como a lista é um objeto mutável, a função altera diretamente o conteúdo do objeto referenciado,
 mantendo o mesmo \inlcode{id}.
-Isso mostra como mudanças feitas dentro da função refletem fora dela --- o parâmetro ainda aponta para o mesmo objeto,
+Isso mostra como mudanças feitas dentro da função refletem fora dela. O parâmetro ainda aponta para o mesmo objeto,
 agora modificado.
 
 
 Compreender essa distinção é fundamental, pois muitas funções em Python podem não retornar um valor explícito, mas
 ainda assim modificar o estado de objetos mutáveis passados como argumento.
-Esse comportamento pode gerar efeitos colaterais significativos na execução do programa --- especialmente quando
+Esse comportamento pode gerar efeitos colaterais significativos na execução do programa, especialmente quando
 não é antecipado pelo desenvolvedor.
 
 
@@ -331,15 +331,10 @@ Por outro lado, esse mecanismo também é uma ferramenta poderosa para evitar c�
 permitindo que funções operem diretamente sobre estruturas complexas sem comprometer o desempenho ou o uso de memória.
 
 
-Funções desse tipo --- que alteram diretamente os dados aos quais têm acesso --- são conhecidas como funções com
-efeitos colaterais (\emph{side-effect functions}) e são bastante comuns em operações sobre estruturas de dados,
-como listas, dicionários ou objetos de classes definidas pelo usuário.
+Funções desse tipo, que alteram diretamente os dados aos quais têm acesso, são conhecidas como funções com efeitos colaterais (\emph{side-effect functions}) e são bastante comuns em operações sobre estruturas de dados, como listas, dicionários ou objetos de classes definidas pelo usuário.
 
-O oposto de uma \emph{side-effect function} é uma função pura (\emph{pure function}).
-Funções puras garantem que seus parâmetros de entrada sejam apenas lidos, sem qualquer modificação.
-Isso é possível mesmo quando se trabalha com objetos mutáveis, desde que se evite alterar seu estado.
-Para isso, é comum criar cópias dos objetos antes de aplicar transformações --- o que preserva a integridade dos
-dados originais, mas implica em custos de duplicação do objeto, com maior uso de memória e tempo de processamento.
+
+O oposto de uma \emph{side-effect function} é uma função pura (\emph{pure function}). Funções puras garantem que seus parâmetros de entrada sejam apenas lidos, sem qualquer modificação. Isso é possível mesmo quando se trabalha com objetos mutáveis, desde que se evite alterar seu estado. Para isso, é comum criar cópias dos objetos antes de aplicar transformações, o que preserva a integridade dos dados originais, mas implica em custos de duplicação do objeto, com maior uso de memória e tempo de processamento.
 
 Em Python, a cópia de objetos pode ser realizada com as funções \inlcode{copy()} ou \inlcode{deepcopy()} do módulo
 \inlcode{copy}, dependendo da profundidade desejada.
@@ -349,7 +344,7 @@ Em Python, a cópia de objetos pode ser realizada com as funções \inlcode{copy
 \section{Recursão}
 
 Outro aspecto importante das funções é que elas permitem a implementação de algoritmos ou soluções com estrutura
-recursiva --- ou seja, funções que chamam a si mesmas durante a execução.
+recursiva, ou seja, funções que chamam a si mesmas durante a execução.
 
 Essa abordagem pode ser útil quando um problema pode ser naturalmente decomposto em subtarefas menores de mesma
 natureza.

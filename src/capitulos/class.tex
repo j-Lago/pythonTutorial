@@ -210,6 +210,53 @@ Fulano, fulano_de_tal@ifsc.edu.br, (11)88888-9999
 \end{minted}
 
 
+Em outro exemplo, poderíamos criar uma segunda classe denominada \inlcode{Cadastro}, que agrupa diversos
+usuários e ofereçe funcionalidades sobre essa coleção.
+
+\begin{minted}[linenos]{custompython}
+class Usuario:
+    def __init__(self, nome: str, email: str = '', telefone: str = ''):
+        self.nome = nome
+        self.email = email
+        self.telefone = telefone
+
+    def imprimir_contato(self) -> str:
+        if self.email:
+            return self.email
+        elif self.telefone:
+            return self.telefone
+        else:
+            return 'nenhum contato cadastrado'
+
+class Cadastro:
+    def __init__(self):
+        self.usuarios = []
+
+    def adicionar_usuario(self, usuario: Usuario):
+        self.usuarios.append(usuario)
+
+    def procurar_usuario(self, nome: str) -> Usuario | None:
+        for usuario in self.usuarios:
+            if usuario.nome == nome:
+                return usuario
+        return None
+
+    def imprimir_contato(self, nome: str):
+        selecionado = cadastro.procurar_usuario(nome)
+        if isinstance(selecionado, Usuario):
+            print(f"O contato de {selecionado.nome} é: {selecionado.imprimir_contato()}")
+        else:
+            print(f"Usuário '{nome}' não encontrado.")
+
+cadastro = Cadastro()
+cadastro.adicionar_usuario(Usuario('Fulano', 'fulano@ifsc.edu.br', '(48)99999-9999'))
+cadastro.adicionar_usuario(Usuario('Beltrano', telefone='(48)99999-8888'))
+cadastro.adicionar_usuario(Usuario('Cicrano'))
+
+cadastro.imprimir_contato("Beltrano")
+\end{minted}
+
+
 As classes em Python oferecem diversas funcionalidades avançadas, como herança, sobrecarga de operadores, métodos
 mágicos, polimorfismo, abstração, propriedades e metaclasses, que ampliam o suporte à programação orientada a objetos.
 
