@@ -73,7 +73,7 @@ class Usuario:
         self.telefone = telefone
         self.email = email
 
-    def contato(self) -> str:
+    def obter_contato(self) -> str:
         if self.email:
             return self.email
         elif self.telefone:
@@ -86,10 +86,10 @@ usuario1 = Usuario(nome='Fulano', email='fulano@ifsc.edu.br', telefone='(48)9999
 usuario2 = Usuario(nome='Beltrano', telefone='(48)99999-8888')
 usuario3 = Usuario(nome='Sicrano')
 
-# utilizando o método contato() e apresentando os resultados
-print('contato usuario1:', usuario1.contato())
-print('contato usuario2:', usuario2.contato())
-print('contato usuario3:', usuario3.contato())
+# utilizando o método obter_contato() e apresentando os resultados
+print('contato usuario1:', usuario1.obter_contato())
+print('contato usuario2:', usuario2.obter_contato())
+print('contato usuario3:', usuario3.obter_contato())
 \end{minted}
 \begin{minted}{text}
 contato usuario1: fulano@ifsc.edu.br
@@ -104,7 +104,7 @@ chamada \inlcode{Usuario}\footnote{Diferente da convenção utilizada para funç
 estilo \textit{snake\_case} (\inlcode{exemplo_variavel}), nomes de classes costumam ser escritos em \textit{CamelCase} (\inlcode{NomeDaClasse}).}.
 
 Essa definição consiste em dois métodos, ou duas funções associadas à classe: \magic{__init__()} (\textbf{linha 4}) e
-\inlcode{contato()} (\textbf{linha 9}).
+\inlcode{obter_contato()} (\textbf{linha 9}).
 
 O método \magic{__init__()} é o construtor da classe, que é executado automaticamente ao criarmos um novo objeto do
 tipo \inlcode{Usuario} (o que é feito na \textbf{linha 18}).
@@ -159,14 +159,16 @@ Nas \textbf{linhas 19} e \textbf{20}, criamos mais duas instâncias da classe \i
 Cada instância da classe representa um objeto único na memoria, contendo suas próprias informações
 de \inlcode{nome}, \inlcode{telefone} e \inlcode{email}, mas possuem a mesma estrutura definida pela classe.
 
-Na \textbf{linha 23}, dentro do comando \inlcode{print()}, temos a chamada  \inlcode{usuario1.contato()}, que executa o
-método \inlcode{contato()} definido na \textbf{linha 9}.
+Na \textbf{linha 23}, dentro do comando \inlcode{print()}, temos a chamada  \inlcode{usuario1.obter_contato()}, que executa o
+método \inlcode{obter_contato()} definido na \textbf{linha 9}.
 
-Um detalhe importante é que, na definição de \inlcode{contato(}\magic{self}\inlcode{)}, declaramos um parâmetro
+Um detalhe importante é que, na definição de \inlcode{contato(}\magic{self}\inlcode{)},
+declaramos um parâmetro
 \magic{self}, mas não o fornecemos explicitamente na chamada do método.
 
 Isso ocorre porque o Python passa \magic{self} automaticamente, garantindo que o método seja chamado sobre a instância correta.
-Ou seja, a chamada \inlcode{usuario1.contato()} equivale internamente a \inlcode{contato(usuario1)}, onde \magic{self} recebe
+Ou seja, a chamada \inlcode{usuario1.obter_contato()} equivale
+internamente a algo como \inlcode{obter_contato(}\magic{self}\inlcode{=usuario1)}, onde \magic{self} recebe
 \inlcode{usuario1} como argumento.
 
 Note que o encapsulamento dos dados e funcionalidades contribui para a organização e legibilidade do código.
@@ -179,15 +181,6 @@ de uma classe são públicos por padrão.
 
 Isso significa que qualquer parte do código que tenha acesso a uma instância da classe pode ler e modificar diretamente
 seus atributos, além de chamar qualquer método definido na classe.
-
-Embora Python não imponha um mecanismo formal de privacidade, existe uma convenção para indicar atributos
-internos\footnote{Convencionou-se utilizar um underscore (\inlcode{_}) antes do nome do atributo para indicar que ele
-não deve ser acessado diretamente (ex: \inlcode{self._informacao_privada}). Apesar de ainda ser possível modificar
-esses atributos externamente, essa prática sinaliza que o atributo é de uso interno, recomendando que sua manipulação
-ocorra apenas dentro da própria classe por seus métodos. IDEs e ferramentas de desenvolvimento costumam alertar sobre
-tentativas de acesso direto a esses atributos, reforçando essa boa prática.}.
-
-
 
 O exemplo a seguir demostra esse acesso a atributos:
 \begin{minted}{custompython}
@@ -209,10 +202,17 @@ Fulano, fulano@ifsc.edu.br, (48)99999-9999
 Fulano, fulano_de_tal@ifsc.edu.br, (11)88888-9999
 \end{minted}
 
+Embora Python não imponha um mecanismo formal de privacidade, convencionou-se utilizar um
+underscore (\inlcode{_}) antes do nome do atributo para indicar que ele
+não deve ser acessado diretamente (ex: \inlcode{self._informacao_privada}). Apesar de ainda ser possível modificar
+esses atributos externamente, essa prática sinaliza que o atributo é de uso interno, recomendando que sua manipulação
+ocorra apenas dentro da própria classe por seus métodos. IDEs e ferramentas de desenvolvimento costumam alertar sobre
+tentativas de acesso direto a esses atributos, reforçando essa boa prática.
 
+
+\pagebreak
 Em outro exemplo, poderíamos criar uma segunda classe denominada \inlcode{Cadastro}, que agrupa diversos
-usuários e ofereçe funcionalidades sobre essa coleção.
-
+usuários e ofereçe funcionalidades sobre essa coleção:
 \begin{minted}[linenos]{custompython}
 class Usuario:
     def __init__(self, nome: str, email: str = '', telefone: str = ''):
@@ -220,7 +220,7 @@ class Usuario:
         self.email = email
         self.telefone = telefone
 
-    def imprimir_contato(self) -> str:
+    def obter_contato(self) -> str:
         if self.email:
             return self.email
         elif self.telefone:
@@ -244,7 +244,7 @@ class Cadastro:
     def imprimir_contato(self, nome: str):
         selecionado = cadastro.procurar_usuario(nome)
         if isinstance(selecionado, Usuario):
-            print(f"O contato de {selecionado.nome} é: {selecionado.imprimir_contato()}")
+            print(f"O contato de {selecionado.nome} é: {selecionado.obter_contato()}")
         else:
             print(f"Usuário '{nome}' não encontrado.")
 
@@ -255,7 +255,9 @@ cadastro.adicionar_usuario(Usuario('Cicrano'))
 
 cadastro.imprimir_contato("Beltrano")
 \end{minted}
-
+\begin{minted}{text}
+O contato de Beltrano é: (48)99999-8888
+\end{minted}
 
 As classes em Python oferecem diversas funcionalidades avançadas, como herança, sobrecarga de operadores, métodos
 mágicos, polimorfismo, abstração, propriedades e metaclasses, que ampliam o suporte à programação orientada a objetos.
